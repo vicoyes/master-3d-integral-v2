@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Máster 3D Integral</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: {
+                            50: "#f5f3ff",
+                            100: "#ede9fe",
+                            200: "#ddd6fe",
+                            300: "#c4b5fd",
+                            400: "#a78bfa",
+                            500: "#8b5cf6",
+                            600: "#7c3aed",
+                            700: "#6d28d9",
+                            800: "#5b21b6",
+                            900: "#4c1d95",
+                        },
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+        .geo-line { stroke: url(#geoGrad); stroke-width: 0.8; fill: none; }
+        .geo-line-thin { stroke: url(#geoGrad); stroke-width: 0.4; fill: none; opacity: 0.5; }
+        .geo-dot { fill: url(#geoGrad); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        .float-anim { animation: float 8s ease-in-out infinite; }
+
+        @keyframes blobA {
+            0%   { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
+            25%  { transform: translate(12px, -8px) scale(1.08); border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; }
+            50%  { transform: translate(-6px, 10px) scale(0.95); border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%; }
+            75%  { transform: translate(8px, 5px) scale(1.04); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
+            100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
+        }
+        @keyframes blobB {
+            0%   { transform: translate(0, 0) scale(1); border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%; }
+            30%  { transform: translate(-10px, 6px) scale(1.06); border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%; }
+            60%  { transform: translate(8px, -12px) scale(0.94); border-radius: 60% 40% 45% 55% / 40% 60% 50% 50%; }
+            100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%; }
+        }
+        @keyframes blobC {
+            0%   { transform: translate(0, 0) scale(1); border-radius: 45% 55% 60% 40% / 55% 45% 40% 60%; }
+            35%  { transform: translate(6px, 10px) scale(0.96); border-radius: 55% 45% 40% 60% / 45% 55% 60% 40%; }
+            65%  { transform: translate(-12px, -5px) scale(1.07); border-radius: 40% 60% 50% 50% / 60% 40% 45% 55%; }
+            100% { transform: translate(0, 0) scale(1); border-radius: 45% 55% 60% 40% / 55% 45% 40% 60%; }
+        }
+        @keyframes blobGlow {
+            0%, 100% { opacity: 0.85; filter: blur(60px); }
+            50%      { opacity: 1; filter: blur(70px); }
+        }
+        .blob-a { animation: blobA 12s ease-in-out infinite; }
+        .blob-b { animation: blobB 14s ease-in-out infinite; }
+        .blob-c { animation: blobC 16s ease-in-out infinite; }
+        .blob-container { animation: blobGlow 10s ease-in-out infinite; }
+
+        @keyframes cursorMove {
+            0%   { transform: translate(0, 0); }
+            20%  { transform: translate(8px, 12px); }
+            40%  { transform: translate(-5px, 6px); }
+            60%  { transform: translate(14px, -4px); }
+            80%  { transform: translate(3px, 10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .cursor-anim { animation: cursorMove 6s ease-in-out infinite; }
+
+        @keyframes badgeFloat1 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes badgeFloat2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(1deg); }
+        }
+        @keyframes badgeFloat3 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(6px); }
+        }
+        @keyframes badgeFloat4 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(-1deg); }
+        }
+        .badge-float-1 { animation: badgeFloat1 5s ease-in-out infinite; }
+        .badge-float-2 { animation: badgeFloat2 6s ease-in-out 0.5s infinite; }
+        .badge-float-3 { animation: badgeFloat3 7s ease-in-out 1s infinite; }
+        .badge-float-4 { animation: badgeFloat4 5.5s ease-in-out 0.8s infinite; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.15s; opacity: 0; }
+        .fade-in-delay-2 { animation-delay: 0.3s; opacity: 0; }
+        .fade-in-delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+        .nav-link {
+            padding: 6px 16px;
+            border-radius: 9999px;
+            border: 1px solid #e5e7eb;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            color: #374151;
+        }
+        .nav-link:hover {
+            border-color: #7c3aed;
+            color: #7c3aed;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- Top Bar -->
+    <div class="bg-black text-white text-center py-2.5 text-xs font-mono uppercase tracking-[0.2em] font-medium">
+        [Webinar] El Futuro del 3D + IA 2026 &nbsp;|&nbsp; <a class="underline hover:no-underline text-violet-300" href="#">Ver la grabación →</a>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl font-extrabold tracking-tight">
+                MÁSTER <span class="text-violet-600">3D</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2">
+                <a class="nav-link" href="#programa">El Programa +</a>
+                <a class="nav-link" href="#para-quien">Para Quién</a>
+                <a class="nav-link" href="#testimonios">Casos de Éxito</a>
+                <a class="nav-link" href="#arsenal">Arsenal 3D +</a>
+                <a class="nav-link" href="#organizacion">Organización</a>
+                <a class="nav-link" href="#mentoria">Mentoría</a>
+                <a class="nav-link" href="#profesorado">Profesorado</a>
+            </div>
+            <a href="#cta" class="bg-black text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-violet-600 transition-colors">
+                CONTACTO
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative pt-24 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 z-10">
+                <div class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-6 fade-in">
+                    Máster 3D Integral
+                </div>
+                <h1 class="text-[3.25rem] md:text-[4.5rem] font-extrabold leading-[1.05] tracking-tight mb-8 fade-in fade-in-delay-1">
+                    Conviértete en el<br/>Artista Técnico<br/>que la Industria<br/>
+                    <span class="gradient-text">Necesita</span>
+                </h1>
+                <p class="text-lg text-gray-500 mb-10 max-w-md leading-relaxed fade-in fade-in-delay-2">
+                    Pasa de ser un operador de software a un profesional próspero en una posición de fuerza.
+                </p>
+                <div class="flex flex-wrap gap-3 fade-in fade-in-delay-3">
+                    <a href="#cta" class="bg-black text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-violet-600 transition-colors tracking-wide">
+                        AGENDAR CONSULTORÍA
+                    </a>
+                    <a href="#programa" class="border border-gray-200 text-gray-700 px-8 py-4 rounded-full font-semibold text-sm hover:border-violet-600 hover:text-violet-600 transition-colors tracking-wide">
+                        VER PROGRAMA
+                    </a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 relative flex items-center justify-center">
+                <div class="relative w-full max-w-xl">
+                    <!-- Animated blob glow behind -->
+                    <div class="absolute -inset-16 z-0 blob-container">
+                        <div class="blob-a absolute top-[5%] right-[5%] w-[70%] h-[65%]" style="background: radial-gradient(ellipse at 60% 40%, #ffedc3 0%, #ffedc3aa 40%, transparent 70%);"></div>
+                        <div class="blob-b absolute bottom-[8%] left-[10%] w-[65%] h-[60%]" style="background: radial-gradient(ellipse at 40% 60%, #ffcac4 0%, #ffcac4aa 40%, transparent 70%);"></div>
+                        <div class="blob-c absolute top-[15%] left-[0%] w-[60%] h-[70%]" style="background: radial-gradient(ellipse at 35% 50%, #bebcea 0%, #bebceaaa 40%, transparent 70%);"></div>
+                    </div>
+
+                    <!-- Floating skill badges -->
+                    <div class="absolute -top-4 -left-6 z-30 badge-float-1 hidden lg:block">
+                        <div class="bg-white shadow-lg rounded-xl px-4 py-2.5 flex items-center gap-2.5 border border-gray-100">
+                            <div class="w-7 h-7 rounded-lg bg-violet-100 flex items-center justify-center">
+                                <span class="text-violet-600 text-xs font-bold font-mono">{}</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold leading-tight">VEX / Python</p>
+                                <p class="text-[9px] text-gray-400 font-mono">Pipeline Tools</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -top-2 -right-8 z-30 badge-float-2 hidden lg:block">
+                        <div class="bg-white shadow-lg rounded-xl px-4 py-2.5 flex items-center gap-2.5 border border-gray-100">
+                            <div class="w-7 h-7 rounded-lg bg-black flex items-center justify-center">
+                                <span class="text-white text-[10px] font-bold">AI</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold leading-tight">IA Generativa</p>
+                                <p class="text-[9px] text-gray-400 font-mono">ComfyUI + SD</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute -bottom-3 -left-10 z-30 badge-float-3 hidden lg:block">
+                        <div class="bg-black shadow-lg rounded-xl px-4 py-2.5 flex items-center gap-2.5 border border-gray-800">
+                            <div class="w-7 h-7 rounded-lg bg-violet-600 flex items-center justify-center">
+                                <span class="text-white text-[10px] font-bold">$</span>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-white leading-tight">Negocio</p>
+                                <p class="text-[9px] text-gray-500 font-mono">Freelance · Marca</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-8 -right-12 z-30 badge-float-4 hidden lg:block">
+                        <div class="bg-white shadow-lg rounded-xl px-4 py-2.5 border border-gray-100">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-violet-500 inline-block"></span>
+                                <p class="text-[10px] font-bold leading-tight">Technical Artist</p>
+                            </div>
+                            <div class="flex gap-1">
+                                <span class="w-full h-1 rounded-full bg-violet-500 block"></span>
+                                <span class="w-full h-1 rounded-full bg-violet-500 block"></span>
+                                <span class="w-full h-1 rounded-full bg-violet-500 block"></span>
+                                <span class="w-3/4 h-1 rounded-full bg-violet-200 block"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Interface mockup -->
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-gray-200/60 bg-[#1e1e1e] float-anim">
+                        <!-- Window title bar -->
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-[#2d2d2d] border-b border-[#3a3a3a]">
+                            <div class="flex items-center gap-2">
+                                <div class="flex gap-1.5">
+                                    <div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-[#febc2e]"></div>
+                                    <div class="w-3 h-3 rounded-full bg-[#28c840]"></div>
+                                </div>
+                                <span class="text-[10px] text-gray-400 font-mono ml-3">scene_master_v3.hip — Houdini 20.5</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-[10px] text-gray-500 font-mono">
+                                <span>Obj</span>
+                                <span class="text-violet-400">Sop</span>
+                                <span>Mat</span>
+                            </div>
+                        </div>
+
+                        <!-- Toolbar -->
+                        <div class="flex items-center gap-1 px-3 py-1.5 bg-[#262626] border-b border-[#3a3a3a]">
+                            <div class="px-2 py-0.5 rounded text-[9px] font-mono text-gray-400">File</div>
+                            <div class="px-2 py-0.5 rounded text-[9px] font-mono text-gray-400">Edit</div>
+                            <div class="px-2 py-0.5 rounded text-[9px] font-mono text-gray-400">Render</div>
+                            <div class="px-2 py-0.5 rounded text-[9px] font-mono text-violet-400 bg-violet-500/10">Assets</div>
+                            <div class="flex-1"></div>
+                            <div class="flex items-center gap-1 text-[9px] text-gray-500 font-mono">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block"></span> GPU 98%
+                            </div>
+                        </div>
+
+                        <!-- Viewport with the 3D image -->
+                        <div class="relative">
+                            <img src="hero-3d.png" alt="Render 3D — Glass Geometry" class="w-full h-auto block"/>
+                            <div class="absolute top-3 left-3 flex items-center gap-2">
+                                <span class="text-[9px] font-mono text-white/40 bg-black/40 px-2 py-0.5 rounded">persp1</span>
+                                <span class="text-[9px] font-mono text-violet-300/60 bg-black/40 px-2 py-0.5 rounded">▸ Wireframe</span>
+                            </div>
+                            <div class="absolute bottom-3 left-3 text-[9px] font-mono text-white/30">
+                                Frame 1/240 · 60fps
+                            </div>
+                            <div class="absolute bottom-3 right-3 flex gap-1">
+                                <span class="text-[9px] font-mono text-white/30 bg-black/30 px-1.5 py-0.5 rounded">X</span>
+                                <span class="text-[9px] font-mono text-white/30 bg-black/30 px-1.5 py-0.5 rounded">Y</span>
+                                <span class="text-[9px] font-mono text-violet-300/50 bg-violet-500/20 px-1.5 py-0.5 rounded">Z</span>
+                            </div>
+                            <!-- Crosshair -->
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                                <div class="w-6 h-px bg-white/15"></div>
+                                <div class="w-px h-6 bg-white/15 -mt-3 ml-[11.5px]"></div>
+                            </div>
+                            <!-- Mouse cursor -->
+                            <div class="absolute top-[38%] left-[55%] pointer-events-none cursor-anim">
+                                <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg">
+                                    <path d="M2 2L2 22L7.5 16.5L12.5 25L16 23L11 14.5L18.5 14.5L2 2Z" fill="white" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Bottom node graph bar -->
+                        <div class="px-4 py-3 bg-[#1a1a1a] border-t border-[#3a3a3a] flex items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded bg-violet-500/80"></div>
+                                <span class="text-[9px] font-mono text-gray-400">glass_refract</span>
+                            </div>
+                            <div class="w-6 h-px bg-gray-600"></div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded bg-blue-500/60"></div>
+                                <span class="text-[9px] font-mono text-gray-400">scatter_geo</span>
+                            </div>
+                            <div class="w-6 h-px bg-gray-600"></div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-4 rounded bg-emerald-500/60"></div>
+                                <span class="text-[9px] font-mono text-gray-400">output_render</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photos Collage Section -->
+    <section class="relative py-16 lg:py-24 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] blob-container" style="filter: blur(80px); opacity: 0.5;">
+                <div class="blob-a absolute top-[10%] right-[10%] w-[60%] h-[55%]" style="background: radial-gradient(ellipse at 50% 50%, #ffedc3 0%, #ffedc3aa 40%, transparent 70%);"></div>
+                <div class="blob-b absolute bottom-[10%] left-[15%] w-[55%] h-[50%]" style="background: radial-gradient(ellipse at 50% 50%, #ffcac4 0%, #ffcac4aa 40%, transparent 70%);"></div>
+                <div class="blob-c absolute top-[20%] left-[5%] w-[50%] h-[60%]" style="background: radial-gradient(ellipse at 50% 50%, #bebcea 0%, #bebceaaa 40%, transparent 70%);"></div>
+            </div>
+            <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.07]" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="200,40 360,120 360,280 200,360 40,280 40,120" fill="none" stroke="#7c3aed" stroke-width="1"/>
+                <circle cx="200" cy="200" r="90" fill="none" stroke="#7c3aed" stroke-width="0.8"/>
+                <line x1="200" y1="40" x2="200" y2="360" stroke="#7c3aed" stroke-width="0.5"/>
+                <line x1="40" y1="120" x2="360" y2="280" stroke="#7c3aed" stroke-width="0.5"/>
+                <line x1="40" y1="280" x2="360" y2="120" stroke="#7c3aed" stroke-width="0.5"/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="relative h-[500px] md:h-[550px] lg:h-[600px]">
+                <div class="absolute left-0 bottom-0 w-[45%] md:w-[38%] z-20 shadow-2xl rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=420&fit=crop&crop=faces" alt="Equipo de estudiantes colaborando" class="w-full h-[220px] md:h-[300px] object-cover"/>
+                </div>
+                <div class="absolute left-[30%] md:left-[33%] top-0 w-[30%] md:w-[22%] z-30 shadow-2xl rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=400&h=500&fit=crop&crop=face" alt="Estudiante trabajando en modelado 3D" class="w-full h-[200px] md:h-[260px] object-cover"/>
+                </div>
+                <div class="absolute right-0 top-[8%] w-[35%] md:w-[28%] z-20 shadow-2xl rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=520&fit=crop&crop=face" alt="Artista 3D profesional" class="w-full h-[240px] md:h-[320px] object-cover"/>
+                </div>
+                <div class="hidden md:block absolute right-[22%] bottom-[5%] w-[20%] z-10 shadow-xl rounded-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=350&h=250&fit=crop&crop=faces" alt="Sesión de mentoría en equipo" class="w-full h-[180px] object-cover"/>
+                </div>
+            </div>
+
+            <div class="relative z-40 -mt-8 flex justify-center">
+                <div class="bg-white border border-gray-100 shadow-xl rounded-full px-6 py-3 flex items-center gap-4">
+                    <div class="flex -space-x-2">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="" class="w-9 h-9 rounded-full border-2 border-white object-cover"/>
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="" class="w-9 h-9 rounded-full border-2 border-white object-cover"/>
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="" class="w-9 h-9 rounded-full border-2 border-white object-cover"/>
+                    </div>
+                    <div class="hidden sm:block">
+                        <p class="text-xs font-bold leading-tight">+120 artistas formados</p>
+                        <p class="text-[10px] text-gray-400 font-mono uppercase tracking-wider">Comunidad activa</p>
+                    </div>
+                    <a href="#cta" class="bg-black text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-violet-600 transition-colors tracking-wide">
+                        AGENDAR LLAMADA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos / Trust bar -->
+    <section class="border-y border-gray-100 py-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-center gap-12 opacity-40">
+            <span class="font-extrabold text-sm tracking-widest uppercase">Houdini</span>
+            <span class="font-extrabold text-sm tracking-widest uppercase">Unreal Engine</span>
+            <span class="font-extrabold text-sm tracking-widest uppercase">ComfyUI</span>
+            <span class="font-extrabold text-sm tracking-widest uppercase">Stable Diffusion</span>
+            <span class="font-extrabold text-sm tracking-widest uppercase">Python</span>
+        </div>
+    </section>
+
+    <!-- Propuesta de Valor - 3 Ejes -->
+    <section id="programa" class="py-28 lg:py-36">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">La Propuesta de Valor</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+                    Tres Ejes. Un Sistema<br/>
+                    <span class="gradient-text">Integral.</span>
+                </h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
+                    Un programa diseñado para transformar tu carrera en 3D desde la raíz.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-hover rounded-2xl border border-gray-100 p-10 bg-white relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="font-mono text-violet-600 font-semibold text-xs uppercase tracking-[0.2em] mb-8">Eje X</div>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Te Capacitamos</h3>
+                    <p class="text-gray-500 mb-8 leading-relaxed">
+                        Domina las herramientas técnicas más avanzadas para destacarte como Technical Artist.
+                    </p>
+                    <ul class="space-y-3 font-mono text-sm text-gray-600">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            Houdini
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            Inteligencia Artificial
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            ComfyUI / Stable Diffusion
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-hover rounded-2xl p-10 bg-black text-white relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-400 to-violet-200 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="font-mono text-violet-400 font-semibold text-xs uppercase tracking-[0.2em] mb-8">Eje Y</div>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Te Ordenamos</h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Construye una base sólida psicológica para afrontar los retos profesionales.
+                    </p>
+                    <ul class="space-y-3 font-mono text-sm text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-900 text-violet-300 flex items-center justify-center text-xs font-bold">✓</span>
+                            Mentalidad
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-900 text-violet-300 flex items-center justify-center text-xs font-bold">✓</span>
+                            Superar Síndrome del Impostor
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-900 text-violet-300 flex items-center justify-center text-xs font-bold">✓</span>
+                            Organización
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-hover rounded-2xl border border-gray-100 p-10 bg-white relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="font-mono text-violet-600 font-semibold text-xs uppercase tracking-[0.2em] mb-8">Eje Z</div>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">Te Enseñamos Negocios</h3>
+                    <p class="text-gray-500 mb-8 leading-relaxed">
+                        Aprende a vender tu talento y gestionar tu carrera como un negocio rentable.
+                    </p>
+                    <ul class="space-y-3 font-mono text-sm text-gray-600">
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            Negociación
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            Freelance
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-5 h-5 rounded-full bg-violet-100 text-violet-600 flex items-center justify-center text-xs font-bold">✓</span>
+                            Marca Personal
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Para Quién Es -->
+    <section id="para-quien" class="py-28 lg:py-36 overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Header -->
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20">
+                <div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">¿Para Quién Es?</p>
+                    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.0]">
+                        Este Máster<br/>Es Para Ti Si...
+                    </h2>
+                </div>
+                <p class="text-gray-500 max-w-sm text-base leading-relaxed lg:pb-2">
+                    Cuatro perfiles. Una misma necesidad: dejar de ser invisible en la industria.
+                </p>
+            </div>
+
+            <!-- Stacked accordion-style profiles -->
+            <div class="space-y-3">
+
+                <!-- Perfil 1 -->
+                <div class="group border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 hover:border-violet-200 hover:shadow-lg">
+                    <div class="flex items-start gap-6 p-8">
+                        <span class="font-mono text-[80px] font-extrabold leading-none text-gray-100 group-hover:text-violet-100 transition-colors flex-shrink-0 select-none">01</span>
+                        <div class="flex-1 pt-3">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-2">Artista 3D</p>
+                                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-0 group-hover:text-violet-700 transition-colors">Llevas tiempo en la industria<br/>y te sientes estancado</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-600 group-hover:border-violet-600 transition-all">
+                                    <span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors text-xl">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                                <p class="text-gray-500 leading-relaxed mt-4 text-sm max-w-2xl">
+                                    Sientes que la IA y los despidos amenazan tu futuro. Quieres dar un salto cualitativo, aspirar a roles de mayor responsabilidad y mejorar tus opciones de carrera.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil 2 -->
+                <div class="group border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 hover:border-violet-200 hover:shadow-lg">
+                    <div class="flex items-start gap-6 p-8">
+                        <span class="font-mono text-[80px] font-extrabold leading-none text-gray-100 group-hover:text-violet-100 transition-colors flex-shrink-0 select-none">02</span>
+                        <div class="flex-1 pt-3">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-2">Junior</p>
+                                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-0 group-hover:text-violet-700 transition-colors">Tienes portfolio, pero no<br/>consigues entrevistas</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-600 group-hover:border-violet-600 transition-all">
+                                    <span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors text-xl">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                                <p class="text-gray-500 leading-relaxed mt-4 text-sm max-w-2xl">
+                                    Has terminado tu formación inicial, pero no destacas. Entiendes que para diferenciarte necesitas algo que el 99% de los artistas no tiene.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil 3 -->
+                <div class="group border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 hover:border-violet-200 hover:shadow-lg">
+                    <div class="flex items-start gap-6 p-8">
+                        <span class="font-mono text-[80px] font-extrabold leading-none text-gray-100 group-hover:text-violet-100 transition-colors flex-shrink-0 select-none">03</span>
+                        <div class="flex-1 pt-3">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-2">Programador</p>
+                                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-0 group-hover:text-violet-700 transition-colors">Eres técnico, pero buscas<br/>un propósito creativo</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-600 group-hover:border-violet-600 transition-all">
+                                    <span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors text-xl">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                                <p class="text-gray-500 leading-relaxed mt-4 text-sm max-w-2xl">
+                                    Disfrutas de la lógica y la resolución de problemas, pero te sientes desconectado del resultado visual. Quieres un rol híbrido que combine tu mente técnica con la creación de mundos y herramientas impactantes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil 4 -->
+                <div class="group border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 hover:border-violet-200 hover:shadow-lg">
+                    <div class="flex items-start gap-6 p-8">
+                        <span class="font-mono text-[80px] font-extrabold leading-none text-gray-100 group-hover:text-violet-100 transition-colors flex-shrink-0 select-none">04</span>
+                        <div class="flex-1 pt-3">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-2">El Síndrome del Impostor</p>
+                                    <h3 class="text-2xl md:text-3xl font-bold tracking-tight mb-0 group-hover:text-violet-700 transition-colors">Eres bueno, pero no sabes<br/>cómo "venderte"</h3>
+                                </div>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-600 group-hover:border-violet-600 transition-all">
+                                    <span class="material-symbols-outlined text-gray-400 group-hover:text-white transition-colors text-xl">arrow_forward</span>
+                                </div>
+                            </div>
+                            <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                                <p class="text-gray-500 leading-relaxed mt-4 text-sm max-w-2xl">
+                                    Te falta claridad, te sientes un impostor o no sabes cómo posicionarte. Buscas un sistema integral que te ordene por dentro para poder conquistar el mundo por fuera.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonio -->
+    <section id="testimonios" class="py-28 lg:py-36">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative rounded-3xl overflow-hidden bg-black">
+                <img alt="Carlos M. — Technical Artist" class="w-full h-[600px] object-cover object-top opacity-50" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1400&h=800&fit=crop&crop=face"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div class="absolute inset-0 p-10 md:p-16 lg:p-20 flex flex-col justify-end">
+                    <div class="font-mono text-violet-400 text-xs uppercase tracking-[0.2em] bg-black/50 w-max px-4 py-2 rounded-full border border-violet-500/20 mb-6">
+                        Caso de Éxito
+                    </div>
+                    <p class="text-white text-lg md:text-xl font-normal max-w-2xl leading-relaxed mb-8 text-white/90">
+                        "De Junior sin rumbo a Technical Artist. Este máster no solo me enseñó Houdini, me enseñó a <span class="text-violet-300 font-medium">valorarme como profesional</span> en una industria competitiva."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" alt="Carlos M." class="w-12 h-12 rounded-full border-2 border-white/20 object-cover"/>
+                        <div>
+                            <p class="text-white font-semibold text-sm">Carlos M.</p>
+                            <p class="text-gray-400 text-xs font-mono tracking-wider">TECHNICAL ARTIST — ESTUDIO AAA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arsenal -->
+    <section id="arsenal" class="py-28 lg:py-36 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Habilidades Técnicas + Estratégicas</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+                    Arsenal del<br/>
+                    <span class="gradient-text">Artista 3D</span>
+                </h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">
+                    El conjunto de habilidades que te convertirán en un perfil indispensable.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-hover border border-gray-100 p-8 rounded-2xl bg-white group">
+                    <div class="w-11 h-11 bg-violet-100 rounded-xl flex items-center justify-center mb-6 text-violet-600 group-hover:bg-black group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">deployed_code</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2 tracking-tight">Modelado Procedural</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Creación de sistemas generativos y automatización de assets complejos con Houdini.</p>
+                </div>
+
+                <div class="card-hover border border-gray-100 p-8 rounded-2xl bg-white group">
+                    <div class="w-11 h-11 bg-violet-100 rounded-xl flex items-center justify-center mb-6 text-violet-600 group-hover:bg-black group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">neurology</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2 tracking-tight">Integración con IA</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Workflows avanzados con ComfyUI y Stable Diffusion aplicados a producción real.</p>
+                </div>
+
+                <div class="card-hover border border-gray-100 p-8 rounded-2xl bg-white group">
+                    <div class="w-11 h-11 bg-violet-100 rounded-xl flex items-center justify-center mb-6 text-violet-600 group-hover:bg-black group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">code_blocks</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2 tracking-tight">Scripting Python/VEX</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Herramientas customizadas y optimización de pipelines técnicos de producción.</p>
+                </div>
+
+                <div class="card-hover border border-gray-100 p-8 rounded-2xl bg-white group">
+                    <div class="w-11 h-11 bg-violet-100 rounded-xl flex items-center justify-center mb-6 text-violet-600 group-hover:bg-black group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">trending_up</span>
+                    </div>
+                    <h4 class="text-lg font-bold mb-2 tracking-tight">Mentalidad & Negocio</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Posicionamiento, negociación y gestión financiera para artistas 3D independientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organización del Programa -->
+    <section id="organizacion" class="py-28 lg:py-36 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Header + intro -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
+                <div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Organización del Programa</p>
+                    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.0]">
+                        Tu Transformación,<br/>
+                        <span class="gradient-text">Paso a Paso</span>
+                    </h2>
+                </div>
+                <div class="lg:pt-16">
+                    <p class="text-gray-500 text-base leading-relaxed mb-6">
+                        Un programa intensivo de <strong class="text-black">6 meses</strong>, limitado a <strong class="text-black">20 alumnos</strong>, que requiere toda tu atención. No es compatible con un empleo ni con otros estudios.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="font-mono text-xs px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700"><strong class="text-violet-600">EJE X</strong> — Capacitación 3D</span>
+                        <span class="font-mono text-xs px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700"><strong class="text-violet-600">EJE Y</strong> — Orden Interno</span>
+                        <span class="font-mono text-xs px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700"><strong class="text-violet-600">EJE Z</strong> — Negocio</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semana visual: timeline horizontal -->
+            <div class="mb-20">
+                <p class="font-mono text-xs text-gray-400 uppercase tracking-wider mb-8">Semana tipo</p>
+                <div class="relative">
+                    <!-- Línea conectora -->
+                    <div class="hidden lg:block absolute top-8 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-200 to-transparent"></div>
+                    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                        <!-- Lunes -->
+                        <div class="relative">
+                            <div class="hidden lg:flex absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-violet-600 z-10 items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 pt-10 border border-gray-100 h-full">
+                                <p class="font-extrabold text-sm mb-1">Lunes</p>
+                                <p class="font-mono text-[10px] text-violet-600 uppercase tracking-wider mb-4">Orden Interno</p>
+                                <ul class="space-y-2.5 text-xs text-gray-500">
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-400 mt-1.5 flex-shrink-0"></span>Clase Grupal — 45'</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-400 mt-1.5 flex-shrink-0"></span>Grupo trabajo (1-5) — 2h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-gray-300 mt-1.5 flex-shrink-0"></span>Mentoría Individual — 1h</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Martes -->
+                        <div class="relative">
+                            <div class="hidden lg:flex absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-black z-10 items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="bg-black rounded-2xl p-6 pt-10 h-full">
+                                <p class="font-extrabold text-sm mb-1 text-white">Martes</p>
+                                <p class="font-mono text-[10px] text-violet-400 uppercase tracking-wider mb-4">Formación 3D</p>
+                                <ul class="space-y-2.5 text-xs text-gray-400">
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>Clase Grupal — 2.5h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>Grupo trabajo (6-10) — 2h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-gray-600 mt-1.5 flex-shrink-0"></span>Mentoría Individual — 1h</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Miércoles -->
+                        <div class="relative">
+                            <div class="hidden lg:flex absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-violet-600 z-10 items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 pt-10 border border-gray-100 h-full">
+                                <p class="font-extrabold text-sm mb-1">Miércoles</p>
+                                <p class="font-mono text-[10px] text-violet-600 uppercase tracking-wider mb-4">Negocio</p>
+                                <ul class="space-y-2.5 text-xs text-gray-500">
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-400 mt-1.5 flex-shrink-0"></span>Clase Grupal — 45'</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-400 mt-1.5 flex-shrink-0"></span>Grupo trabajo (11-15) — 2h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-gray-300 mt-1.5 flex-shrink-0"></span>Mentoría Individual — 1h</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Jueves -->
+                        <div class="relative">
+                            <div class="hidden lg:flex absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-black z-10 items-center justify-center">
+                                <div class="w-2 h-2 rounded-full bg-white"></div>
+                            </div>
+                            <div class="bg-black rounded-2xl p-6 pt-10 h-full">
+                                <p class="font-extrabold text-sm mb-1 text-white">Jueves</p>
+                                <p class="font-mono text-[10px] text-violet-400 uppercase tracking-wider mb-4">Formación 3D</p>
+                                <ul class="space-y-2.5 text-xs text-gray-400">
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>Clase Grupal — 2.5h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-violet-500 mt-1.5 flex-shrink-0"></span>Grupo trabajo (16-20) — 2h</li>
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-gray-600 mt-1.5 flex-shrink-0"></span>Mentoría Individual — 1h</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Viernes -->
+                        <div class="relative">
+                            <div class="hidden lg:flex absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-violet-200 border-2 border-violet-400 z-10"></div>
+                            <div class="bg-white rounded-2xl p-6 pt-10 border border-dashed border-gray-200 h-full">
+                                <p class="font-extrabold text-sm mb-1 text-gray-400">Viernes</p>
+                                <p class="font-mono text-[10px] text-gray-400 uppercase tracking-wider mb-4">Cierre semana</p>
+                                <ul class="space-y-2.5 text-xs text-gray-400">
+                                    <li class="flex items-start gap-2"><span class="w-1 h-1 rounded-full bg-gray-300 mt-1.5 flex-shrink-0"></span>Mentoría Individual — 1h</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horarios + Metodología -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:col-span-1">
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-6">Horarios (Madrid)</p>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-white text-base">laptop_mac</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Formación 3D (Eje X)</p>
+                                <p class="text-gray-500 text-xs mt-0.5">Mar. y Jue. · <strong>17:30 – 20:00h</strong></p>
+                                <p class="text-gray-400 text-xs">Andrés Romero</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-gray-100"></div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-violet-600 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-white text-base">self_improvement</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Mentoría Grupal (Eje Y + Z)</p>
+                                <p class="text-gray-500 text-xs mt-0.5">Lun. y Mié. · <strong>07:00 – 07:45h</strong></p>
+                                <p class="text-gray-400 text-xs">Adolfo Reverón</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-gray-100"></div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-gray-600 text-base">person</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Mentoría Individual</p>
+                                <p class="text-gray-500 text-xs mt-0.5">Horario a convenir</p>
+                                <p class="text-gray-400 text-xs">Plan personalizado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:col-span-2">
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-wider mb-6">Metodología y Herramientas</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-violet-600 text-base">videocam</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Clases en Directo vía Zoom</p>
+                                <p class="text-gray-500 text-xs mt-1 leading-relaxed">Interactivas, en tiempo real y grabadas para que puedas consultarlas siempre.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-violet-600 text-base">forum</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Comunidad Privada</p>
+                                <p class="text-gray-500 text-xs mt-1 leading-relaxed">Feedback, resolución de dudas, salas de trabajo y contacto directo con profesores.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-violet-600 text-base">translate</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Idioma</p>
+                                <p class="text-gray-500 text-xs mt-1 leading-relaxed">Español. Sesiones puntuales en inglés con subtítulos generados por IA.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+                                <span class="material-symbols-outlined text-violet-600 text-base">school</span>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm">Nivel Requerido</p>
+                                <p class="text-gray-500 text-xs mt-1 leading-relaxed">Base de 3D (modelado, UVs, texturizado, import). Desde cero en Technical Art y scripting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner comunidad -->
+            <div class="relative rounded-2xl bg-black text-white overflow-hidden">
+                <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
+                <div class="relative p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <p class="font-mono text-violet-400 text-xs uppercase tracking-[0.2em] mb-3">Comunidad</p>
+                        <h3 class="text-3xl font-extrabold tracking-tight">Ya no estarás sol@</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mt-3 max-w-lg">
+                            Entorno seguro y tutelado. Compañeros sin hate. Una tribu en clase y fuera de ella. Tendrás un mentor que ha estado donde tú estás ahora.
+                        </p>
+                    </div>
+                    <a href="#cta" class="flex-shrink-0 bg-white text-black px-8 py-4 rounded-full font-bold text-sm hover:bg-violet-100 transition-colors tracking-wide whitespace-nowrap">
+                        UNIRME AL PROGRAMA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentoría Section -->
+    <section id="mentoria" class="py-28 lg:py-36 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Acompañamiento Real</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+                        Mentoría<br/>
+                        <span class="gradient-text">Personalizada</span>
+                    </h2>
+                    <p class="text-gray-500 text-lg leading-relaxed mb-10 max-w-md">
+                        No estás solo. Te acompañamos con sesiones 1-a-1 para que avances con dirección y confianza.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Sesiones 1-a-1 semanales</h4>
+                                <p class="text-gray-500 text-sm">Revisión de tu progreso y resolución de bloqueos técnicos y creativos.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Portfolio Review</h4>
+                                <p class="text-gray-500 text-sm">Feedback profesional para que tu portfolio hable por ti en cada entrevista.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Comunidad Privada</h4>
+                                <p class="text-gray-500 text-sm">Acceso de por vida a una red de artistas técnicos con los mismos objetivos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-violet-100/50 rounded-3xl blur-2xl"></div>
+                    <div class="relative bg-white border border-gray-100 rounded-3xl p-10">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white text-xl">calendar_month</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Próxima cohorte</p>
+                                    <p class="text-gray-500 text-sm">Abril 2026 — Plazas limitadas</p>
+                                </div>
+                            </div>
+                            <div class="h-px bg-gray-100"></div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white text-xl">schedule</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Duración</p>
+                                    <p class="text-gray-500 text-sm">6 meses de formación intensiva</p>
+                                </div>
+                            </div>
+                            <div class="h-px bg-gray-100"></div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white text-xl">group</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Formato</p>
+                                    <p class="text-gray-500 text-sm">Grupo reducido — máximo 20 alumnos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profesorado -->
+    <section id="profesorado" class="py-28 lg:py-36 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Header -->
+            <div class="mb-20">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Profesorado</p>
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+                    <h2 class="text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.0]">
+                        Aprende de quienes<br/>trabajan en la industria<br/>
+                        <span class="gradient-text">HOY.</span>
+                    </h2>
+                    <p class="text-gray-500 max-w-sm text-base leading-relaxed lg:pb-2">
+                        No son académicos. Son artistas y directores técnicos en activo. Te enseñan lo que funciona ahora.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mentor destacado: Adolfo -->
+            <div class="rounded-3xl bg-black text-white overflow-hidden mb-6">
+                <div class="grid grid-cols-1 lg:grid-cols-5">
+                    <div class="lg:col-span-2 bg-violet-900/30 flex items-center justify-center p-12 lg:p-16">
+                        <div class="text-center">
+                            <div class="w-28 h-28 rounded-2xl bg-violet-600/40 border border-violet-500/30 flex items-center justify-center mx-auto mb-5">
+                                <span class="text-4xl font-extrabold text-white">AR</span>
+                            </div>
+                            <h4 class="text-2xl font-bold">Adolfo Reverón</h4>
+                            <p class="font-mono text-violet-400 text-xs uppercase tracking-wider mt-2">Mentor · Ejes Y + Z</p>
+                            <div class="flex flex-wrap justify-center gap-2 mt-4">
+                                <span class="text-[10px] font-mono bg-violet-900/60 border border-violet-700/40 px-3 py-1 rounded-full text-violet-300">20+ años</span>
+                                <span class="text-[10px] font-mono bg-violet-900/60 border border-violet-700/40 px-3 py-1 rounded-full text-violet-300">Orden Interno</span>
+                                <span class="text-[10px] font-mono bg-violet-900/60 border border-violet-700/40 px-3 py-1 rounded-full text-violet-300">Negocio</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3 p-10 lg:p-14 flex flex-col justify-center">
+                        <p class="text-gray-300 text-base leading-relaxed mb-6">
+                            Creador de TAW y Director general. Tras más de 20 años de experiencia acumulada, he colgado las botas de la producción para enfocarme donde más valor puedo aportar.
+                        </p>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Voy a ser tu mentor. He sido junior, artista 3D, technical artist, senior, jefe de departamento, ingeniero y emprendedor. Te ofrezco mi mente y mi corazón para ayudarte a encontrar un objetivo, trazar un plan y prosperar en la vida.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resto del equipo: grid asimétrico -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+
+                <!-- Marta -->
+                <div class="card-hover rounded-2xl border border-gray-100 p-7 bg-white group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-5 text-gray-600 font-bold group-hover:bg-violet-600 group-hover:text-white group-hover:border-violet-600 transition-all duration-300">MR</div>
+                    <h4 class="font-bold text-base mb-1">Marta Rodriguez</h4>
+                    <p class="font-mono text-violet-600 text-[10px] uppercase tracking-wider mb-4">Guardián del propósito · Eje Y</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Velo por la promesa del proyecto. Defiendo tus intereses dentro del equipo. Producer, emprendedora y formación en autoconocimiento. Conoce a Adolfo desde hace 15 años.
+                    </p>
+                </div>
+
+                <!-- Jas -->
+                <div class="card-hover rounded-2xl border border-gray-100 p-7 bg-white group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-5 text-gray-600 font-bold group-hover:bg-violet-600 group-hover:text-white group-hover:border-violet-600 transition-all duration-300">J</div>
+                    <h4 class="font-bold text-base mb-1">Jas</h4>
+                    <p class="font-mono text-violet-600 text-[10px] uppercase tracking-wider mb-4">El Ingeniero · Eje Z</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Hago que las cosas funcionen: productos, marketing, plataforma y comunidad. Mi experiencia profesional y en marketing al servicio del proyecto.
+                    </p>
+                </div>
+
+                <!-- Andrés -->
+                <div class="card-hover rounded-2xl border border-gray-100 p-7 bg-white group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-5 text-gray-600 font-bold group-hover:bg-violet-600 group-hover:text-white group-hover:border-violet-600 transition-all duration-300 text-sm">ARo</div>
+                    <h4 class="font-bold text-base mb-1">Andrés Romero</h4>
+                    <p class="font-mono text-violet-600 text-[10px] uppercase tracking-wider mb-4">Director Formación 3D · Eje X</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Mi misión: elevar tu capacitación para que encuentres empleo con el 3D. Coordino profesores, temarios, masterclasses y plataforma. Soy quien te hace útil y empleable.
+                    </p>
+                </div>
+
+                <!-- Santiago -->
+                <div class="card-hover rounded-2xl border border-gray-100 p-7 bg-white group relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-violet-600 to-violet-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-5 text-gray-600 font-bold group-hover:bg-violet-600 group-hover:text-white group-hover:border-violet-600 transition-all duration-300">SN</div>
+                    <h4 class="font-bold text-base mb-1">Santiago Nieto</h4>
+                    <p class="font-mono text-violet-600 text-[10px] uppercase tracking-wider mb-4">La voz · Eje Z</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">
+                        Que se entienda qué hacemos y por qué. Dirijo la comunicación exterior. Si te unes, hablarás conmigo para contar tu historia dentro. Campañas, rebranding, video.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Profesores 3D -->
+            <div class="rounded-2xl border border-dashed border-violet-200 bg-violet-50/40 p-10 flex flex-col md:flex-row items-start md:items-center gap-8">
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-violet-100 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-violet-600 text-3xl">groups</span>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold tracking-tight mb-2">Profesores y Amigos que Imparten 3D</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-3xl">
+                        Profesionales en activo que te guían en el EJE X. Con sus virtudes y limitaciones, te ofrecen lo mejor de sí mismos para hacerte un artista 3D capaz y válido. Aprovecha también su visión del Eje Z.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section id="cta" class="py-28 lg:py-36">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                ¿Listo para el<br/>
+                <span class="gradient-text">cambio?</span>
+            </h2>
+            <p class="text-gray-500 text-lg mb-10 max-w-lg mx-auto leading-relaxed">
+                Agenda una llamada de consultoría gratuita. Analizamos tu situación y te decimos si el máster es para ti.
+            </p>
+            <a href="#" class="inline-block bg-black text-white px-10 py-5 rounded-full font-bold text-sm hover:bg-violet-600 transition-colors tracking-wide">
+                AGENDAR LLAMADA DE CONSULTORÍA
+            </a>
+            <p class="mt-6 text-gray-400 text-sm font-mono">Sin compromiso · 30 min · 100% personalizada</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <a href="#" class="text-lg font-extrabold tracking-tight">
+                MÁSTER <span class="text-violet-600">3D</span>
+            </a>
+            <div class="flex gap-8 text-sm text-gray-400">
+                <a href="#" class="hover:text-black transition-colors">Privacidad</a>
+                <a href="#" class="hover:text-black transition-colors">Términos</a>
+                <a href="#" class="hover:text-black transition-colors">Contacto</a>
+            </div>
+            <p class="text-xs text-gray-400 font-mono">© 2026 Máster 3D Integral</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div class="bg-black/95 backdrop-blur-md px-6 py-3 rounded-full shadow-2xl flex items-center gap-5 border border-white/10">
+            <span class="text-white font-semibold whitespace-nowrap hidden sm:inline-block text-sm tracking-wide">¿LISTO PARA EL CAMBIO?</span>
+            <a href="#cta" class="bg-white text-black px-7 py-2.5 rounded-full font-bold text-xs hover:bg-violet-100 transition-colors whitespace-nowrap">
+                AGENDAR LLAMADA
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
