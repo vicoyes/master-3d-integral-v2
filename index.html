@@ -549,12 +549,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Controles estilo Apple: play/pause + dots -->
-            <div class="flex items-center justify-center gap-4 pt-6 pb-2">
-                <button type="button" id="ejes-play" class="flex items-center justify-center w-10 h-10 rounded-full text-gray-500 hover:text-black hover:bg-gray-100 transition-colors" aria-label="Reproducir o pausar">
-                    <svg id="ejes-play-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                    <svg id="ejes-pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                </button>
+            <!-- Controles: dots -->
+            <div class="flex items-center justify-center gap-2 pt-6 pb-2">
                 <div class="flex items-center gap-2">
                     <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-500 transition-all duration-300" data-index="0" aria-label="Ir a Eje X"></button>
                     <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-500 transition-all duration-300" data-index="1" aria-label="Ir a Eje Y"></button>
@@ -569,20 +565,15 @@
                 var slider = document.getElementById('ejes-slider');
                 var dots = document.querySelectorAll('.eje-dot');
                 var slides = document.querySelectorAll('.ejes-slide');
-                var playBtn = document.getElementById('ejes-play');
-                var playIcon = document.getElementById('ejes-play-icon');
-                var pauseIcon = document.getElementById('ejes-pause-icon');
                 var prevBtn = document.getElementById('ejes-prev');
                 var nextBtn = document.getElementById('ejes-next');
                 if (!slider || !slides.length) return;
                 var currentIndex = 0;
-                var autoplayTimer = null;
-                var autoplayDelay = 5000;
 
                 function setActiveDot(index) {
                     currentIndex = index;
                     dots.forEach(function(d, i) {
-                        d.classList.toggle('bg-black', i === index);
+                        d.classList.toggle('bg-blue-600', i === index);
                         d.classList.toggle('scale-125', i === index);
                         d.classList.toggle('bg-gray-300', i !== index);
                     });
@@ -597,28 +588,9 @@
                     slider.scrollTo({ left: offset, behavior: 'smooth' });
                     setActiveDot(index);
                 }
-                function nextSlide() {
-                    goTo((currentIndex + 1) % slides.length);
-                }
-                function startAutoplay() {
-                    if (autoplayTimer) return;
-                    autoplayTimer = setInterval(nextSlide, autoplayDelay);
-                    if (playIcon) playIcon.classList.add('hidden');
-                    if (pauseIcon) pauseIcon.classList.remove('hidden');
-                }
-                function stopAutoplay() {
-                    clearInterval(autoplayTimer);
-                    autoplayTimer = null;
-                    if (playIcon) playIcon.classList.remove('hidden');
-                    if (pauseIcon) pauseIcon.classList.add('hidden');
-                }
-                function togglePlay() {
-                    if (autoplayTimer) stopAutoplay(); else startAutoplay();
-                }
                 dots.forEach(function(dot, i) {
                     dot.addEventListener('click', function() { goTo(i); });
                 });
-                if (playBtn) playBtn.addEventListener('click', togglePlay);
                 if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIndex > 0 ? currentIndex - 1 : slides.length - 1); });
                 if (nextBtn) nextBtn.addEventListener('click', function() { goTo((currentIndex + 1) % slides.length); });
 
@@ -750,9 +722,9 @@
                 <div class="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4 mt-6" aria-label="Navegación por ejes">
                     <div class="flex-1 min-w-0"></div>
                     <div class="flex justify-center gap-2 flex-shrink-0">
-                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-red-300 hover:bg-red-400" aria-label="Eje X" data-index="0"></button>
-                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-emerald-300 hover:bg-emerald-400" aria-label="Eje Y" data-index="1"></button>
-                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-blue-300 hover:bg-blue-400" aria-label="Eje Z" data-index="2"></button>
+                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-gray-300 hover:bg-gray-500" aria-label="Eje X" data-index="0"></button>
+                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-gray-300 hover:bg-gray-500" aria-label="Eje Y" data-index="1"></button>
+                        <button type="button" class="para-quien-dot w-2.5 h-2.5 rounded-full border-0 cursor-pointer transition-all duration-300 bg-gray-300 hover:bg-gray-500" aria-label="Eje Z" data-index="2"></button>
                     </div>
                     <div class="flex-1 flex justify-end items-center gap-2 flex-shrink-0">
                         <button type="button" id="para-quien-prev" class="glass-arrow w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center" aria-label="Anterior">
@@ -772,13 +744,12 @@
                     var nextBtn = document.getElementById('para-quien-next');
                     if (!slider || !slides.length) return;
                     var currentIndex = 0;
-                    var dotColors = [['bg-red-300', 'bg-red-500'], ['bg-emerald-300', 'bg-emerald-500'], ['bg-blue-300', 'bg-blue-500']];
                     function setActiveDot(index) {
                         currentIndex = index;
                         dots.forEach(function(d, i) {
-                            d.classList.remove('bg-red-300', 'bg-red-500', 'bg-emerald-300', 'bg-emerald-500', 'bg-blue-300', 'bg-blue-500', 'scale-125');
-                            d.classList.add(dotColors[i][i === index ? 1 : 0]);
-                            if (i === index) d.classList.add('scale-125');
+                            d.classList.toggle('bg-blue-600', i === index);
+                            d.classList.toggle('scale-125', i === index);
+                            d.classList.toggle('bg-gray-300', i !== index);
                         });
                     }
                     function goTo(index) {
@@ -987,11 +958,11 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-2 mt-6" aria-label="Navegación por día">
-                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-violet-300" aria-label="Lunes" data-index="0"></button>
-                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-violet-300" aria-label="Martes" data-index="1"></button>
-                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-violet-300" aria-label="Miércoles" data-index="2"></button>
-                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-violet-300" aria-label="Jueves" data-index="3"></button>
-                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-violet-300" aria-label="Viernes" data-index="4"></button>
+                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Lunes" data-index="0"></button>
+                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Martes" data-index="1"></button>
+                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Miércoles" data-index="2"></button>
+                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Jueves" data-index="3"></button>
+                    <button type="button" class="schedule-dot w-2.5 h-2.5 rounded-full bg-gray-300 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Viernes" data-index="4"></button>
                 </div>
                 <script>
                 (function() {
@@ -1005,7 +976,7 @@
                     function setActiveDot(index) {
                         currentIndex = index;
                         dots.forEach(function(d, i) {
-                            d.classList.toggle('bg-violet-600', i === index);
+                            d.classList.toggle('bg-blue-600', i === index);
                             d.classList.toggle('scale-125', i === index);
                             d.classList.toggle('bg-gray-300', i !== index);
                         });
@@ -1288,7 +1259,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center gap-2 mt-6">
-                    <button type="button" class="testimonio-dot w-2.5 h-2.5 rounded-full bg-violet-400 border-0 cursor-pointer transition-all duration-300" aria-label="Testimonio 1" data-index="0"></button>
+                    <button type="button" class="testimonio-dot w-2.5 h-2.5 rounded-full bg-blue-600 border-0 cursor-pointer transition-all duration-300 hover:bg-gray-500" aria-label="Testimonio 1" data-index="0"></button>
                 </div>
             </div>
         </div>
@@ -1696,8 +1667,8 @@
                 dot.addEventListener('click', () => {
                     const slideWidth = track.parentElement.offsetWidth;
                     track.scrollTo({ left: slideWidth * i, behavior: 'smooth' });
-                    dots.forEach(d => { d.classList.remove('bg-violet-400', 'scale-110'); d.classList.add('bg-gray-300'); });
-                    dot.classList.remove('bg-gray-300'); dot.classList.add('bg-violet-400', 'scale-110');
+                    dots.forEach(d => { d.classList.remove('bg-blue-600', 'scale-110'); d.classList.add('bg-gray-300'); });
+                    dot.classList.remove('bg-gray-300'); dot.classList.add('bg-blue-600', 'scale-110');
                 });
             });
         }
