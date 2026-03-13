@@ -286,6 +286,29 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
+        .cta-ver-oferta { transition: background-color 0.35s ease, color 0.35s ease; }
+        @keyframes cta-rgb-flow {
+            0%, 100% { background-color: #e53935; }
+            33% { background-color: #43a047; }
+            66% { background-color: #1e88e5; }
+        }
+        .cta-ver-oferta.cta-scrolled {
+            animation: cta-rgb-flow 10s ease-in-out infinite;
+        }
+        .cta-ver-oferta.cta-scrolled:hover {
+            animation-duration: 6s;
+            filter: brightness(1.08);
+        }
+        /* CTA flotante: efecto Aladdin al acercarse a la barra */
+        #cta-float {
+            transform: translate(-50%, 0);
+            transition: transform 0.7s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.6s ease;
+        }
+        #cta-float.cta-float-hidden {
+            transform: translate(-50%, calc(100% + 6rem));
+            opacity: 0;
+            pointer-events: none;
+        }
         /* Flechas estilo Apple con vidrio esmerilado */
         .glass-arrow {
             background: rgba(255, 255, 255, 0.45);
@@ -366,7 +389,7 @@
                 <a class="nav-link" href="#faqs">FAQs</a>
             </div>
             <a href="#oferta" class="font-montserrat font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
-                VER OFERTA
+                AGENDAR CONSULTORÍA
             </a>
         </div>
     </nav>
@@ -671,7 +694,8 @@
                             <p class="font-mono text-violet-600 font-semibold text-xs uppercase tracking-[0.2em] mb-3">Formación 3D</p>
                             <h3 class="text-2xl lg:text-3xl font-bold tracking-tight mb-4 text-gray-900">LA FORMACIÓN 3D PARA HACER DE TI UN PROFESIONAL DIFERENCIADO</h3>
                             <p class="text-gray-500 text-sm leading-relaxed mb-6">Te especializarás como Technical Artist para cine y videojuegos, creando Props, Entornos y Pipelines con un enfoque en las últimas tendencias de IA. Conseguimos hacerte más útil que el artista promedio y mejorar tus probabilidades de empleabilidad a través de la diferenciación. Todo el conocimiento se aplica en 10 proyectos específicos* de dificultad progresiva que aplanan la curva de aprendizaje para que nunca te quedes atrás.</p>
-                            <div class="flex justify-end mt-auto">
+                            <div class="flex justify-end items-center gap-2 mt-auto">
+                                <button type="button" class="eje-popup-trigger text-xs text-gray-500 font-mono uppercase tracking-wider cursor-pointer hover:text-gray-700 bg-transparent border-0 p-0" data-eje="x">Ver más</button>
                                 <button type="button" class="eje-popup-trigger w-10 h-10 rounded-full bg-gray-900 hover:bg-gray-700 flex items-center justify-center transition-colors shadow-lg" data-eje="x" aria-label="Ver más sobre Eje X">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                 </button>
@@ -691,7 +715,8 @@
                             <p class="font-mono text-violet-600 font-semibold text-xs uppercase tracking-[0.2em] mb-3">Orden Interno</p>
                             <h3 class="text-2xl lg:text-3xl font-bold tracking-tight mb-4 text-gray-900">EL ORDEN QUE NECESITAS PARA PODER CONQUISTAR</h3>
                             <p class="text-gray-500 text-sm leading-relaxed mb-6">La mayoría cree que no consigue sus metas por mala suerte, pero la verdadera causa está en tu interior. Todos albergamos 'desórdenes internos' que nos hacen temer los cambios, sentirnos impostores o incapaces del éxito. Adolfo Reverón, Director del proyecto, será tu mentor y construirá un plan individualizado para ti, para que te detengas, ordenes tu interior y salgas renovado para luchar por el éxito.</p>
-                            <div class="flex justify-end mt-auto">
+                            <div class="flex justify-end items-center gap-2 mt-auto">
+                                <button type="button" class="eje-popup-trigger text-xs text-gray-500 font-mono uppercase tracking-wider cursor-pointer hover:text-gray-700 bg-transparent border-0 p-0" data-eje="y">Ver más</button>
                                 <button type="button" class="eje-popup-trigger w-10 h-10 rounded-full bg-gray-900 hover:bg-gray-700 flex items-center justify-center transition-colors shadow-lg" data-eje="y" aria-label="Ver más sobre Eje Y">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                 </button>
@@ -711,7 +736,8 @@
                             <p class="font-mono text-violet-600 font-semibold text-xs uppercase tracking-[0.2em] mb-3">Negocio</p>
                             <h3 class="text-2xl lg:text-3xl font-bold tracking-tight mb-4 text-gray-900">NEGOCIO. LAS REGLAS QUE DESCONOCES PERO QUE RIGEN LAS RELACIONES LABORALES Y EMPRESARIALES</h3>
                             <p class="text-gray-500 text-sm leading-relaxed mb-6">Te ofrecemos las destrezas que necesitas para hacer negocios y prosperar, ya sea como empleado, freelance o emprendedor. Adolfo Reverón será tu mentor también en este eje y diseñará una estrategia individualizada para ti.</p>
-                            <div class="flex justify-end mt-auto">
+                            <div class="flex justify-end items-center gap-2 mt-auto">
+                                <button type="button" class="eje-popup-trigger text-xs text-gray-500 font-mono uppercase tracking-wider cursor-pointer hover:text-gray-700 bg-transparent border-0 p-0" data-eje="z">Ver más</button>
                                 <button type="button" class="eje-popup-trigger w-10 h-10 rounded-full bg-gray-900 hover:bg-gray-700 flex items-center justify-center transition-colors shadow-lg" data-eje="z" aria-label="Ver más sobre Eje Z">
                                     <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
                                 </button>
@@ -807,6 +833,10 @@
                             <div class="border-b border-gray-100 pb-8 last:border-0 last:pb-0">
                                 <h3 class="text-lg font-bold text-gray-900 mb-2">Eres Programador y buscas un propósito creativo</h3>
                                 <p class="text-gray-500 text-base leading-relaxed">Disfrutas de la lógica y la resolución de problemas, pero te sientes desconectado del resultado visual. Quieres un rol híbrido que combine tu mente técnica con la creación de mundos y herramientas impactantes.</p>
+                            </div>
+                            <div class="border-b border-gray-100 pb-8 last:border-0 last:pb-0">
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">Sientes que el conocimiento técnico y artístico no es suficiente</h3>
+                                <p class="text-gray-500 text-base leading-relaxed">Eres bueno en lo que haces, pero te falta claridad, te sientes un impostor o no sabes cómo "venderte". Buscas un sistema integral que te ordene por dentro para poder conquistar el mundo por fuera.</p>
                             </div>
                         </div>
                     </div>
@@ -1406,6 +1436,9 @@
                     <h2 class="section-title font-extrabold tracking-tight mb-10 text-black">
                         El Manifiesto de TechArtWorlds:<br/><span class="text-accent-green">¿Por Qué Hacemos Esto?</span>
                     </h2>
+                    <div class="mb-10 flex justify-center">
+                        <img src="img/steve-jobs-manifiesto.png" alt="Visión y propósito" class="w-full max-w-2xl rounded-2xl object-cover shadow-lg aspect-[2/1]">
+                    </div>
                     <div class="space-y-6 text-gray-600 text-base leading-relaxed">
                         <p>Como fundador, impulsé esta escuela desde la urgencia por vender, no desde el propósito. Lo hacía solo por dinero. Sostener ese vacío durante 4 años nos llevó a una crisis que casi nos destruye.</p>
                         <p>Tuvimos que parar, mirar hacia adentro y hundirnos para poder renacer. Aprendimos que el éxito sin un propósito real es insostenible. Decidí que TAW viviría con un propósito, o no viviría.</p>
@@ -1458,7 +1491,7 @@
                             </div>
                             <div class="mt-10">
                                 <a href="#cta" class="font-montserrat font-bold inline-block bg-violet-600 text-white px-8 py-4 rounded-full text-sm hover:bg-violet-700 transition-colors tracking-wide uppercase">
-                                    Agendar llamada de admisión
+                                    AGENDAR CONSULTORÍA
                                 </a>
                             </div>
                         </div>
@@ -1647,17 +1680,53 @@
     </footer>
 
     <!-- Floating CTA - cristal esmerilado estilo Apple -->
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <div id="cta-float" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
         <div class="glass-cta px-6 py-3 rounded-full flex items-center gap-5">
-            <span class="text-black font-semibold whitespace-nowrap hidden sm:inline-block text-sm tracking-wide">PLAZAS LIMITADAS — ABRIL 2026</span>
-            <a href="#oferta" class="font-montserrat font-bold bg-black text-white px-7 py-2.5 rounded-full text-xs hover:bg-gray-800 transition-colors whitespace-nowrap">
-                VER OFERTA
+            <span class="text-black font-semibold whitespace-nowrap hidden sm:inline-block text-sm tracking-wide">Da el paso hacia la transformación</span>
+            <a href="#oferta" id="cta-ver-oferta" class="cta-ver-oferta font-montserrat font-bold bg-black text-white px-7 py-2.5 rounded-full text-xs hover:bg-gray-800 whitespace-nowrap">
+                AGENDAR CONSULTORÍA
             </a>
         </div>
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        var ctaBtn = document.getElementById('cta-ver-oferta');
+        var ctaFloat = document.getElementById('cta-float');
+        var ofertaInView = false;
+        var inlineCtaInView = new Set();
+        var ofertaSection = document.getElementById('oferta');
+        if (ofertaSection) {
+            var obsOferta = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) { ofertaInView = e.isIntersecting; });
+                updateCtaScroll();
+            }, { threshold: 0.08 });
+            obsOferta.observe(ofertaSection);
+        }
+        document.querySelectorAll('a[href="#cta"]').forEach(function(el) {
+            var obsCta = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) inlineCtaInView.add(e.target);
+                    else inlineCtaInView.delete(e.target);
+                });
+                updateCtaScroll();
+            }, { threshold: 0.1 });
+            obsCta.observe(el);
+        });
+        function updateCtaScroll() {
+            var y = window.scrollY;
+            if (ctaBtn) {
+                if (y > 280) ctaBtn.classList.add('cta-scrolled');
+                else ctaBtn.classList.remove('cta-scrolled');
+            }
+            if (ctaFloat) {
+                if (y < 180 || ofertaInView || inlineCtaInView.size > 0) ctaFloat.classList.add('cta-float-hidden');
+                else ctaFloat.classList.remove('cta-float-hidden');
+            }
+        }
+        window.addEventListener('scroll', updateCtaScroll, { passive: true });
+        updateCtaScroll();
+
         document.querySelectorAll('section > div').forEach(el => el.classList.add('reveal'));
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
