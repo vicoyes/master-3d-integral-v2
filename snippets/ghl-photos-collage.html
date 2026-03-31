@@ -1,0 +1,100 @@
+<!--
+  FRAGMENTO GHL — Photos Collage Section (mismo bloque que index.html tras el hero)
+  =============================================================================
+  1) Pega gohighlevel-custom.css en el CSS personalizado de GHL.
+  2) Fotos del collage (1.12, 1.3, 1.4) desde GitHub Pages; el marco 2 y 2 avatares
+     siguen con Unsplash como en index.html. Cambia esos src si subes más assets.
+  3) Coloca este HTML en un bloque “Custom code” / HTML personalizado.
+-->
+
+<section class="m3d-collage-section m3d-fade-in">
+  <div class="m3d-collage-bg" aria-hidden="true">
+    <div class="m3d-collage-blobs-wrap">
+      <div class="m3d-collage-blob m3d-collage-blob--a"></div>
+      <div class="m3d-collage-blob m3d-collage-blob--b"></div>
+      <div class="m3d-collage-blob m3d-collage-blob--c"></div>
+      <div class="m3d-collage-blob m3d-collage-blob--d"></div>
+    </div>
+    <svg class="m3d-collage-geo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polygon points="200,40 360,120 360,280 200,360 40,280 40,120" fill="none" stroke="#ffffff" stroke-width="1" />
+      <circle cx="200" cy="200" r="90" fill="none" stroke="#ffffff" stroke-width="0.8" />
+      <line x1="200" y1="40" x2="200" y2="360" stroke="#ffffff" stroke-width="0.5" />
+      <line x1="40" y1="120" x2="360" y2="280" stroke="#ffffff" stroke-width="0.5" />
+      <line x1="40" y1="280" x2="360" y2="120" stroke="#ffffff" stroke-width="0.5" />
+    </svg>
+  </div>
+
+  <div class="m3d-container m3d-collage-inner">
+    <div class="m3d-collage-stage">
+      <div class="m3d-collage-frame m3d-collage-frame--1">
+        <img
+          src="https://vicoyes.github.io/master-3d-integral-v2/1.12.png"
+          alt="Artista técnico trabajando en Houdini"
+          width="800"
+          height="300"
+          loading="lazy"
+        />
+      </div>
+      <div class="m3d-collage-frame m3d-collage-frame--2">
+        <img
+          src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=400&amp;h=500&amp;q=80"
+          alt="Estudiante trabajando en modelado 3D"
+          width="400"
+          height="260"
+          loading="lazy"
+        />
+      </div>
+      <div class="m3d-collage-frame m3d-collage-frame--3">
+        <img
+          src="https://vicoyes.github.io/master-3d-integral-v2/1.3.png"
+          alt="Alumna del Máster 3D Integral"
+          width="800"
+          height="320"
+          loading="lazy"
+        />
+      </div>
+      <div class="m3d-collage-frame m3d-collage-frame--4">
+        <img
+          src="https://vicoyes.github.io/master-3d-integral-v2/1.4.png"
+          alt="Detalle del entorno 3D del máster"
+          width="400"
+          height="180"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="m3d-collage-pill-row">
+      <div class="m3d-collage-pill">
+        <div class="m3d-collage-avatars">
+          <img
+            src="https://vicoyes.github.io/master-3d-integral-v2/1.3.png"
+            alt=""
+            width="36"
+            height="36"
+            loading="lazy"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=80&amp;h=80&amp;q=80"
+            alt=""
+            width="36"
+            height="36"
+            loading="lazy"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=80&amp;h=80&amp;q=80"
+            alt=""
+            width="36"
+            height="36"
+            loading="lazy"
+          />
+        </div>
+        <div class="m3d-collage-pill-copy">
+          <p class="m3d-collage-pill-title">+120 artistas formados</p>
+          <p class="m3d-collage-pill-sub">Comunidad activa</p>
+        </div>
+        <a href="#cta" class="m3d-btn m3d-btn-primary m3d-btn-sm">AGENDAR LLAMADA</a>
+      </div>
+    </div>
+  </div>
+</section>

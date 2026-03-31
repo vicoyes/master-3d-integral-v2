@@ -1,0 +1,382 @@
+<!--
+  GHL — Organización semanal (slider de días L–V)
+  ==============================================
+  Bloque independiente: estilos + iconos + script en un solo pegado.
+  1) Si GHL no carga el <link> de Material Symbols, añádelo en el head del funnel
+     o sustituye los iconos por SVG.
+  2) El título "Organización Semanal" va incluido; bórralo si ya lo tienes arriba.
+-->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" />
+
+<style>
+  .m3d-sched-block {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #111827;
+    box-sizing: border-box;
+  }
+  .m3d-sched-block *,
+  .m3d-sched-block *::before,
+  .m3d-sched-block *::after {
+    box-sizing: border-box;
+  }
+  .m3d-sched-label {
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin: 0 0 2rem;
+    background: linear-gradient(
+      90deg,
+      #2196f3 0%,
+      #673ab7 35%,
+      #e91e63 65%,
+      #ff9800 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .m3d-sched-outer {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .m3d-sched-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.45);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    color: #1f2937;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .m3d-sched-arrow:hover {
+    background: rgba(255, 255, 255, 0.65);
+  }
+  .m3d-sched-arrow:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+  .m3d-sched-arrow svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  .m3d-sched-arrow--prev {
+    left: 0.5rem;
+  }
+  .m3d-sched-arrow--next {
+    right: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .m3d-sched-arrow {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+    .m3d-sched-arrow--prev {
+      left: 1rem;
+    }
+    .m3d-sched-arrow--next {
+      right: 1rem;
+    }
+  }
+  .m3d-sched-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 3.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  @media (min-width: 768px) {
+    .m3d-sched-slider {
+      padding-left: 4rem;
+      padding-right: 4rem;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+  .m3d-sched-slider::-webkit-scrollbar {
+    display: none;
+  }
+  .m3d-sched-slider > * {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .m3d-sched-slide {
+    flex: 0 0 82vw;
+    width: 82vw;
+    min-width: 260px;
+    max-width: 340px;
+    border-radius: 1rem;
+    border: 1px solid #f3f4f6;
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .m3d-sched-slide--tint {
+    background-color: #edf4fc;
+  }
+  .m3d-sched-slide--white {
+    background-color: #fff;
+  }
+  .m3d-sched-slide--fri {
+    border-style: dashed;
+    border-color: #e5e7eb;
+    background-color: #edf4fc;
+  }
+  .m3d-sched-day {
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    color: #111827;
+  }
+  .m3d-sched-slide--fri .m3d-sched-day {
+    color: #374151;
+  }
+  .m3d-sched-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .m3d-sched-li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: #4b5563;
+  }
+  .m3d-sched-li strong {
+    font-weight: 700;
+    color: inherit;
+  }
+  .material-symbols-outlined.m3d-sched-icon {
+    font-size: 1.125rem;
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    color: #9333ea;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+  .m3d-sched-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .m3d-sched-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    padding: 0;
+    border: none;
+    border-radius: 9999px;
+    background: #d1d5db;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .m3d-sched-dot:hover {
+    background: #9ca3af;
+  }
+  .m3d-sched-dot.m3d-sched-dot--active {
+    background: #9333ea;
+    transform: scale(1.25);
+  }
+</style>
+
+<div class="m3d-sched-block" data-m3d-schedule-root>
+  <p class="m3d-sched-label">Organización Semanal</p>
+
+  <div class="m3d-sched-outer">
+    <button type="button" class="m3d-sched-arrow m3d-sched-arrow--prev" data-m3d-sched-prev aria-label="Día anterior">
+      <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+    </button>
+    <button type="button" class="m3d-sched-arrow m3d-sched-arrow--next" data-m3d-sched-next aria-label="Día siguiente">
+      <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18l6-6-6-6"></path>
+      </svg>
+    </button>
+
+    <div class="m3d-sched-slider" data-m3d-sched-track>
+      <div class="m3d-sched-slide m3d-sched-slide--tint">
+        <p class="m3d-sched-day">Lunes</p>
+        <ul class="m3d-sched-ul">
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">groups</span>
+            <span><strong>Clase Grupal (20 alumnos)</strong><br />Orden Interno - 45'</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">group_work</span>
+            <span><strong>Grupo de trabajo 1 (alumnos 1 a 5)</strong><br />Orden Interno y Negocio - 2h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">person</span>
+            <span><strong>Mentoría Individual (alumno)</strong><br />1h</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="m3d-sched-slide m3d-sched-slide--white">
+        <p class="m3d-sched-day">Martes</p>
+        <ul class="m3d-sched-ul">
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">groups</span>
+            <span><strong>Clase Grupal (20 alumnos)</strong><br />Formación 3D - 2.5h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">group_work</span>
+            <span><strong>Grupo de trabajo 2 (alumnos 6 a 10)</strong><br />Orden Interno y Negocio - 2h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">person</span>
+            <span><strong>Mentoría Individual (alumno)</strong><br />1h</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="m3d-sched-slide m3d-sched-slide--tint">
+        <p class="m3d-sched-day">Miércoles</p>
+        <ul class="m3d-sched-ul">
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">groups</span>
+            <span><strong>Clase Grupal (20 alumnos)</strong><br />Negocio - 45'</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">group_work</span>
+            <span><strong>Grupo de trabajo 3 (alumnos 11 a 15)</strong><br />Orden Interno y Negocio - 2h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">person</span>
+            <span><strong>Mentoría Individual (alumno)</strong><br />1h</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="m3d-sched-slide m3d-sched-slide--white">
+        <p class="m3d-sched-day">Jueves</p>
+        <ul class="m3d-sched-ul">
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">groups</span>
+            <span><strong>Clase Grupal (20 alumnos)</strong><br />Formación 3D - 2.5h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">group_work</span>
+            <span><strong>Grupo de trabajo 4 (alumnos 16 a 20)</strong><br />Orden Interno y Negocio - 2h</span>
+          </li>
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">person</span>
+            <span><strong>Mentoría Individual (alumno)</strong><br />1h</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="m3d-sched-slide m3d-sched-slide--fri">
+        <p class="m3d-sched-day">Viernes</p>
+        <ul class="m3d-sched-ul">
+          <li class="m3d-sched-li">
+            <span class="material-symbols-outlined m3d-sched-icon" aria-hidden="true">person</span>
+            <span><strong>Mentoría Individual (alumno)</strong><br />1h</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="m3d-sched-dots" aria-label="Navegación por día">
+    <button type="button" class="m3d-sched-dot m3d-sched-dot--active" data-index="0" aria-label="Lunes"></button>
+    <button type="button" class="m3d-sched-dot" data-index="1" aria-label="Martes"></button>
+    <button type="button" class="m3d-sched-dot" data-index="2" aria-label="Miércoles"></button>
+    <button type="button" class="m3d-sched-dot" data-index="3" aria-label="Jueves"></button>
+    <button type="button" class="m3d-sched-dot" data-index="4" aria-label="Viernes"></button>
+  </div>
+</div>
+
+<script>
+(function () {
+  function initSchedule(root) {
+    var slider = root.querySelector("[data-m3d-sched-track]");
+    var dots = root.querySelectorAll(".m3d-sched-dot");
+    var slides = root.querySelectorAll(".m3d-sched-slide");
+    var prevBtn = root.querySelector("[data-m3d-sched-prev]");
+    var nextBtn = root.querySelector("[data-m3d-sched-next]");
+    if (!slider || !slides.length) return;
+
+    var currentIndex = 0;
+
+    function setActiveDot(index) {
+      currentIndex = index;
+      dots.forEach(function (d, i) {
+        d.classList.toggle("m3d-sched-dot--active", i === index);
+      });
+    }
+
+    function goTo(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      var slide = slides[index];
+      if (!slide) return;
+      slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      setActiveDot(index);
+    }
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () {
+        goTo(i);
+      });
+    });
+    if (prevBtn) prevBtn.addEventListener("click", function () { goTo(currentIndex - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { goTo(currentIndex + 1); });
+
+    var scrollTimeout;
+    slider.addEventListener("scroll", function () {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function () {
+        var center = slider.scrollLeft + slider.offsetWidth / 2;
+        var closest = 0;
+        var minDist = Infinity;
+        slides.forEach(function (s, i) {
+          var mid = s.offsetLeft + s.offsetWidth / 2;
+          var d = Math.abs(center - mid);
+          if (d < minDist) {
+            minDist = d;
+            closest = i;
+          }
+        });
+        setActiveDot(closest);
+      }, 80);
+    });
+    setActiveDot(0);
+  }
+
+  document.querySelectorAll("[data-m3d-schedule-root]").forEach(initSchedule);
+})();
+</script>
