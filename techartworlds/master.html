@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        x: "#E8733A",
+                        x: "#0071e3",
                         y: "#8B74E8",
                         z: "#3DA882",
                         "text-main": "#1d1d1f",
@@ -315,7 +315,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
                 <!-- Card 1 -->
                 <div class="card-apple p-8 bg-white">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,116,232,0.08);">
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.08);">
                         <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     </div>
                     <h3 class="text-base font-semibold tracking-tight mb-3" style="color:#1d1d1f;">28 Sept 2026 — 25 Junio 2027</h3>
@@ -323,8 +323,8 @@
                 </div>
                 <!-- Card 2 -->
                 <div class="card-apple p-8 bg-white">
-                    <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(232,115,58,0.08);">
-                        <svg class="w-5 h-5" style="color:#E8733A;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.08);">
+                        <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                     </div>
                     <h3 class="text-base font-semibold tracking-tight mb-3" style="color:#1d1d1f;">4 clases colectivas + individuales</h3>
                     <p class="text-sm leading-relaxed" style="color:#6e6e73;">Lunes y miércoles por la mañana. Martes y jueves por la tarde. Sesiones individuales de mentoría cada semana.</p>
@@ -350,9 +350,9 @@
                 <div id="ejes-slider" class="flex overflow-x-auto gap-5 lg:gap-8 py-4" style="scroll-behavior:smooth;scroll-padding-inline:20vw;padding-left:20vw;padding-right:20vw;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
                     <div class="flex-shrink-0 w-[85vw] md:w-[65vw] lg:w-[52vw] min-h-[420px] flex flex-col lg:flex-row overflow-hidden shadow-sm" style="background-color:#fef2f2;border-radius:1.75rem;">
                         <div class="flex-1 p-8 lg:p-10 flex flex-col justify-center min-w-0">
-                            <div style="font-size:10px;font-family:monospace;text-transform:uppercase;letter-spacing:.2em;font-weight:600;color:#E8733A;margin-bottom:16px;">Eje X</div>
+                            <div style="font-size:10px;font-family:monospace;text-transform:uppercase;letter-spacing:.2em;font-weight:600;color:#0071e3;margin-bottom:16px;">Eje X</div>
                             <h3 class="text-xl lg:text-2xl font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Te capacitamos hacia la excelencia profesional</h3>
-                            <p class="text-sm font-medium mb-4 leading-relaxed" style="color:#E8733A;">Formación 3D con IA — Houdini, VEX, Python y flujos de trabajo procedurales combinados con IA y ComfyUI.</p>
+                            <p class="text-sm font-medium mb-4 leading-relaxed" style="color:#0071e3;">Formación 3D con IA — Houdini, VEX, Python y flujos de trabajo procedurales combinados con IA y ComfyUI.</p>
                             <p class="text-sm leading-relaxed" style="color:#6e6e73;">Adquiere habilidades que te harán valioso en cualquier producción en la era de la IA, proporcionándote una base técnica que te coloca en la vanguardia.</p>
                         </div>
                         <div class="w-full lg:w-[42%] lg:min-w-[180px] aspect-[4/3] lg:aspect-auto lg:flex-shrink-0 lg:self-stretch lg:min-h-0">
@@ -384,7 +384,7 @@
                 </div>
                 <!-- Dots -->
                 <div class="flex items-center justify-center gap-2 pt-6">
-                    <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full transition-all duration-300" data-index="0" style="background:#E8733A;" aria-label="Ir a Eje X"></button>
+                    <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full transition-all duration-300" data-index="0" style="background:#0071e3;" aria-label="Ir a Eje X"></button>
                     <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-index="1" aria-label="Ir a Eje Y"></button>
                     <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-index="2" aria-label="Ir a Eje Z"></button>
                 </div>
@@ -402,7 +402,7 @@
                 function setActiveDot(index) {
                     currentIndex = index;
                     dots.forEach(function(d, i) {
-                        var colors = ['#E8733A','#8B74E8','#3DA882'];
+                        var colors = ['#0071e3','#8B74E8','#3DA882'];
                         d.style.background = (i === index) ? colors[i] : '#d1d5db';
                         d.style.transform = (i === index) ? 'scale(1.3)' : 'scale(1)';
                     });
@@ -450,8 +450,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
                 <!-- Turno Mañana -->
                 <div class="card-apple p-9 bg-white text-center">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(232,115,58,0.1);">
-                        <svg class="w-7 h-7" style="color:#E8733A;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(0,113,227,0.1);">
+                        <svg class="w-7 h-7" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     </div>
                     <h3 class="text-lg font-semibold tracking-tight mb-2" style="color:#1d1d1f;">Turno de mañana</h3>
                     <p class="schedule-pill active mb-3 inline-block">Lunes y miércoles</p>
@@ -459,7 +459,7 @@
                 </div>
                 <!-- Turno Tarde -->
                 <div class="card-apple p-9 bg-white text-center">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(139,116,232,0.1);">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:rgba(0,113,227,0.1);">
                         <svg class="w-7 h-7" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                     </div>
                     <h3 class="text-lg font-semibold tracking-tight mb-2" style="color:#1d1d1f;">Turno de tarde</h3>
@@ -489,19 +489,19 @@
                     </p>
                     <ul class="space-y-4">
                         <li class="flex items-start gap-4 text-base" style="color:#1d1d1f;">
-                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(139,116,232,0.1); color:#8B74E8;">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(0,113,227,0.1); color:#8B74E8;">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
                             Sesiones one-to-one con tu mentor asignado
                         </li>
                         <li class="flex items-start gap-4 text-base" style="color:#1d1d1f;">
-                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(139,116,232,0.1); color:#8B74E8;">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(0,113,227,0.1); color:#8B74E8;">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
                             Seguimiento de tu progreso y plan de acción personalizado
                         </li>
                         <li class="flex items-start gap-4 text-base" style="color:#1d1d1f;">
-                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(139,116,232,0.1); color:#8B74E8;">
+                            <span class="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center mt-0.5 text-xs font-bold" style="background:rgba(0,113,227,0.1); color:#8B74E8;">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             </span>
                             Resolución de dudas específicas de tu flujo de trabajo
@@ -531,7 +531,7 @@
                         <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/c3cmUrbBhdgs54adfIYP/media/666136581848ae65069c5b9f.jpeg" alt="Zoom" class="w-full h-full object-cover"/>
                     </div>
                     <div class="p-8">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(139,116,232,0.08);">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,113,227,0.08);">
                             <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
                         </div>
                         <h3 class="text-base font-semibold tracking-tight mb-3" style="color:#1d1d1f;">Acceso vía Zoom</h3>
@@ -570,7 +570,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
                 <!-- Idioma -->
-                <div class="card-apple p-10" style="background:rgba(139,116,232,0.04); border-color:rgba(139,116,232,0.12);">
+                <div class="card-apple p-10" style="background:rgba(0,113,227,0.04); border-color:rgba(0,113,227,0.12);">
                     <p class="label-apple mb-4" style="color:#0071e3;">Idioma</p>
                     <h3 class="text-2xl font-bold tracking-tight mb-4 leading-snug" style="color:#1d1d1f;">
                         Español,<br/>con módulos en Inglés
@@ -580,8 +580,8 @@
                     </p>
                 </div>
                 <!-- Nivel -->
-                <div class="card-apple p-10" style="background:rgba(232,115,58,0.04); border-color:rgba(232,115,58,0.12);">
-                    <p class="label-apple mb-4" style="color:#E8733A;">Nivel</p>
+                <div class="card-apple p-10" style="background:rgba(0,113,227,0.04); border-color:rgba(0,113,227,0.12);">
+                    <p class="label-apple mb-4" style="color:#0071e3;">Nivel</p>
                     <h3 class="text-2xl font-bold tracking-tight mb-4 leading-snug" style="color:#1d1d1f;">
                         Iniciación.<br/>Desde cero.
                     </h3>
@@ -626,28 +626,28 @@
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="p-8" style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:1.25rem;">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,116,232,0.12);border:1px solid rgba(139,116,232,0.2);">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.12);border:1px solid rgba(0,113,227,0.2);">
                         <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
                     <h3 class="text-base font-semibold mb-2" style="color:#1d1d1f;">Entorno seguro</h3>
                     <p class="text-sm leading-relaxed" style="color:#6e6e73;">Aprendizaje seguro y tutelado. Un espacio donde puedes cometer errores, preguntar y crecer sin juicio.</p>
                 </div>
                 <div class="p-8" style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:1.25rem;">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,116,232,0.12);border:1px solid rgba(139,116,232,0.2);">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.12);border:1px solid rgba(0,113,227,0.2);">
                         <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <h3 class="text-base font-semibold mb-2" style="color:#1d1d1f;">Privado, sin hate</h3>
                     <p class="text-sm leading-relaxed" style="color:#6e6e73;">Entorno privado con compañeros que se enfocan en crear, no en destruir. Cero tolerancia al hate.</p>
                 </div>
                 <div class="p-8" style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:1.25rem;">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,116,232,0.12);border:1px solid rgba(139,116,232,0.2);">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.12);border:1px solid rgba(0,113,227,0.2);">
                         <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-2-3-1.5-1.5-2-3-2-5 0 2 2 4 4 4s3-1 4-4c1.5 2.5 2.5 4.5 2.5 7a4.5 4.5 0 0 1-4.5 4.5c-1.5 0-2.5-0.5-3.5-2"/></svg>
                     </div>
                     <h3 class="text-base font-semibold mb-2" style="color:#1d1d1f;">Tu tribu</h3>
                     <p class="text-sm leading-relaxed" style="color:#6e6e73;">Una tribu en clase y fuera de ella. Conexiones que van más allá del horario y se mantienen en el tiempo.</p>
                 </div>
                 <div class="p-8" style="background:rgba(255,255,255,.75);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.08);border-radius:1.25rem;">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(139,116,232,0.12);border:1px solid rgba(139,116,232,0.2);">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style="background:rgba(0,113,227,0.12);border:1px solid rgba(0,113,227,0.2);">
                         <svg class="w-5 h-5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                     </div>
                     <h3 class="text-base font-semibold mb-2" style="color:#1d1d1f;">Mentor asignado</h3>
@@ -661,7 +661,7 @@
     <!-- CTA Final -->
     <section id="cta" class="py-24 lg:py-32 bg-white">
         <div class="max-w-3xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 label-apple px-5 py-2.5 rounded-full mb-8 animate-in" style="background:rgba(139,116,232,0.08); color:#8B74E8; border:1px solid rgba(139,116,232,0.12);">
+            <div class="inline-flex items-center gap-2 label-apple px-5 py-2.5 rounded-full mb-8 animate-in" style="background:rgba(0,113,227,0.08); color:#8B74E8; border:1px solid rgba(0,113,227,0.12);">
                 Plazas limitadas · Admisión 2026
             </div>
             <h2 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6 animate-in animate-in-delay-1" style="color:#1d1d1f;">
