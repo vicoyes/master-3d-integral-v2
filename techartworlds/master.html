@@ -339,8 +339,103 @@
                 </div>
             </div>
 
-            <!-- 3 Ejes Cards -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            <!-- Slider 3 Ejes — Apple style full width -->
+            <div class="mb-16 w-full overflow-hidden relative">
+                <button type="button" id="ejes-prev" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,0.08);box-shadow:0 2px 12px rgba(0,0,0,0.08);" aria-label="Anterior">
+                    <svg class="w-5 h-5" style="color:#1d1d1f;" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button type="button" id="ejes-next" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,0.08);box-shadow:0 2px 12px rgba(0,0,0,0.08);" aria-label="Siguiente">
+                    <svg class="w-5 h-5" style="color:#1d1d1f;" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+                <div id="ejes-slider" class="flex overflow-x-auto gap-5 lg:gap-8 py-4" style="scroll-behavior:smooth;scroll-padding-inline:20vw;padding-left:20vw;padding-right:20vw;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+                    <div class="flex-shrink-0 w-[85vw] md:w-[65vw] lg:w-[52vw] min-h-[420px] flex flex-col lg:flex-row overflow-hidden shadow-sm" style="background-color:#fef2f2;border-radius:1.75rem;">
+                        <div class="flex-1 p-8 lg:p-10 flex flex-col justify-center min-w-0">
+                            <div style="font-size:10px;font-family:monospace;text-transform:uppercase;letter-spacing:.2em;font-weight:600;color:#E8733A;margin-bottom:16px;">Eje X</div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Te capacitamos hacia la excelencia profesional</h3>
+                            <p class="text-sm font-medium mb-4 leading-relaxed" style="color:#E8733A;">Formación 3D con IA — Houdini, VEX, Python y flujos de trabajo procedurales combinados con IA y ComfyUI.</p>
+                            <p class="text-sm leading-relaxed" style="color:#6e6e73;">Adquiere habilidades que te harán valioso en cualquier producción en la era de la IA, proporcionándote una base técnica que te coloca en la vanguardia.</p>
+                        </div>
+                        <div class="w-full lg:w-[42%] lg:min-w-[180px] aspect-[4/3] lg:aspect-auto lg:flex-shrink-0 lg:self-stretch lg:min-h-0">
+                            <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80" alt="Formación 3D" class="w-full h-full object-cover"/>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-[85vw] md:w-[65vw] lg:w-[52vw] min-h-[420px] flex flex-col lg:flex-row overflow-hidden shadow-sm" style="background-color:#f5f3ff;border-radius:1.75rem;">
+                        <div class="flex-1 p-8 lg:p-10 flex flex-col justify-center min-w-0">
+                            <div style="font-size:10px;font-family:monospace;text-transform:uppercase;letter-spacing:.2em;font-weight:600;color:#8B74E8;margin-bottom:16px;">Eje Y</div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Orden interno y claridad mental</h3>
+                            <p class="text-sm font-medium mb-4 leading-relaxed" style="color:#8B74E8;">Metodología de trabajo, hábitos y estructura mental. Cómo organizar tu día, tu proyecto y tu mente para producir sin bloqueos.</p>
+                            <p class="text-sm leading-relaxed" style="color:#6e6e73;">La creatividad necesita estructura. Desarrolla la disciplina interna y los hábitos que separan a los profesionales de los amateurs.</p>
+                        </div>
+                        <div class="w-full lg:w-[42%] lg:min-w-[180px] aspect-[4/3] lg:aspect-auto lg:flex-shrink-0 lg:self-stretch lg:min-h-0">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Orden interno" class="w-full h-full object-cover"/>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-[85vw] md:w-[65vw] lg:w-[52vw] min-h-[420px] flex flex-col lg:flex-row overflow-hidden shadow-sm" style="background-color:#f0fdf4;border-radius:1.75rem;">
+                        <div class="flex-1 p-8 lg:p-10 flex flex-col justify-center min-w-0">
+                            <div style="font-size:10px;font-family:monospace;text-transform:uppercase;letter-spacing:.2em;font-weight:600;color:#3DA882;margin-bottom:16px;">Eje Z</div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Tu negocio como artista 3D</h3>
+                            <p class="text-sm font-medium mb-4 leading-relaxed" style="color:#3DA882;">Freelance, pricing, relación con clientes y escala. Aprende a monetizar tu arte y construir un negocio sostenible.</p>
+                            <p class="text-sm leading-relaxed" style="color:#6e6e73;">No basta con crear. Aprende a vender, fijar precios, conseguir clientes y escalar tu negocio como artista 3D independiente.</p>
+                        </div>
+                        <div class="w-full lg:w-[42%] lg:min-w-[180px] aspect-[4/3] lg:aspect-auto lg:flex-shrink-0 lg:self-stretch lg:min-h-0">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="Negocio freelance" class="w-full h-full object-cover"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="flex items-center justify-center gap-2 pt-6">
+                    <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full transition-all duration-300" data-index="0" style="background:#E8733A;" aria-label="Ir a Eje X"></button>
+                    <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-index="1" aria-label="Ir a Eje Y"></button>
+                    <button type="button" class="eje-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300" data-index="2" aria-label="Ir a Eje Z"></button>
+                </div>
+            </div>
+
+            <script>
+            (function() {
+                var slider = document.getElementById('ejes-slider');
+                var dots = document.querySelectorAll('.eje-dot');
+                var slides = document.querySelectorAll('#ejes-slider > div');
+                var prevBtn = document.getElementById('ejes-prev');
+                var nextBtn = document.getElementById('ejes-next');
+                if (!slider || !slides.length) return;
+                var currentIndex = 0;
+                function setActiveDot(index) {
+                    currentIndex = index;
+                    dots.forEach(function(d, i) {
+                        var colors = ['#E8733A','#8B74E8','#3DA882'];
+                        d.style.background = (i === index) ? colors[i] : '#d1d5db';
+                        d.style.transform = (i === index) ? 'scale(1.3)' : 'scale(1)';
+                    });
+                }
+                function goTo(index) {
+                    var slide = slides[index];
+                    if (!slide) return;
+                    var sliderRect = slider.getBoundingClientRect();
+                    var slideRect = slide.getBoundingClientRect();
+                    var offset = slideRect.left - sliderRect.left + slider.scrollLeft - (sliderRect.width / 2) + (slideRect.width / 2);
+                    slider.scrollTo({ left: offset, behavior: 'smooth' });
+                    setActiveDot(index);
+                }
+                dots.forEach(function(dot, i) { dot.addEventListener('click', function() { goTo(i); }); });
+                if (prevBtn) prevBtn.addEventListener('click', function() { goTo(currentIndex > 0 ? currentIndex - 1 : slides.length - 1); });
+                if (nextBtn) nextBtn.addEventListener('click', function() { goTo((currentIndex + 1) % slides.length); });
+                var scrollTimeout;
+                slider.addEventListener('scroll', function() {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(function() {
+                        var center = slider.scrollLeft + slider.offsetWidth / 2;
+                        var closest = 0, minDist = Infinity;
+                        slides.forEach(function(s, i) {
+                            var mid = s.offsetLeft + s.offsetWidth / 2;
+                            var d = Math.abs(center - mid);
+                            if (d < minDist) { minDist = d; closest = i; }
+                        });
+                        setActiveDot(closest);
+                    }, 60);
+                });
+                setActiveDot(0);
+            })();
+            </script>
                 <!-- Eje X — Naranja -->
                 <div class="card-apple eje-x-card flex flex-col">
                     <div class="p-8 lg:p-9 flex flex-col flex-1">
