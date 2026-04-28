@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MÁSTER 3D — TechArt Worlds</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       RESET & TOKENS
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --violet-600: #9333ea;
+      --violet-700: #7e22ce;
+      --violet-100: #f3e8ff;
+      --black: #000000;
+      --white: #ffffff;
+      --gray-50:  #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+
+      --font-sans: 'Montserrat', system-ui, sans-serif;
+      --font-alt:  'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--white);
+      color: var(--gray-900);
+      overflow-x: hidden;
+    }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s var(--ease-out-expo),
+                  transform 0.9s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.45s; }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: saturate(180%) blur(24px);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      border-bottom-color: var(--gray-200);
+    }
+    .nav-logo {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--violet-600); }
+    .nav-cta {
+      font-family: var(--font-alt);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--black);
+      text-decoration: none;
+      padding: 0.625rem 1.5rem;
+      border-radius: 9999px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--gray-800); transform: scale(1.03); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 8rem 2rem 6rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(147,51,234,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(99,102,241,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--violet-600);
+      background: var(--violet-100);
+      border: 1px solid rgba(147,51,234,0.2);
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      margin-bottom: 2rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--violet-600);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .hero-title {
+      font-family: var(--font-alt);
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--violet-600) 0%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-family: var(--font-alt);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--gray-500);
+      max-width: 560px;
+      margin: 0 auto 3rem;
+    }
+    .hero-dates {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--gray-600);
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      margin-bottom: 3rem;
+    }
+    .hero-dates-dot { color: var(--violet-600); }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-alt);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      background: var(--violet-600);
+      text-decoration: none;
+      padding: 1rem 2.25rem;
+      border-radius: 9999px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(147,51,234,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--violet-700);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(147,51,234,0.35);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-alt);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--gray-700);
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      border-radius: 9999px;
+      border: 1px solid var(--gray-200);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gray-400);
+      color: var(--gray-900);
+      background: var(--gray-50);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      animation: scroll-bounce 2.5s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* =============================================
+       STATS BAR
+    ============================================= */
+    .stats-bar {
+      background: var(--black);
+      color: var(--white);
+      padding: 3.5rem 2rem;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .stats-inner { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: var(--font-alt);
+      font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 0.375rem;
+    }
+    .stat-number span {
+      background: linear-gradient(135deg, var(--violet-600), #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    /* =============================================
+       SECTION COMMON
+    ============================================= */
+    .section {
+      padding: 7rem 2rem;
+    }
+    @media (min-width: 1024px) {
+      .section { padding: 9rem 3rem; }
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--violet-600);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-alt);
+      font-weight: 900;
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+    }
+    .section-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--violet-600), #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-sub {
+      font-family: var(--font-alt);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--gray-500);
+      max-width: 580px;
+    }
+
+    /* =============================================
+       DURACIÓN / PROGRAMA
+    ============================================= */
+    .duracion-section {
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .duracion-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    @media (min-width: 768px) {
+      .duracion-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .duracion-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 1.5rem;
+      padding: 2.25rem;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .duracion-card:hover {
+      border-color: rgba(147,51,234,0.3);
+      box-shadow: 0 16px 48px rgba(147,51,234,0.1);
+      transform: translateY(-4px);
+    }
+    .duracion-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 0.875rem;
+      background: var(--violet-100);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+    }
+    .duracion-card-title {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+    .duracion-card-text {
+      font-family: var(--font-alt);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--gray-500);
+    }
+
+    /* =============================================
+       SESIONES COLECTIVAS
+    ============================================= */
+    .sesiones-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    @media (min-width: 1024px) {
+      .sesiones-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .sesion-card {
+      border-radius: 1.75rem;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .sesion-card:hover {
+      box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+      transform: translateY(-6px);
+    }
+    .sesion-card-header {
+      padding: 2.5rem;
+      position: relative;
+    }
+    .sesion-card--lun Mie .sesion-card-header {
+      background: linear-gradient(145deg, #f5f3ff, #ede9fe);
+    }
+    .sesion-card--marJue .sesion-card-header {
+      background: linear-gradient(145deg, #eff6ff, #dbeafe);
+    }
+    .sesion-card-day {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .sesion-card--lunMie .sesion-card-day { color: var(--violet-600); }
+    .sesion-card--marJue .sesion-card-day { color: #4f46e5; }
+    .sesion-card-title {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1.375rem;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 0.375rem;
+      line-height: 1.2;
+    }
+    .sesion-card-schedule {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--gray-500);
+      margin-bottom: 0.25rem;
+    }
+    .sesion-card-lead {
+      font-family: var(--font-alt);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+    .sesion-card-body {
+      background: var(--white);
+      padding: 2rem 2.5rem 2.5rem;
+    }
+    .sesion-card-quote {
+      font-family: var(--font-alt);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--gray-600);
+      font-style: italic;
+      position: relative;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--violet-200);
+    }
+    .sesion-card-quote::before {
+      content: '\201C';
+      font-size: 3rem;
+      line-height: 0;
+      vertical-align: -1rem;
+      color: var(--violet-200);
+      font-style: normal;
+      margin-right: 0.25rem;
+    }
+
+    /* =============================================
+       SESIONES INDIVIDUALES
+    ============================================= */
+    .individual-section { background: var(--gray-50); }
+    .individual-card {
+      margin-top: 3.5rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 1.75rem;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .individual-card { grid-template-columns: 1fr 1fr; }
+    }
+    .individual-visual {
+      border-radius: 1.25rem;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .individual-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .individual-content {}
+    .individual-features {
+      list-style: none;
+      margin-top: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .individual-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      font-family: var(--font-alt);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--gray-600);
+    }
+    .individual-features li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 1.5rem; height: 1.5rem;
+      border-radius: 50%;
+      background: var(--violet-100);
+      color: var(--violet-600);
+      display: grid;
+      place-items: center;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      margin-top: 0.125rem;
+    }
+
+    /* =============================================
+       PLATFORM (Zoom + Discord)
+    ============================================= */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    @media (min-width: 768px) {
+      .platform-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .platform-card {
+      border-radius: 1.75rem;
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .platform-card:hover {
+      box-shadow: 0 20px 56px rgba(0,0,0,0.09);
+      transform: translateY(-4px);
+    }
+    .platform-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+    }
+    .platform-card-body {
+      padding: 2rem 2.25rem;
+      background: var(--white);
+    }
+    .platform-card-icon {
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 0.75rem;
+      background: var(--violet-100);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+    }
+    .platform-card-title {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+    }
+    .platform-card-text {
+      font-family: var(--font-alt);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--gray-500);
+    }
+
+    /* =============================================
+       IDIOMA Y NIVEL
+    ============================================= */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+    @media (min-width: 768px) {
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .info-card {
+      border-radius: 1.75rem;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .info-card--idioma {
+      background: linear-gradient(145deg, #f5f3ff, #ede9fe);
+      border: 1px solid rgba(147,51,234,0.15);
+    }
+    .info-card--nivel {
+      background: linear-gradient(145deg, #eff6ff, #dbeafe);
+      border: 1px solid rgba(79,70,229,0.15);
+    }
+    .info-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.875rem;
+    }
+    .info-card--idioma .info-card-label { color: var(--violet-600); }
+    .info-card--nivel .info-card-label { color: #4f46e5; }
+    .info-card-title {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 0.875rem;
+      line-height: 1.2;
+    }
+    .info-card-text {
+      font-family: var(--font-alt);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--gray-600);
+    }
+    .info-card-deco {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      width: 10rem; height: 10rem;
+      border-radius: 50%;
+      opacity: 0.08;
+    }
+    .info-card--idioma .info-card-deco { background: var(--violet-600); }
+    .info-card--nivel .info-card-deco { background: #4f46e5; }
+
+    /* =============================================
+       YA NO ESTARÁS SOL@
+    ============================================= */
+    .sol-section {
+      background: var(--black);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .sol-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 50%, rgba(147,51,234,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 30%, rgba(99,102,241,0.2) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .sol-inner { position: relative; z-index: 2; }
+    .sol-section .section-label { color: #a78bfa; }
+    .sol-section .section-title {
+      color: var(--white);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    }
+    .sol-section .section-sub { color: var(--gray-400); }
+    .sol-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    @media (min-width: 768px) {
+      .sol-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .sol-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .sol-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.5rem;
+      padding: 2.25rem;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+    .sol-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(147,51,234,0.4);
+      transform: translateY(-4px);
+    }
+    .sol-card-icon {
+      width: 3rem; height: 3rem;
+      border-radius: 0.875rem;
+      background: rgba(147,51,234,0.2);
+      border: 1px solid rgba(147,51,234,0.3);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+    }
+    .sol-card-title {
+      font-family: var(--font-alt);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .sol-card-text {
+      font-family: var(--font-alt);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--gray-400);
+    }
+
+    /* =============================================
+       CTA FINAL
+    ============================================= */
+    .cta-section {
+      padding: 8rem 2rem;
+      text-align: center;
+      background: var(--white);
+      position: relative;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-title {
+      font-family: var(--font-alt);
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+    }
+    .cta-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--violet-600), #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-sub {
+      font-family: var(--font-alt);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: var(--gray-500);
+      margin-bottom: 2.75rem;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 1.0625rem;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      background: var(--black);
+      text-decoration: none;
+      padding: 1.25rem 3rem;
+      border-radius: 9999px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+    .cta-btn:hover {
+      background: var(--gray-800);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .cta-note {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-top: 1.25rem;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--font-alt);
+      font-weight: 800;
+      font-size: 0.875rem;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--violet-600); }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--gray-400);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">TechArt<span>Worlds</span></a>
+    <a href="#cta" class="nav-cta">Reservar plaza</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge reveal">Programa 2026 — 2027 · Admissiones abiertas</div>
+
+      <h1 class="hero-title reveal reveal-delay-1">
+        MÁSTER<br><em>3D Integral</em>
+      </h1>
+
+      <p class="hero-sub reveal reveal-delay-2">
+        9 meses de formación intensiva en 3D TechArt, orden interno y desarrollo de negocio.
+        El programa que transforma talento en profesional completo.
+      </p>
+
+      <div class="hero-dates reveal reveal-delay-3">
+        <span>28 Sept 2026</span>
+        <span class="hero-dates-dot">—</span>
+        <span>25 Junio 2027</span>
+      </div>
+
+      <div class="hero-actions reveal reveal-delay-4">
+        <a href="#cta" class="btn-primary">
+          Reservar mi plaza
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#programa" class="btn-ghost">Ver programa</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <svg width="16" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="14" height="22" rx="7" stroke-opacity="0.4"/><circle cx="8" cy="7" r="2" fill="currentColor" fill-opacity="0.4"/></svg>
+      Scroll
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-number">9 <span>meses</span></div>
+        <div class="stat-label">Duración</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">4 <span>clases</span>/semana</div>
+        <div class="stat-label">Colectivas</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number"><span>+</span>1</div>
+        <div class="stat-label">Mentoría individual</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number"><span>24</span>/7</div>
+        <div class="stat-label">Soporte Discord</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DURACIÓN / PROGRAMA -->
+  <section class="section duracion-section" id="programa">
+    <div class="container">
+      <div class="section-label reveal">Programa</div>
+      <h2 class="section-title reveal reveal-delay-1">9 meses que<br><em>cambian tu carrera</em></h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Del 28 de Septiembre de 2026 al 25 de Junio de 2027. Cuatro clases colectivas semanales más sesiones individuales de mentoría con Adolfo Reverón.
+      </p>
+
+      <div class="duracion-grid">
+        <div class="duracion-card reveal reveal-delay-1">
+          <div class="duracion-icon">📅</div>
+          <div class="duracion-card-title">28 Sept 2026 — 25 Junio 2027</div>
+          <div class="duracion-card-text">Nueve meses de formación continua. Del orden interno al negocio, pasando por la tecnología 3D más avanzada.</div>
+        </div>
+        <div class="duracion-card reveal reveal-delay-2">
+          <div class="duracion-icon">🎓</div>
+          <div class="duracion-card-title">4 clases colectivas + individuales</div>
+          <div class="duracion-card-text">Lunes y miércoles por la mañana. Martes y jueves por la tarde. Sesiones individuales de mentoría cada semana.</div>
+        </div>
+        <div class="duracion-card reveal reveal-delay-3">
+          <div class="duracion-icon">🌍</div>
+          <div class="duracion-card-title">Online en directo desde tu casa</div>
+          <div class="duracion-card-text">Acceso por Zoom a todas las clases. Grabaciones disponibles en la plataforma de gestión del curso.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESIONES COLECTIVAS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label reveal">Sesiones colectivas</div>
+      <h2 class="section-title reveal reveal-delay-1">Estructura<br><em>de aprendizaje</em></h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Cuatro sesiones semanales organizadas en dos ejes: manhã para el desarrollo personal y empresarial, tarde para la capacitación técnica.
+      </p>
+
+      <div class="sesiones-grid">
+        <!-- LUNES Y MIÉRCOLES -->
+        <div class="sesion-card sesion-card--lunMie reveal reveal-delay-1">
+          <div class="sesion-card-header">
+            <div class="sesion-card-day">Lunes y Miércoles · 07:00h — 07:45h</div>
+            <div class="sesion-card-title">Eje "Y" (Orden Interno)<br>y "Z" (Negocio)</div>
+            <div class="sesion-card-schedule">07:00h — 07:45h · Mañana</div>
+            <div class="sesion-card-lead">Lidera: Adolfo Reverón — Director de Proyecto</div>
+          </div>
+          <div class="sesion-card-body">
+            <p class="sesion-card-quote">
+              Tu cerebro es capaz de recibir y crecer a frecuencias más elevadas si lo alimentas por las mañanas con el contenido adecuado. Es un ejercicio de disciplina con el horario, un compromiso que te demanda esfuerzo en el que tú tomas el control sobre cómo iniciar tu día y dirigir tu semana.
+            </p>
+          </div>
+        </div>
+
+        <!-- MARTES Y JUEVES -->
+        <div class="sesion-card sesion-card--marJue reveal reveal-delay-2">
+          <div class="sesion-card-header">
+            <div class="sesion-card-day">Martes y Jueves · 17:30h — 20:00h</div>
+            <div class="sesion-card-title">Eje "X" (Capacitación)<br>3D TECHART</div>
+            <div class="sesion-card-schedule">17:30h — 20:00h · Tarde</div>
+            <div class="sesion-card-lead">Lidera: Andrés Romero — Coordinador de Formación 3D</div>
+          </div>
+          <div class="sesion-card-body">
+            <p class="sesion-card-quote" style="border-left-color: #bfdbfe;">
+              Formación técnica en 3D TechArt, scripting y generación procedural. Clases prácticas e interactivas donde compartes pantalla, participas y aprendes junto al resto de compañeros.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESIONES INDIVIDUALES -->
+  <section class="section individual-section">
+    <div class="container">
+      <div class="individual-card">
+        <div class="individual-visual reveal">
+          <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/7wDb47LI8FqIf0k6ERPa/media/68cdcbf46a682e6f035acd4a.jpeg" alt="Sesiones individuales" loading="lazy" />
+        </div>
+        <div class="individual-content">
+          <div class="section-label reveal">Sesiones individuales</div>
+          <h2 class="section-title reveal reveal-delay-1">Mentoría<br><em>personalizada</em></h2>
+          <p class="section-sub reveal reveal-delay-2">
+            Mentorías individuales con Adolfo Reverón. Un seguimiento cercano para garantizar tu progreso y resolver tus dudas específicas.
+          </p>
+          <ul class="individual-features reveal reveal-delay-3">
+            <li>Sesiones one-to-one con tu mentor asignado</li>
+            <li>Seguimiento de tu progreso y plan de acción personalizado</li>
+            <li>El horario definitivo puede sufrir variaciones</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZOOM + DISCORD -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label reveal">Plataforma</div>
+      <h2 class="section-title reveal reveal-delay-1">Conecta,<br><em>participa y crea</em></h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Todas las clases se imparten en directo por Zoom. El soporte continuo está disponible a través de Discord privado.
+      </p>
+
+      <div class="platform-grid">
+        <div class="platform-card reveal reveal-delay-1">
+          <img class="platform-card-img" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/c3cmUrbBhdgs54adfIYP/media/666136581848ae65069c5b9f.jpeg" alt="Zoom" loading="lazy" />
+          <div class="platform-card-body">
+            <div class="platform-card-icon">📹</div>
+            <div class="platform-card-title">Acceso vía Zoom</div>
+            <div class="platform-card-text">
+              Nos conectamos en directo y en remoto desde casa. Las clases grupales quedan grabadas para tu posterior consulta en una plataforma de gestión de curso. Clases interactivas: compartimos pantalla, explicamos, tú participas y preguntas junto al resto de compañeros.
+            </div>
+          </div>
+        </div>
+
+        <div class="platform-card reveal reveal-delay-2">
+          <img class="platform-card-img" src="https://storage.googleapis.com/msgsndr/4IeQGzdbw8Skb5M1TmZE/media/67d1b678e86818addecad384.jpeg" alt="Discord" loading="lazy" />
+          <div class="platform-card-body">
+            <div class="platform-card-icon">💬</div>
+            <div class="platform-card-title">Discord privado</div>
+            <div class="platform-card-text">
+              Comunicación directa, feedback continuo, directos improvisados y salas de trabajo con compañeros. Un entorno privado donde resolver dudas en cualquier momento y compartir tu progreso con tu tribu.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDIOMA Y NIVEL -->
+  <section class="section" style="background: var(--white);">
+    <div class="container">
+      <div class="section-label reveal reveal-delay-0">Idioma y nivel</div>
+      <h2 class="section-title reveal reveal-delay-1">Accesible,<br><em>para todos</em></h2>
+
+      <div class="info-grid">
+        <div class="info-card info-card--idioma reveal reveal-delay-1">
+          <div class="info-card-label">Idioma</div>
+          <div class="info-card-title">Español,<br>con módulos en Inglés</div>
+          <div class="info-card-text">
+            El programa se imparte en Español. Algunos módulos serán impartidos en Inglés por docentes internacionales con subtítulos automáticos por IA en Español, para que nada te detenga.
+          </div>
+          <div class="info-card-deco"></div>
+        </div>
+
+        <div class="info-card info-card--nivel reveal reveal-delay-2">
+          <div class="info-card-label">Nivel</div>
+          <div class="info-card-title">Iniciación.<br>Desde cero.</div>
+          <div class="info-card-text">
+            Para el eje X (Formación 3D) empezamos desde cero con el TechArt, scripting y generación procedural. Debes conocer las bases del 3D. Si no tienes fundamentos sólidos, puedes solicitar acceso a cursos preparatorios de Props y Environments.
+          </div>
+          <div class="info-card-deco"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YA NO ESTARÁS SOL@ -->
+  <section class="section sol-section">
+    <div class="container sol-inner">
+      <div class="section-label reveal">Comunidad</div>
+      <h2 class="section-title reveal reveal-delay-1">Ya no estarás<br><em>sol@</em></h2>
+      <p class="section-sub reveal reveal-delay-2">
+        Un entorno de aprendizaje seguro y tutelado, con compañeros que comparten tu misma visión y un mentor que te acompaña en cada paso.
+      </p>
+
+      <div class="sol-grid">
+        <div class="sol-card reveal reveal-delay-1">
+          <div class="sol-card-icon">🛡️</div>
+          <div class="sol-card-title">Entorno seguro</div>
+          <div class="sol-card-text">Aprendizaje seguro y tutelado. Un espacio donde puedes cometer errores, preguntar y crecer sin juicio.</div>
+        </div>
+        <div class="sol-card reveal reveal-delay-2">
+          <div class="sol-card-icon">🤝</div>
+          <div class="sol-card-title">Privado, sin hate</div>
+          <div class="sol-card-text">Entorno privado con compañeros que se enfocan en crear, no en destruir. Cero tolerancia al hate.</div>
+        </div>
+        <div class="sol-card reveal reveal-delay-3">
+          <div class="sol-card-icon">🔥</div>
+          <div class="sol-card-title">Tu tribu</div>
+          <div class="sol-card-text">Una tribu en clase y fuera de ella. Conexiones que van más allá del horario y se mantienen en el tiempo.</div>
+        </div>
+        <div class="sol-card reveal reveal-delay-4">
+          <div class="sol-card-icon">🎯</div>
+          <div class="sol-card-title">Mentor asignado</div>
+          <div class="sol-card-text">Tendrás un mentor dedicado que conoce tu progreso, tus fortalezas y las áreas donde necesitas crecer.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section" id="cta">
+    <div class="cta-inner">
+      <div class="hero-badge reveal" style="margin-bottom: 1.5rem;">Plazas limitadas · Admisión 2026</div>
+      <h2 class="cta-title reveal reveal-delay-1">Tu momento<br>es <em>ahora</em></h2>
+      <p class="cta-sub reveal reveal-delay-2">
+        9 meses. 4 clases por semana. Una comunidad que no te suelta. El programa que va a definir cómo trabajas y creas a partir de ahora.
+      </p>
+      <a href="#" class="cta-btn reveal reveal-delay-3">
+        Reservar mi plaza
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h14M9 5l4 4-4 4"/></svg>
+      </a>
+      <p class="cta-note reveal reveal-delay-4">Programa: 28 Sept 2026 — 25 Junio 2027 · Horario Madrid (España)</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="index.html" class="footer-logo">TechArt<span>Worlds</span></a>
+    <span class="footer-copy">© 2026 TechArt Worlds · Todos los derechos reservados</span>
+  </footer>
+
+  <!-- INTERACTIONS -->
+  <script>
+    // Navbar scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
