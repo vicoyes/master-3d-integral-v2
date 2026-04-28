@@ -98,6 +98,20 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--violet-600); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .nav-links a {
+      font-family: var(--font-alt);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gray-900); }
     .nav-cta {
       font-family: var(--font-alt);
       font-size: 0.8125rem;
@@ -443,7 +457,7 @@
       padding: 2.5rem;
       position: relative;
     }
-    .sesion-card--lun Mie .sesion-card-header {
+    .sesion-card--lunMie .sesion-card-header {
       background: linear-gradient(145deg, #f5f3ff, #ede9fe);
     }
     .sesion-card--marJue .sesion-card-header {
@@ -533,7 +547,6 @@
       object-fit: cover;
       display: block;
     }
-    .individual-content {}
     .individual-features {
       list-style: none;
       margin-top: 1.75rem;
@@ -864,6 +877,12 @@
   <!-- NAVBAR -->
   <nav class="nav" id="nav">
     <a href="index.html" class="nav-logo">TechArt<span>Worlds</span></a>
+    <div class="nav-links">
+      <a href="comunidad.html">Comunidad</a>
+      <a href="master.html">Máster</a>
+      <a href="vamos-contigo.html">Acompañamiento</a>
+      <a href="nosotros.html">Nosotros</a>
+    </div>
     <a href="#cta" class="nav-cta">Reservar plaza</a>
   </nav>
 
