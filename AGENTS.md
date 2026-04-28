@@ -1,193 +1,300 @@
-# AGENTS.md — Máster 3D Integral Landing
+# Sistema de Diseño — MASTER 3D INTEGRAL
+## "Mismos colores. Otra dimensión."
 
-Guía para mantener el estilo y la coherencia al añadir o modificar secciones de la landing. Usar este documento como referencia al crear contenido nuevo o al pedir cambios a un agente/IA.
-
----
-
-## 1. Visión del proyecto
-
-- **Producto:** Landing page del Máster 3D Integral (formación para Technical Artists).
-- **Estética:** Minimalista, editorial, inspirada en referencias como SUSO Digital. Limpio, con mucho espacio en blanco y acentos muy controlados.
-- **Paleta:** Solo **3 colores** — blanco, negro, violeta (`#7c3aed` y escala violet-50 … violet-900). No usar verde ni rojo como acentos.
-- **Sensación:** Profesional, serio, “premium”, sin ruido visual.
+> El objetivo no es rediseñar la web — es inyectarle **alma**. Los colores, fuentes y estructura permanecen. Lo que cambia es la *presencia*, la *intención* y el *ritmo* visual.
 
 ---
 
-## 2. Requisitos del cliente (identidad, calidez, conversión)
+## 🔍 Diagnóstico: Lo que falta hoy
 
-Estos puntos reflejan el feedback del cliente. Toda nueva sección o rediseño debe tenerlos en cuenta.
-
-**Importante — Copy de referencia:** El texto/copy que el cliente ha pasado (títulos de sección, perfiles, organización del programa, profesorado, metodología, etc.) **es el copy que se utiliza**. No hay que quitar ni reemplazar ese contenido escrito; es la base del mensaje. Las indicaciones siguientes se refieren a **complementar** con más 3D y calidez, no a eliminar el copy.
-
-### 2.1 Identidad visual: "Más 3D, menos texto"
-
-- **Objetivo:** Que la web se sienta más del sector 3D y con impacto visual, **sin quitar** el copy existente.
-- **Impacto visual:** **Añadir** imágenes o vídeo que expliquen la transformación (hero, antes/después, reels), **junto** al texto, no en lugar de él.
-- **Mundo 3D:** La web debe **respirar 3D por todos lados**: más renders, wireframes, interfaces de software 3D, arte procedural, referencias al pipeline (Houdini, motores). El copy se mantiene; se enriquece el contexto visual.
-- **Refuerzo visual:** Donde encaje, **complementar** con vídeos del portfolio o imágenes de alta calidad (resultados, piezas de alumnos o del equipo), sin sustituir los bloques de texto que el cliente ha definido.
-
-### 2.2 Conexión humana y calidez (transformación personal)
-
-- **Problema:** El diseño puede percibirse "frío" o "demasiado formal". El producto no es solo técnica 3D, sino **transformación personal**.
-- **Mostrar rostros:** Es **vital** incluir fotos reales de las personas detrás del proyecto (Adolfo, Marta, Jas, Andrés, Santiago) para generar confianza y conexión emocional. Evitar solo iniciales o avatares genéricos donde el equipo tenga protagonismo.
-- **Suavizar el tono:** Mantener el estilo tecnológico que gusta, pero hacerlo más **amable** y cercano; evitar un tono corporativo rígido.
-- **Tipografía y calidez:** Valorar tipografías más **cercanas** (redondeadas, humanistas) donde tenga sentido, para transmitir programa de acompañamiento humano y no solo "curso técnico" o software.
-
-### 2.3 Elementos de conversión (la oferta)
-
-- **Problema:** Faltan componentes claros para el cierre de la venta.
-- **Cajetín de producto (The Stack):** Diseñar un **bloque claro** que muestre:
-  - Opciones de compra / planes o paquetes.
-  - Precios y formas de pago.
-  - Qué incluye cada opción (listado escaneable).
-- Este bloque debe ser fácil de localizar y de leer; es clave para la conversión.
-
-### 2.4 Resumen operativo (para Johana y equipo)
-
-- **Humanizar la interfaz:** Fotos reales de personas (equipo, alumnos, mentores) en secciones relevantes.
-- **Saturar visualmente con 3D:** Renders, vídeos, mockups de software 3D, arte generativo; que el nicho se reconozca al instante.
-- **Secciones reutilizables:** Cada sección debe poder **copiarse y pegarse** en otras páginas sin tocar una sola línea de código (bloques autocontenidos, sin dependencias rotas).
+| Dimensión | Estado actual | Lo que debería ser |
+|-----------|--------------|-------------------|
+| **Primer glow** | No existe — el hero es plano | Un foco de luz que llama la atención antes de leer |
+| **Tipografía hero** | Tamaño correcto pero genérico | Editorial, con jerarquía dramática |
+| **Copy como diseño** | Informativo pero frío | Cada frase tiene peso, pausa, intención |
+| **Los Ejes (X/Y/Z)** | Se mencionan, no se *sienten* | Son el sistema visual de toda la página |
+| **Ritmo de scroll** | Sección tras sección, plano | Cinematográfico — cada sección es un acto |
+| **Texturas** | Fondo negro puro | Negro con profundidad (noise, vignette sutil) |
+| **Micro-detalles** | Ninguno | Separadores, badges, líneas vivas |
 
 ---
 
-## 3. Sistema de diseño
+## 🎯 El Concepto: "Las 3 Dimensiones"
 
-### Colores
-- **Fondo principal:** `bg-white` o `bg-gray-50` (alternar por sección para ritmo).
-- **Texto:** `text-black` / `text-gray-500` (cuerpo), `text-gray-400` (secundario).
-- **Acento:** `text-violet-600`, `bg-violet-100`, `border-violet-200`, etc. Violeta como único color de marca.
-- **Contraste fuerte:** Bloques `bg-black text-white` para destacar (ej. una card central, banners, CTAs).
-- **Gradiente de texto:** Clase `.gradient-text` (violeta suave) solo para **una o dos palabras** por título, no frases largas.
+- **Eje X → Color naranja/ámbar** (#E8733A) — Formación 3D
+- **Eje Y → Color violeta** (#7C6FE8) — Orden Interno
+- **Eje Z → Color verde/teal** (#3A9E82) — Negocio
 
-### Tipografía
-- **Sans:** Inter (títulos y cuerpo). Pesos: `font-extrabold` títulos, `font-bold` subtítulos, `font-semibold` énfasis, `font-normal` cuerpo.
-- **Mono:** JetBrains Mono (`font-mono`). Uso: etiquetas de sección, pills, datos técnicos, roles.
-- **Tamaños:** Títulos de sección `text-5xl` / `text-6xl` con `leading-[1.0]` o `tracking-tight`. Cuerpo `text-base` o `text-sm`, descripciones secundarias `text-xs`.
-
-### Espaciado
-- **Secciones:** `py-28 lg:py-36` (padding vertical estándar).
-- **Contenedor:** `max-w-7xl mx-auto px-6`.
-- **Entre bloques dentro de sección:** `mb-20` o `mb-16` para separar título de contenido; `gap-8` o `gap-6` en grids.
-
-### Bordes y sombras
-- **Cards:** `rounded-2xl`, `border border-gray-100`. En hover: `hover:border-violet-200`, `hover:shadow-lg`.
-- **Botones / pills:** `rounded-full` para CTAs y pills de navegación.
-- **Evitar** bordes gruesos o colores llamativos; mantener líneas finas y grises suaves.
+Cada vez que aparece un eje, su color lo precede. El usuario no necesita leer la etiqueta — ya *siente* de qué eje se trata.
 
 ---
 
-## 4. Estructura de una sección nueva
+## 🎨 Sistema de Color
 
-Toda sección debe:
+```css
+:root {
+ /* Base */
+ --bg-primary: #0A0A0F; /* negro con tinte azul */
+ --bg-surface: #111118; /* superficies */
+ --accent-orange: #E8733A; /* naranja principal — Eje X */
+ --text-primary: #F2F2F0; /* blanco suave */
+ --text-muted: rgba(242,242,240,0.45);
 
-1. Tener un **id** único y descriptivo (kebab-case) para enlaces de ancla y nav.
-2. Usar la clase de sección estándar: `py-28 lg:py-36` y, si aplica, `bg-gray-50` o `bg-white` para alternar con la anterior.
-3. Incluir un **encabezado** con:
-   - **Label de sección:** `font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4`.
-   - **Título:** `text-5xl` o `text-6xl font-extrabold tracking-tight`. Opcionalmente una palabra (o dos) con `gradient-text`.
-   - **Subtítulo/descripción** (opcional): `text-gray-500 text-base` o `text-lg`, `max-w-xl` o `max-w-2xl` si está centrado.
+ /* Ejes como sistema de color */
+ --eje-x: #E8733A; /* naranja — Formación 3D */
+ --eje-x-glow: rgba(232,115,58,0.15);
+ --eje-y: #7C6FE8; /* violeta — Orden Interno */
+ --eje-y-glow: rgba(124,111,232,0.15);
+ --eje-z: #3A9E82; /* verde — Negocio */
+ --eje-z-glow: rgba(58,158,130,0.15);
 
-### Patrones de header por tipo de sección
-
-- **Centrado (clásico):**  
-  `text-center mb-20` → label + título + párrafo intro.
-
-- **Editorial (dos columnas):**  
-  `flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20` → título a la izquierda, texto corto o resumen a la derecha (p. ej. “Para Quién Es”, “Organización”, “Profesorado”).
-
----
-
-## 5. Componentes reutilizables
-
-### Card estándar (con hover)
-```html
-<div class="card-hover rounded-2xl border border-gray-100 p-8 bg-white">
-  <!-- contenido -->
-</div>
+ /* Profundidad */
+ --noise-opacity: 0.035;
+}
 ```
-- Para listas de ítems (perfiles, habilidades, días de la semana): usar grid (`grid-cols-1 md:grid-cols-2` o `lg:grid-cols-3/4`) y esta card.
-- Opcional: barra superior animada en hover con `absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet-600 to-violet-300` y `group-hover:scale-x-100`.
-
-### Card destacada (fondo negro)
-- Una card del grid puede ser `bg-black text-white` para dar jerarquía (ej. Eje Y en “3 Ejes”, días Martes/Jueves en Organización).
-- En negro: texto `text-gray-300`/`text-gray-400`, labels `text-violet-400`, bordes `border-violet-500/20`.
-
-### Pills / tags
-- `font-mono text-xs px-4 py-2 rounded-full bg-white border border-gray-200` (o `bg-violet-100` si es etiqueta de categoría). Para acento: `text-violet-600` o `strong` en violeta.
-
-### Listas con icono
-- Ítem: `flex items-center gap-3` o `gap-2`, con `w-5 h-5 rounded-full bg-violet-100 text-violet-600` + check o bullet, y texto `font-mono text-sm text-gray-600`.
-
-### Botones
-- **Primario:** `bg-black text-white px-8 py-4 rounded-full font-semibold text-sm hover:bg-violet-600 transition-colors tracking-wide`.
-- **Secundario:** `border border-gray-200 text-gray-700 ... rounded-full hover:border-violet-600 hover:text-violet-600`.
-
-### Banner final de sección (CTA)
-- Contenedor: `rounded-2xl bg-black text-white overflow-hidden`, padding generoso (`p-10`).
-- Label: `font-mono text-violet-400 text-xs uppercase tracking-[0.2em]`.
-- Título: `text-2xl` o `text-3xl font-extrabold`.
-- Texto: `text-gray-300`/`text-gray-400` `text-sm`. Opcional: botón `bg-white text-black ... rounded-full` alineado a la derecha (flex).
 
 ---
 
-## 6. Secciones actuales y sus IDs
+## ✍️ Tipografía
 
-| ID (ancla)   | Nombre / contenido breve                    |
-|--------------|---------------------------------------------|
-| `#programa`  | Propuesta de valor — 3 Ejes                 |
-| `#para-quien`| Este Máster es para ti si… (4 perfiles)     |
-| `#testimonios` | Caso de éxito (testimonio)                |
-| `#arsenal`   | Arsenal del Artista 3D (habilidades)         |
-| `#organizacion` | Tu transformación, paso a paso (calendario, horarios, metodología) |
-| `#mentoria`  | Mentoría personalizada                       |
-| `#profesorado` | Equipo principal + profesores 3D           |
-| `#cta`       | CTA final “¿Listo para el cambio?”          |
+```css
+/* Hero headline — en 3 líneas distintas con tamaños distintos */
+.hero-line-1 {
+ font-size: clamp(14px, 1.5vw, 18px);
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ color: var(--eje-x);
+ font-weight: 400;
+}
+.hero-line-2 {
+ font-size: clamp(48px, 7vw, 96px);
+ font-weight: 600;
+ line-height: 1.0;
+ letter-spacing: -0.03em;
+}
+.hero-line-3 {
+ font-size: clamp(32px, 4.5vw, 56px);
+ font-weight: 300;
+ color: var(--text-muted);
+ line-height: 1.15;
+}
 
-Al añadir una sección nueva:
-- Crear `id="kebab-case"` único.
-- Añadir enlace en la nav con `href="#nuevo-id"` y clase `nav-link`.
+/* Labels de eje */
+.eje-label {
+ font-size: 11px;
+ font-weight: 600;
+ letter-spacing: 0.18em;
+ text-transform: uppercase;
+}
 
----
-
-## 7. Contenido y tono
-
-- **Voz:** Directa, segura, orientada a resultados profesionales; pero **amable** y cercana (ver §2.2). Evitar exceso de adjetivos o promesas vagas, y un tono excesivamente formal o frío.
-- **Ejes del máster:** Siempre nombrar con mayúsculas cuando sea etiqueta (EJE X, EJE Y, EJE Z) y asociar: X = Formación 3D / Capacitación; Y = Orden interno / Mentalidad; Z = Negocio / Marca / Freelance.
-- **Testimonios:** Texto del quote más corto que el resto del copy; priorizar que se vea bien la cara o el contexto visual.
-- **Profesorado:** Destacar una persona (ej. Adolfo) con bloque ancho o full-width; el resto en grid de cards compactas con rol + Eje en `font-mono` y bio breve. **Incluir fotos reales** del equipo (Adolfo, Marta, Jas, Andrés, Santiago) para conexión humana (§2.2).
-
----
-
-## 8. Añadir una sección nueva (checklist)
-
-1. Definir **id** y **título** de sección.
-2. Elegir **fondo:** `bg-white` o `bg-gray-50` según la sección anterior.
-3. Usar **header** editorial o centrado según el tipo de contenido.
-4. Reutilizar **cards**, **pills** y **botones** del sistema; no inventar nuevos estilos de card/botón sin motivo.
-5. Mantener **espaciado** (`py-28 lg:py-36`, `mb-20`, `gap-6`/`gap-8`).
-6. Añadir enlace en la **nav** con clase `nav-link` y `href="#id-de-la-seccion"`.
-7. Si la sección es larga, considerar un **banner/CTA** al final (negro, con o sin botón).
-8. **Requisitos cliente (§2):** Usar el **copy que el cliente ha pasado** (no quitarlo). **Complementar** con imagen o vídeo y **elementos 3D** (renders, UI, arte) donde encaje; usar **fotos reales** si la sección habla de personas; mantener tono **amable**; si es la oferta, incluir bloque claro de **precios/planes/formas de pago** (The Stack). La sección debe ser **autocontenida** para poder copiar/pegar en otras páginas.
-
----
-
-## 9. Assets y técnico
-
-- **Fuentes:** Inter, JetBrains Mono, Material Symbols Outlined (Google Fonts).
-- **Estilos:** Tailwind vía CDN; configuración en `<script>` en `index.html` (colores violet, fontFamily).
-- **Clases globales** definidas en `<style>`: `.gradient-text`, `.card-hover`, `.nav-link`, `.blob-*`, `.float-anim`, `.cursor-anim`, `.badge-float-*`, `.fade-in`, etc. Reutilizar antes de crear nuevas clases inline.
-- **Imágenes:** Hero usa `hero-3d.png`; resto pueden ser URLs externas (ej. Unsplash) o assets locales. Mantener `alt` descriptivo y tamaños coherentes (evitar imágenes enormes sin necesidad).
+/* Números monumentales */
+.stat-number {
+ font-size: clamp(56px, 8vw, 96px);
+ font-weight: 700;
+ line-height: 0.9;
+ letter-spacing: -0.04em;
+}
+```
 
 ---
 
-## 10. Lo que no hacer
+## 🌫️ Hero Glow — Sistema de 3 focos
 
-- No introducir **verde** ni **rojo** como color de acento.
-- No usar **más de una palabra** (o dos) con `gradient-text` por título.
-- No saturar de animaciones: las que hay (blobs, cursor, badges flotantes) están en el hero; en secciones nuevas preferir transiciones suaves (hover) en lugar de animaciones continuas.
-- No cambiar la paleta a 4+ colores; mantener **blanco, negro, violeta**.
-- No olvidar el **id** de sección ni el **enlace en la nav** al crear contenido nuevo.
+```css
+.hero-atmosphere {
+ position: absolute;
+ inset: 0;
+ pointer-events: none;
+ overflow: hidden;
+}
+
+/* Foco principal — naranja, Eje X, centrado arriba */
+.hero-atmosphere::before {
+ content: '';
+ position: absolute;
+ top: -15%;
+ left: 50%;
+ transform: translateX(-50%);
+ width: 700px;
+ height: 500px;
+ background: radial-gradient(ellipse,
+ rgba(232,115,58, 0.18) 0%,
+ rgba(232,115,58, 0.05) 50%,
+ transparent 70%
+ );
+ filter: blur(60px);
+}
+
+/* Foco secundario — violeta, Eje Y */
+.hero-atmosphere::after {
+ content: '';
+ position: absolute;
+ top: 10%;
+ left: 30%;
+ width: 400px;
+ height: 300px;
+ background: radial-gradient(ellipse,
+ rgba(124,111,232, 0.1) 0%,
+ transparent 70%
+ );
+ filter: blur(80px);
+}
+```
 
 ---
 
-Con esto, cualquier agente o desarrollador puede mantener el mismo estilo en nuevas secciones y actualizaciones de la landing del Máster 3D Integral.
+## 🧩 Componentes
+
+### Badges de Eje
+```css
+.eje-badge {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+ padding: 6px 14px 6px 10px;
+ border-radius: 9999px;
+ border: 1px solid currentColor;
+ font-size: 11px;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+}
+.eje-badge--x { color: var(--eje-x); border-color: rgba(232,115,58, 0.35); background: rgba(232,115,58, 0.08); }
+.eje-badge--y { color: var(--eje-y); border-color: rgba(124,111,232, 0.35); background: rgba(124,111,232, 0.08); }
+.eje-badge--z { color: var(--eje-z); border-color: rgba(58,158,130, 0.35); background: rgba(58,158,130, 0.08); }
+.eje-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+```
+
+### Cards con acento de eje
+```css
+.card-eje-x {
+ border: 1px solid rgba(232,115,58, 0.15);
+ border-top: 2px solid var(--eje-x);
+ background: rgba(232,115,58, 0.03);
+}
+```
+
+### CTA Principal
+```css
+.btn-cta {
+ background: var(--eje-x);
+ color: #fff;
+ border: none;
+ border-radius: 9999px;
+ padding: 16px 32px;
+ font-size: 15px;
+ font-weight: 600;
+ position: relative;
+ overflow: hidden;
+}
+.btn-cta::after {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+}
+.btn-cta:hover {
+ transform: translateY(-1px);
+ box-shadow: 0 8px 32px rgba(232,115,58, 0.35);
+}
+```
+
+### Separadores con glow
+```css
+.section-divider {
+ width: 100%;
+ height: 1px;
+ background: linear-gradient(90deg, transparent 0%, rgba(232,115,58, 0.4) 50%, transparent 100%);
+ margin: 80px 0;
+}
+```
+
+### Stats Grid Monumental
+```css
+.stats-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 1px;
+ background: rgba(255,255,255,0.08);
+ border-radius: 16px;
+ overflow: hidden;
+}
+.stat-cell { background: var(--bg-surface); padding: 48px 32px; text-align: center; }
+.stat-number { font-size: 72px; font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; }
+.stat-unit { font-size: 13px; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 12px; }
+```
+
+---
+
+## 🎬 Ritmo de Scroll — Estructura de Actos
+
+```
+ACT I — EL PROBLEMA
+ Hero: El glow. La promesa. El CTA.
+
+ACT II — LOS 3 EJES
+ Aparición progresiva: Eje X → Eje Y → Eje Z con sus colores.
+
+ACT III — LA PRUEBA
+ Testimonios como citas de revista.
+
+ACT IV — EL SISTEMA
+ Horario semanal tratado como infografía.
+
+ACT V — LOS HUMANOS
+ Equipo con sus frases primero.
+
+ACT VI — LA DECISIÓN
+ Pricing + CTA final con número grande.
+```
+
+---
+
+## 📜 Copy Clave
+
+### Hero Subheadline
+> "Para hacer de ti un profesional próspero. Y una persona que duerme tranquila."
+
+### Barra de anuncio
+> "⚡ 3 plazas disponibles para la próxima edición — Agendar consultoría →"
+
+---
+
+## 🧭 Prioridad de Implementación
+
+**Impacto alto / Esfuerzo bajo:**
+1. ✅ Añadir hero glow (CSS puro, 20 líneas)
+2. ✅ Convertir "Eje X/Y/Z" en badges de color
+3. ✅ Añadir letter-spacing y font-weight: 300 al subtítulo del hero
+4. ✅ Cambiar copy del precio — frase comparativa
+5. ✅ Añadir separadores con glow entre secciones
+
+**Impacto alto / Esfuerzo medio:**
+6. 🔶 Rediseñar stats como grid monumental
+7. 🔶 Animar entradas con scroll (IntersectionObserver)
+8. 🔶 Revisar copy de "¿Para quién es?"
+9. 🔶 Añadir textura de noise al fondo
+
+**Impacto medio / Esfuerzo alto:**
+10. 🔵 Infografía del horario semanal
+11. 🔵 Testimonios como citas editoriales
+
+---
+
+## 🚫 Lo que NO cambiar
+
+- ❌ Los colores base — naranja, negro profundo, blanco suave funcionan
+- ❌ La estructura de secciones — el orden narrativo ya es correcto
+- ❌ La tipografía base — solo ajustar escalas y pesos
+- ❌ El copy de los ejes — el concepto X/Y/Z es diferenciador
+- ❌ El manifiesto final — es el alma de la marca
+
+---
+
+## 💡 La Frase que Resume Todo
+
+> "No es el mejor diseño el que gana. Es el que hace que el visitante sienta que ya confía en ti antes de terminar de leer el hero."
+
+---
+
+*Documento de diseño — Master 3D Integral — Abril 2026*
