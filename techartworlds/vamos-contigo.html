@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Vamos Contigo | TechArt Worlds</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-in-delay-1 { animation-delay: 0.15s; }
+        .fade-in-delay-2 { animation-delay: 0.3s; }
+        .fade-in-delay-3 { animation-delay: 0.45s; }
+        .fade-in-delay-4 { animation-delay: 0.6s; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 10px 0;
+            margin: 0 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #7c3aed;
+            transition: width 0.25s ease;
+        }
+        .nav-link:hover { color: #7c3aed; }
+        .nav-link:hover::after { width: 100%; }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
+        }
+
+        .section-flow { padding-top: 7rem; padding-bottom: 7rem; }
+        @media (min-width: 1024px) {
+            .section-flow { padding-top: 9rem; padding-bottom: 9rem; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes blobGlow {
+            0%, 100% { opacity: 0.6; filter: blur(80px); }
+            50% { opacity: 0.9; filter: blur(100px); }
+        }
+        .blob-container { animation: blobGlow 8s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight flex-shrink-0">
+                ORIGEN <span class="text-violet-600">3D</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2 flex-1 overflow-x-auto">
+                <a class="nav-link" href="comunidad.html">Comunidad</a>
+                <a class="nav-link" href="vamos-contigo.html">Vamos Contigo</a>
+                <a class="nav-link" href="nosotros.html">Nuestro Porqué</a>
+            </div>
+            <a href="#llamada" class="font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+                Llamada Gratuita
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-0 left-0 w-[600px] h-[600px] blob-container" style="filter: blur(100px);">
+                <div class="absolute top-[10%] left-[10%] w-[70%] h-[65%]" style="background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%); border-radius: 50%;"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-6 fade-in">
+                    Acompañamiento Personalizado
+                </p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8 fade-in fade-in-delay-1">
+                    El acompañamiento que necesitas cuando la vida te pide avances
+                </h1>
+                <a href="#llamada" class="inline-flex items-center gap-2 font-bold bg-violet-600 text-white px-8 py-4 rounded-full text-base hover:bg-violet-700 transition-all fade-in fade-in-delay-2 hover:scale-105">
+                    Solicitar Llamada de 30'
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Bloques de ayuda -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">¿En qué podemos ayudarte?</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">Ayuda con tu...</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Carrera profesional -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
+                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.834c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Carrera profesional</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Estrategias de búsqueda de empleo
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Formación
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Productividad
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Bloqueos internos: autosabotaje, procrastinación, falta de motivación
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Emprendimiento -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
+                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Emprendimiento</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Modelo de negocio, producto
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Proceso de Creación de Empresa
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Marketing: Estrategias, Diseño Web, Copywriting, Campañas, Comunicación, Ventas
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Ordenarte -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
+                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Ordenarte</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Trabajo de Mentalidad adecuada
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Definición de objetivos
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Mapeo de escenarios
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Criterios de decisión
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-600 text-sm">
+                            <span class="text-violet-600 mt-1">→</span>
+                            Panificación y ejecución
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Por qué te interesa? -->
+    <section class="section-flow bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.2em] mb-4">Contexto</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-8">¿Por qué te interesa?</h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed">
+                        <p>En ocasiones la vida te pide moverte.<br/>Te llegan oportunidades externas o quizá motivaciones internas te piden salir y expresarte: un proyecto que te llega, un deseo de emprender, un cambio laboral, un momento difícil.</p>
+                        <p>Sientes que tienes que acciónar, que es el momento.<br/>Pero sientes que estás solo.</p>
+                        <p>Te falta un equipo que te acompañe para atravesar la incertidumbre: consultar y debatir, descubrir cómo superar tus carencias, establecer y ejecutar planes.</p>
+                        <p class="text-gray-900 font-medium">Tendemos una mano para dar soporte y ayudarte a convertir lo abstracto en algo concreto, para poder moverte.</p>
+                        <p>Tenemos para ofrecerte nuestra experiencia personal, profesional y empresarial para ayudarte a encontrar el <strong>QUÉ</strong>, el <strong>CÓMO</strong> y el <strong>CUÁNDO</strong>.</p>
+                        <p>Te acompañamos para dejar atrás lo difuso y el estancamiento.</p>
+                        <p class="font-medium text-gray-900">Nos dirigimos a tí si estás en un momento en que necesitas ayuda para crear realidad y avanzar: ayuda con tu carrera profesional, tu proceso de emprendimiento o un enfoque externo para ayudarte a tomar buenas decisiones y crecer interiormente.</p>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 lg:p-10">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-bold">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                                611 62 04 99
+                            </div>
+                        </div>
+                        <div class="space-y-4 text-center">
+                            <div class="bg-white rounded-xl p-5 border border-gray-100">
+                                <p class="text-sm font-bold text-violet-600 mb-1">Marta</p>
+                                <p class="text-gray-600 text-xs">Responsable de Marketing</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-5 border border-gray-100">
+                                <p class="text-sm font-bold text-violet-600 mb-1">Adolfo</p>
+                                <p class="text-gray-600 text-xs">Mentoría y estrategia</p>
+                            </div>
+                            <div class="bg-white rounded-xl p-5 border border-gray-100">
+                                <p class="text-sm font-bold text-violet-600 mb-1">Jas</p>
+                                <p class="text-gray-600 text-xs">Operaciones y ejecución</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Quién hay detrás? -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">El equipo</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-16">¿Quién hay detrás?</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Marta -->
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
+                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">👩‍💼</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Marta</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Soy la responsable de Marketing. Me esfuerzo por dar a conocer los productos y servicios que sirven a nuestro propósito.</p>
+                    </div>
+
+                    <!-- Adolfo -->
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
+                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">👨‍💻</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Adolfo</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">Velo porque todo funcione adecuadamente y pongo al servicio todo mi conocimiento sobre Marketing.</p>
+                    </div>
+
+                    <!-- Jas -->
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
+                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-3xl">🧑‍🎨</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Jas</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">El responsável del Marketing y la comunicación. Hace que las cosas se vean y se sientan bien.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuestros amigos -->
+            <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:p-12 reveal">
+                <h3 class="text-2xl font-bold mb-6 text-center">Nuestros amigos</h3>
+                <div class="text-gray-600 leading-relaxed space-y-4 max-w-3xl mx-auto text-center">
+                    <p>Somos un equipo de Seniors, personas con canas que se ha equivocado y aprendido mucho a lo largo de la vida.</p>
+                    <p>Venimos del mundo de la Producción 3D para Cine y Videojuegos, de la Ingeniería, del Marketing.</p>
+                    <p>Hemos salido adelante por separado y ahora trabajamos juntos para ganarnos la vida bajo un modelo de negocio y propósito que atiende a nuestros valores.</p>
+                    <p><strong>Hemos aprendido lo suficiente como para ser de utilidad a otros en este momento.</strong></p>
+                    <p class="font-medium text-gray-900">Es nuestro momento de crecer alineados con un propósito y ayudar a muchas personas.<br/>¿Eres una de ellas?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Cómo funciona? -->
+    <section class="section-flow bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Proceso</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">¿Cómo funciona?</h2>
+                <p class="text-gray-500 mt-4">Sencillo, 3 simples pasos:</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 reveal">
+                <!-- Paso 1 -->
+                <div class="relative">
+                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">1</div>
+                    <h3 class="text-lg font-bold mb-3 text-center">Llamada de 30' gratuita</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed text-center">Te ofrecemos una llamada de 30' gratuita por Zoom, sin compromiso, para que nos cuentes en qué necesitas ayuda.</p>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="relative">
+                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">2</div>
+                    <h3 class="text-lg font-bold mb-3 text-center">Descubrimos si podemos ayudarte</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed text-center">Durante la llamada descubriremos si te podemos ayudar. Si es así, estableceremos lo que, a nuestro juicio, debería ser la línea de trabajo básica.</p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="relative">
+                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">3</div>
+                    <h3 class="text-lg font-bold mb-3 text-center">Tú decides</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed text-center">Después de la llamada, nos despediremos y tú decidirás si te podemos ayudar.</p>
+                </div>
+            </div>
+
+            <!-- Servicios -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal">
+                <!-- Mentoría -->
+                <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 lg:p-10">
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest mb-4">Servicio</p>
+                    <h3 class="text-2xl font-bold mb-4">MENTORÍA</h3>
+                    <div class="space-y-3 text-gray-600 text-sm leading-relaxed mb-6">
+                        <p>Ponemos a tu servicio nuestra experiencia.</p>
+                        <p><strong>Te decimos el QUÉ, el CÓMO Y el CUÁNDO</strong></p>
+                        <p>Te damos la guía y tú ejecutas.</p>
+                        <p class="text-gray-900 font-medium">2 videollamadas a la semana en horario de mañanas</p>
+                    </div>
+                    <div class="border-t border-violet-100 pt-6">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-extrabold text-violet-600">395€</span>
+                            <span class="text-gray-500 text-sm">/mes</span>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-1">(imp.no incluidos)</p>
+                    </div>
+                </div>
+
+                <!-- Acompañamiento -->
+                <div class="bg-black text-white rounded-2xl p-8 lg:p-10">
+                    <p class="font-mono text-violet-400 text-xs uppercase tracking-widest mb-4">Servicio</p>
+                    <h3 class="text-2xl font-bold mb-4">ACOMPAÑAMIENTO</h3>
+                    <div class="space-y-3 text-gray-300 text-sm leading-relaxed mb-6">
+                        <p>Nosotros te lo hacemos.</p>
+                        <p><strong>Además de indicarte qué hay que hacer, co-creamos contigo.</strong></p>
+                        <p>Ejecutamos tareas contigo como un equipo.</p>
+                    </div>
+                    <div class="border-t border-gray-700 pt-6">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-extrabold text-white">A convenir</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Por qué hacemos esto? -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Nuestro propósito</p>
+                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">¿Por qué hacemos esto?</h2>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:p-12 text-gray-600 leading-relaxed space-y-5 reveal">
+                <p>Hemos descubierto que la falta de capacitación (entendida como el conocimiento útil que te hace empleable) no es lo que impide a las personas progresar en la mayoría de casos.</p>
+                <p>Existe una masa tremenda de conocimiento que no enseñan en ningún sitio y que resulta crucial para conseguir cosas, para avanzar.</p>
+                <p>Desde la ideación con libertad y propósito de una meta, hasta su planificación y ejecución, existe toda una serie de desafíos en el camino.</p>
+                <p>Algunos son retos externos, dificultades para afrontar lo que viene del entorno, que desconoces y no puedes controlar.</p>
+                <p>Muchos otros son bloqueos internos, que impiden alinear pensamiento, verbo y acción.</p>
+                <p>Nosotros hemos enfrentado estos retos y somos conscientes de lo inestimable que es recibir la guía adecuada en el momento adecuado.</p>
+                <p>Hemos tenido la gran suerte de contar con guías en el pasado reciente y lejano.</p>
+                <p class="text-gray-900 font-medium">No hay nada más maravilloso que ayudar a otra persona en un momento de bloqueo y poder comprobar el efecto positivo de tu interacción.</p>
+                <p class="font-bold text-gray-900">Por eso hemos creado este servicio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section id="llamada" class="section-flow bg-violet-600 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 blob-container" style="filter: blur(80px); opacity: 0.3;">
+                <div style="background: radial-gradient(ellipse at 50% 50%, #9333ea 0%, transparent 70%); width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+                Solicita tu Llamada de 30'
+            </h2>
+            <p class="text-violet-100 text-lg mb-8 leading-relaxed">
+                Sin compromiso. Te escuchamos y decides si te podemos ayudar.
+            </p>
+            <div class="inline-flex items-center gap-3 bg-white text-violet-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-violet-50 transition-all hover:scale-105">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                611 62 04 99
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight">
+                        ORIGEN <span class="text-violet-400">3D</span>
+                    </a>
+                    <p class="text-gray-500 text-sm mt-2">La única escuela de España especializada en Generación Procedural.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-2">
+                    <a href="tel:611620499" class="text-violet-400 font-mono text-sm hover:text-violet-300 transition-colors">
+                        611 62 04 99
+                    </a>
+                    <div class="flex gap-4 mt-2">
+                        <a href="comunidad.html" class="text-gray-500 hover:text-white text-sm transition-colors">Comunidad</a>
+                        <a href="vamos-contigo.html" class="text-gray-500 hover:text-white text-sm transition-colors">Vamos Contigo</a>
+                        <a href="nosotros.html" class="text-gray-500 hover:text-white text-sm transition-colors">Nuestro Porqué</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-600 text-xs">© 2025 Black Monkey Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

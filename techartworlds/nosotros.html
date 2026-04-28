@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Nuestro Porqué | TechArt Worlds</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-in-delay-1 { animation-delay: 0.15s; }
+        .fade-in-delay-2 { animation-delay: 0.3s; }
+        .fade-in-delay-3 { animation-delay: 0.45s; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 10px 0;
+            margin: 0 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #7c3aed;
+            transition: width 0.25s ease;
+        }
+        .nav-link:hover { color: #7c3aed; }
+        .nav-link:hover::after { width: 100%; }
+
+        .section-flow { padding-top: 7rem; padding-bottom: 7rem; }
+        @media (min-width: 1024px) {
+            .section-flow { padding-top: 9rem; padding-bottom: 9rem; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes blobGlow {
+            0%, 100% { opacity: 0.5; filter: blur(100px); }
+            50% { opacity: 0.8; filter: blur(130px); }
+        }
+        .blob-container { animation: blobGlow 10s ease-in-out infinite; }
+
+        .story-quote {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid #7c3aed;
+        }
+
+        .depth-indicator {
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight flex-shrink-0">
+                ORIGEN <span class="text-violet-600">3D</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2 flex-1 overflow-x-auto">
+                <a class="nav-link" href="comunidad.html">Comunidad</a>
+                <a class="nav-link" href="vamos-contigo.html">Vamos Contigo</a>
+                <a class="nav-link" href="nosotros.html">Nuestro Porqué</a>
+            </div>
+            <a href="comunidad.html" class="font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+                Únete a ORIGEN
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero — Depth metaphor -->
+    <section class="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 blob-container" style="filter: blur(120px);">
+                <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px]" style="background: radial-gradient(ellipse at center, #4c1d95 0%, #7c3aed40 40%, transparent 70%);"></div>
+            </div>
+            <!-- Depth lines -->
+            <div class="absolute inset-0 flex items-center justify-center overflow-hidden opacity-10">
+                <div class="w-px h-full bg-gradient-to-b from-transparent via-violet-400 to-transparent"></div>
+                <div class="absolute w-px h-full" style="left: 30%; background: linear-gradient(to bottom, transparent, #7c3aed, transparent); transform: rotate(15deg);"></div>
+                <div class="absolute w-px h-full" style="right: 30%; background: linear-gradient(to bottom, transparent, #7c3aed, transparent); transform: rotate(-15deg);"></div>
+            </div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <p class="font-mono text-violet-400 text-xs uppercase tracking-[0.3em] mb-8 fade-in">
+                Historia y propósito
+            </p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white mb-8 fade-in fade-in-delay-1">
+                Nuestro Porqué
+            </h1>
+            <div class="flex items-center justify-center gap-4 fade-in fade-in-delay-2">
+                <div class="w-16 h-px bg-violet-600"></div>
+                <p class="font-mono text-violet-400 text-xs uppercase tracking-widest">Nov 2022 — Hoy</p>
+                <div class="w-16 h-px bg-violet-600"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 1: La constitución -->
+    <section class="section-flow bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">1</div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El comienzo</p>
+                </div>
+                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
+                    <p>El 22 de Noviembre de 2022 constituimos una empresa por los motivos más comunes: hacer dinero para vivir mejor, independencia financiera, tener más cosas para nuestras familias.</p>
+                    <p class="text-gray-900 font-medium">Como ves, nada poético ni elevado.</p>
+                    <p>En menos de 4 años, este motivo resultó ser un cascarón vacío.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 2: La crisis -->
+    <section class="section-flow bg-gray-50 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[400px] h-[400px] blob-container opacity-30" style="filter: blur(80px);">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%);"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">2</div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">La crisis</p>
+                </div>
+                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
+                    <p>La evolución económica de la empresa, aunque humilde, era favorable.</p>
+                    <p class="text-gray-900 font-semibold">Y a pesar de ello, sentimos una profunda crisis de identidad, agotados y sin fuerzas.</p>
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 my-8 shadow-sm">
+                        <p class="text-gray-700 italic">"¿Por qué cada día pesa más y apenas podemos salir de la cama?<br/>¿Por qué ya no tenemos energía?<br/>¿Qué está pasando?"</p>
+                    </div>
+                    <p>Agotamiento profundo, noches sin dormir, frustración e inquietud tremendas nos asaltaban.</p>
+                    <p>Es una sensación terrible sentir la urgencia de vender para evitar que el proyecto del que depende tu familia se hunda; achicando agua todos los días, al mismo tiempo que procuras proyectar fortaleza... y sin embargo sentir, muy dentro del corazón, que en realidad no sabes hacia dónde hay que ir.</p>
+                    <div class="bg-red-50/40 rounded-2xl border border-red-100 p-6 my-8">
+                        <p class="text-red-700 font-medium">A todas las dificultades de una joven empresa, se añadía nuestra estocada final:</p>
+                        <p class="text-red-900 font-bold text-xl mt-2">La pasión moría.</p>
+                    </div>
+                    <p>Estas emociones nos llevaron al miedo y mucho sufrimiento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 3: El punto de inflexión -->
+    <section class="section-flow bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">3</div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El punto de inflexión</p>
+                </div>
+                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
+                    <p>Gracias a ayuda externa, tuvimos la suerte infinita de descubrir, en el momento más crítico, que <strong>tocar fondo es la oportunidad más grande</strong> que se nos podía presentar.</p>
+                    <p>Estar hundidos nos llevó a detenerlo todo: campañas promocionales, nuevos productos, incluso bloqueamos la web.</p>
+                    <p>Tuvimos el coraje de parar en seco un tren preñado de artificio, que silbaba al son de las reglas del marketing y de las tendencias, impulsado por el miedo, la urgencia y la escasez.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 4: La decisión -->
+    <section class="section-flow bg-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 blob-container" style="filter: blur(100px); opacity: 0.15;">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 50%, #7c3aed 0%, transparent 70%);"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">4</div>
+                    <p class="font-mono text-violet-400 text-xs uppercase tracking-widest">La decisión</p>
+                </div>
+                <div class="story-quote text-gray-300 leading-relaxed text-lg space-y-6">
+                    <p>Llegamos al punto sin retorno:</p>
+                    <div class="bg-gray-900 rounded-2xl border border-gray-700 p-8 my-8 text-center">
+                        <p class="text-white text-xl md:text-2xl font-bold leading-relaxed">
+                            "Preferimos que se hunda el proyecto, si no tenemos un <span class="text-violet-400">porque</span> que nos haga vibrar.<br/>
+                            A pesar del esfuerzo invertido, del dinero perdido y de los años empleados.<br/>
+                            <span class="text-gray-500">Ya nos da igual.</span>"
+                        </p>
+                    </div>
+                    <p>Hundidos en lo más frío y oscuro del océano, tan cansados que ya nos daba igual si el proyecto vivía o moría...</p>
+                    <p class="text-gray-400">...tuvimos la fortuna de iniciar un proceso de quietud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 5: El proceso -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">5</div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El proceso de quietud</p>
+                </div>
+                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
+                    <p>De mirar hacia adentro sin prisas, sin urgencia.</p>
+                    <p>De mirarnos al espejo y esforzarnos por descubrir nuestro <strong class="text-violet-600">porque verdadero</strong>.</p>
+                    <div class="bg-white rounded-2xl border border-gray-100 p-8 my-8 shadow-sm">
+                        <div class="flex items-center gap-6">
+                            <div class="text-5xl font-mono font-bold text-violet-600">0,0,0</div>
+                            <div>
+                                <p class="text-gray-900 font-medium">Vuelta al origen</p>
+                                <p class="text-gray-500 text-sm">Coordenadas XYZ — punto de partida</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 6: El ascenso -->
+    <section class="section-flow bg-white">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="reveal">
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">6</div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El ascenso</p>
+                </div>
+                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
+                    <p>Y esto nos llevó, sin saberlo ni esperarlo, a iniciar un ascenso sin urgencia, liberados de las cargas que nos habían mantenido anclados a las frías profundidades del miedo.</p>
+                    <p>Nos llevó a la superficie, donde los rayos del sol ya iluminan y calientan las aguas.</p>
+                    <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 my-8">
+                        <p class="text-gray-900 text-xl font-medium leading-relaxed">
+                            Al lugar donde comienzas a sentir paz, porque estás haciendo lo que <strong>debes hacer</strong> y no te avergüenzas de alzar la voz para que se te oiga.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapter 7: La misión — CTA -->
+    <section class="section-flow bg-violet-600 relative overflow-hidden">
+        <div class="absolute inset-0 blob-container" style="filter: blur(80px); opacity: 0.35;">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 50%, #9333ea 0%, transparent 70%);"></div>
+        </div>
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10 reveal">
+            <p class="font-mono text-violet-200 text-xs uppercase tracking-[0.3em] mb-8">Si has llegado hasta aquí</p>
+            <div class="w-16 h-px bg-violet-300 mx-auto mb-8"></div>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-8">
+                Te contamos nuestra misión.
+            </h2>
+            <p class="text-violet-100 text-lg mb-10 leading-relaxed">
+                Descubre cómo puedes sumarte a este propósito.<br/>
+                <strong class="text-white">Te acompañamos desde el origen.</strong>
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="comunidad.html" class="inline-flex items-center gap-2 bg-white text-violet-600 px-8 py-4 rounded-full font-bold text-base hover:bg-violet-50 transition-all hover:scale-105">
+                    Únete a la Comunidad
+                </a>
+                <a href="vamos-contigo.html" class="inline-flex items-center gap-2 border-2 border-white/40 text-white px-8 py-4 rounded-full font-bold text-base hover:bg-white/10 transition-all hover:scale-105">
+                    Vamos Contigo →
+                </a>
+            </div>
+            <div class="mt-10 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4 text-violet-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                <span class="text-violet-200 font-mono text-sm">611 62 04 99</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight">
+                        ORIGEN <span class="text-violet-400">3D</span>
+                    </a>
+                    <p class="text-gray-500 text-sm mt-2">La única escuela de España especializada en Generación Procedural.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-2">
+                    <a href="tel:611620499" class="text-violet-400 font-mono text-sm hover:text-violet-300 transition-colors">
+                        611 62 04 99
+                    </a>
+                    <div class="flex gap-4 mt-2">
+                        <a href="comunidad.html" class="text-gray-500 hover:text-white text-sm transition-colors">Comunidad</a>
+                        <a href="vamos-contigo.html" class="text-gray-500 hover:text-white text-sm transition-colors">Vamos Contigo</a>
+                        <a href="nosotros.html" class="text-gray-500 hover:text-white text-sm transition-colors">Nuestro Porqué</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-600 text-xs">© 2025 Black Monkey Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

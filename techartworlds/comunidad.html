@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Comunidad | TechArt Worlds</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violet: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+        .fade-in-delay-1 { animation-delay: 0.15s; }
+        .fade-in-delay-2 { animation-delay: 0.3s; }
+        .fade-in-delay-3 { animation-delay: 0.45s; }
+        .fade-in-delay-4 { animation-delay: 0.6s; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 10px 0;
+            margin: 0 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #7c3aed;
+            transition: width 0.25s ease;
+        }
+        .nav-link:hover { color: #7c3aed; }
+        .nav-link:hover::after { width: 100%; }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
+        }
+
+        .section-flow { padding-top: 7rem; padding-bottom: 7rem; }
+        @media (min-width: 1024px) {
+            .section-flow { padding-top: 9rem; padding-bottom: 9rem; }
+        }
+
+        .eje-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+
+        @keyframes blobGlow {
+            0%, 100% { opacity: 0.6; filter: blur(80px); }
+            50% { opacity: 0.9; filter: blur(100px); }
+        }
+        .blob-container { animation: blobGlow 8s ease-in-out infinite; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight flex-shrink-0">
+                ORIGEN <span class="text-violet-600">3D</span>
+            </a>
+            <div class="hidden md:flex items-center gap-2 flex-1 overflow-x-auto">
+                <a class="nav-link" href="comunidad.html">Comunidad</a>
+                <a class="nav-link" href="vamos-contigo.html">Vamos Contigo</a>
+                <a class="nav-link" href="nosotros.html">Nuestro Porqué</a>
+            </div>
+            <a href="#unete" class="font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+                Únete a la Comunidad
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-0 right-0 w-[600px] h-[600px] blob-container" style="filter: blur(100px);">
+                <div class="absolute top-[10%] right-[10%] w-[70%] h-[65%]" style="background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%); border-radius: 50%;"></div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-6 fade-in">
+                    Bienvenido a ORIGEN
+                </p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8 fade-in fade-in-delay-1">
+                    El lugar para ordenarte, hacerte útil y poder prosperar en compañía
+                </h1>
+                <p class="font-mono text-2xl md:text-4xl font-bold text-violet-600 uppercase tracking-widest mb-6 fade-in fade-in-delay-2">
+                    RECONSTRÚYETE DESDE EL ORIGEN
+                </p>
+                <p class="text-lg md:text-xl text-gray-500 leading-relaxed mb-12 fade-in fade-in-delay-3">
+                    La primera comunidad privada de ayuda real para artistas en 3 ejes:<br/>
+                    <span class="text-black font-semibold">Formación 3D, Negocio y Crecimiento personal.</span>
+                </p>
+                <a href="#unete" class="inline-flex items-center gap-2 font-bold bg-violet-600 text-white px-8 py-4 rounded-full text-base hover:bg-violet-700 transition-all fade-in fade-in-delay-4 hover:scale-105">
+                    Únete a la Comunidad
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Se han roto los esquemas -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.2em] mb-4">El nuevo paradigma</p>
+                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-6">
+                        Se han roto los esquemas.
+                    </h2>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        La irrupción de la IA ha cambiado los métodos de producción 3D y los viejos sistemas de enseñanza.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        Ya no funciona atesorar el conocimiento en un mundo inundado de información, un avance tecnológico acelerado y una incertidumbre extrema.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed font-medium">
+                        Te invitamos a que dejes atrás el camino de la ansiedad y vuelvas al origen, al <span class="font-mono text-violet-600 font-bold">[0,0,0]</span>, como si de las coordenadas XYZ del espacio se tratara.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-xl p-8 lg:p-10">
+                        <div class="text-center">
+                            <div class="text-6xl font-mono font-bold text-violet-600 mb-2">[0,0,0]</div>
+                            <p class="text-gray-500 text-sm font-mono uppercase tracking-wider">Coordenadas XYZ — Tu punto de origen</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mt-8 text-center">
+                            <div class="bg-violet-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-violet-600">X</div>
+                                <div class="text-xs text-gray-500 mt-1 font-mono uppercase">3D</div>
+                            </div>
+                            <div class="bg-violet-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-violet-600">Y</div>
+                                <div class="text-xs text-gray-500 mt-1 font-mono uppercase">Crecimiento</div>
+                            </div>
+                            <div class="bg-violet-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-violet-600">Z</div>
+                                <div class="text-xs text-gray-500 mt-1 font-mono uppercase">Negocio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistema de 3 Ejes -->
+    <section class="section-flow bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Sistema ORIGEN</p>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
+                    BIENVENIDO AL SISTEMA DE 3 EJES
+                </h2>
+                <p class="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                    En ORIGEN, no separamos al artista de la persona.
+                </p>
+            </div>
+
+            <!-- Eje cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- EJE X -->
+                <div class="rounded-2xl border border-gray-100 bg-red-50/40 overflow-hidden card-hover reveal">
+                    <div class="p-8 lg:p-10">
+                        <div class="eje-badge text-red-600 mb-4">EJE X</div>
+                        <h3 class="text-xl font-bold mb-3 tracking-tight">3D | APRENDER UN OFICIO</h3>
+                        <p class="text-violet-600 text-xs font-mono uppercase tracking-widest mb-4">Conocimiento</p>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Modelado. Texturas. Generación Procedural. Scripting. Houdini. Unreal. Blender. IA.
+                        </p>
+                        <p class="text-gray-500 text-sm leading-relaxed">
+                            Te enseñamos lo que sabemos de 3D y producción audiovisual y para Videojuegos, desde cuestiones básicas para principiantes como técnicas avanzadas para seniors o últimas integraciones con IA.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <p class="text-gray-600 text-sm italic">
+                                "Necesitas aprender un oficio para hacer cosas útiles y que alguien te quiera pagar por tu trabajo."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EJE Y -->
+                <div class="rounded-2xl border border-gray-100 bg-emerald-50/40 overflow-hidden card-hover reveal">
+                    <div class="p-8 lg:p-10">
+                        <div class="eje-badge text-emerald-600 mb-4">EJE Y</div>
+                        <h3 class="text-xl font-bold mb-3 tracking-tight">CRECIMIENTO PERSONAL | MENTALIDAD</h3>
+                        <p class="text-gray-600 text-xs uppercase tracking-widest mb-4">El interior. Tu espiritualidad. El gran olvido.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            El interior. Tu espiritualidad. El gran olvido.
+                        </p>
+                        <p class="text-gray-500 text-sm leading-relaxed">
+                            Te ayudaremos a que te quedes quieto por un momento. A que mires hacia adentro, para poder ordenar aquello que está desordenado.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <p class="text-gray-600 text-sm italic">
+                                "Para que puedas salir al mundo desde tu origen y ayudarte a alcanzar lo que genuinamente debas alcanzar."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EJE Z -->
+                <div class="rounded-2xl border border-gray-100 bg-blue-50/40 overflow-hidden card-hover reveal">
+                    <div class="p-8 lg:p-10">
+                        <div class="eje-badge text-blue-600 mb-4">EJE Z</div>
+                        <h3 class="text-xl font-bold mb-3 tracking-tight">NEGOCIO | SALIR DEL CASCARÓN</h3>
+                        <p class="text-gray-600 text-xs uppercase tracking-widest mb-4">La parte de realidad que sólo se aprende cuando saltas a la arena.</p>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            ¿Cuánto vale mi tiempo? ¿Cómo se hace un presupuesto? ¿Cómo se planifica una producción? ¿Cómo se trata a un cliente? ¿Cómo se emprende?
+                        </p>
+                        <p class="text-gray-500 text-sm leading-relaxed">
+                            Marketing, Estrategia, Planificación, Productividad, Emprendimiento.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <p class="text-gray-600 text-sm italic">
+                                "Aprende a vender tu trabajo, las reglas del juego y a luchar por tu lugar en la industria."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ¿Para qué te sirve...? -->
+            <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 lg:p-12">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>¿Para qué te sirve aprender el mejor 3D si no sabes presupuestar tu trabajo?</strong>
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>¿Para qué hacer más portfolio si no sabes llegar a entrevistas?</strong> ¿Por qué no acabas lo que empiezas?
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>¿Para qué quieres la última técnica 3D si no sabes comunicar?</strong> ¿Por qué arruinaste tu último emprendimiento?
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    <strong>¿Cómo se afronta el fracaso? ¿Cómo se monta una empresa? ¿Cómo se vende?</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿CÓMO FUNCIONA? -->
+    <section class="section-flow bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Proceso</p>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]">
+                    ¿CÓMO FUNCIONA?
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- COMUNIDAD REAL -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover reveal">
+                    <div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">COMUNIDAD REAL</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Un entorno de aprendizaje seguro sin hate. Una comunidad de miembros que reciben ayuda y ofrecen ayuda real.</p>
+                </div>
+
+                <!-- EVENTOS EN DIRECTO -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover reveal">
+                    <div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">EVENTOS EN DIRECTO</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Directos semanales para aprender reglas de Negocio y Orden interior. Formación en directo con expertos.</p>
+                </div>
+
+                <!-- CURSOS GRABADOS -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover reveal">
+                    <div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">CURSOS GRABADOS</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Blender, 3dsMax, Maya, Houdini, Unreal, Python, VEX, Scripting. Todo queda grabado y accesible.</p>
+                </div>
+
+                <!-- LA TRIBA -->
+                <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover reveal">
+                    <div class="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">LA TRIBA</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Si tienes algo que aportar, puedes convertirte en Guía. Un equipo que te acompaña para atravesar la incertidumbre.</p>
+                </div>
+            </div>
+
+            <!-- ¿Qué pasa dentro de ORÍGEN? -->
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-lg p-8 lg:p-12">
+                <h3 class="text-2xl font-bold mb-8 text-center">¿Qué pasa dentro de ORÍGEN?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-violet-600 text-lg">⚡</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900 mb-1">Formación en 3 ejes</p>
+                            <p class="text-gray-500 text-sm">Directos semanales para aprender reglas de Negocio y Orden interior.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-violet-600 text-lg">🧠</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900 mb-1">Consumo a tu ritmo</p>
+                            <p class="text-gray-500 text-sm">Todo queda grabado y accesible para tí como miembro de la comunidad.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-violet-600 text-lg">🤝</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900 mb-1">La Tribu</p>
+                            <p class="text-gray-500 text-sm">Un entorno de aprendizaje seguro sin hate. Si tienes algo que aportar, puedes convertirte en Guía.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-violet-600 text-lg">📂</span>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900 mb-1">Librería de Recursos</p>
+                            <p class="text-gray-500 text-sm">Assets, escenas de ejemplo y herramientas de gestión.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section id="unete" class="section-flow bg-violet-600 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 blob-container" style="filter: blur(80px); opacity: 0.3;">
+                <div style="background: radial-gradient(ellipse at 50% 50%, #9333ea 0%, transparent 70%); width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+                Únete a la Comunidad
+            </h2>
+            <p class="text-violet-100 text-lg mb-8 leading-relaxed">
+                El mejor momento para empezar fue ayer. El segundo mejor es ahora.<br/>
+                <strong class="text-white">Deja de orbitar. Ven al centro.</strong>
+            </p>
+            <div class="inline-flex items-center gap-2 bg-white text-violet-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-violet-50 transition-all hover:scale-105">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                611 62 04 99
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <a href="https://techartworlds.com" class="text-xl font-extrabold tracking-tight">
+                        ORIGEN <span class="text-violet-400">3D</span>
+                    </a>
+                    <p class="text-gray-500 text-sm mt-2">La única escuela de España especializada en Generación Procedural.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-2">
+                    <a href="tel:611620499" class="text-violet-400 font-mono text-sm hover:text-violet-300 transition-colors">
+                        611 62 04 99
+                    </a>
+                    <div class="flex gap-4 mt-2">
+                        <a href="https://techartworlds.com/comunidad" class="text-gray-500 hover:text-white text-sm transition-colors">Comunidad</a>
+                        <a href="https://techartworlds.com/vamos-contigo" class="text-gray-500 hover:text-white text-sm transition-colors">Vamos Contigo</a>
+                        <a href="https://techartworlds.com/nuestro-porque" class="text-gray-500 hover:text-white text-sm transition-colors">Nuestro Porqué</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-600 text-xs">© 2025 Black Monkey Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
