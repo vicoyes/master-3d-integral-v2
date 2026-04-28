@@ -298,3 +298,86 @@ ACT VI — LA DECISIÓN
 ---
 
 *Documento de diseño — Master 3D Integral — Abril 2026*
+
+---
+
+## Sistema de Diseño Alternativo — Apple Style (Recibido de Héctor)
+
+Este es un sistema de diseño Apple con fondo claro que Héctor ha enviado como referencia o para aplicar.
+
+### Características:
+- **Fondo:** Blanco (#fff)
+- **Texto:** Negro (#1d1d1f)
+- **Acento primario:** Azul Apple (#2997ff)
+- **Botones:** Azul (#2997ff), Oscuro (#1d1d1f)
+- **Cards:** Blancas con bordes sutiles, hover lift
+- **Badges de eje:** Colores diferenciados (rojo=X, verde=Y, azul=Z)
+- **CTA:** Degradado iridiscente Apple con orbes animados
+- **Fuentes:** SF Pro Display, Inter, Playfair Display (italic)
+
+### Tokens:
+```css
+--bg: #fff
+--text: #1d1d1f
+--accent: #2997ff
+--purple: #5e5ce6
+--pink: #bf5af2
+--muted: #6e6e73
+--subtle: #86868b
+```
+
+### Estructura de secciones:
+- Nav sticky con glass blur
+- Hero con glow sutil
+- Stats strip en 4 columnas
+- Programa grid 3 columnas
+- Schedule cards
+- Mentoría con imagen
+- Plataforma cards
+- Idioma/Nivel grid
+- Comunidad grid
+- CTA con degradado Apple
+
+---
+
+## HTML Completo — Apple Style (Recibido de Héctor)
+
+```html
+<!-- ANNOUNCE -->
+<div class="ann">
+ Webinar grabado: El futuro del 3D + IA 2026 | <a href="#">Ver la grabación →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+ <a href="#" class="nav-logo">TechArtWorlds</a>
+ <div class="nav-center">
+ <a href="#programa" class="nav-link">Máster</a>
+ <a href="#sesiones" class="nav-link">Sesiones</a>
+ <a href="#plataforma" class="nav-link">Plataforma</a>
+ <a href="#comunidad" class="nav-link">Comunidad</a>
+ </div>
+ <a href="#cta" class="nav-cta-link">Reservar plaza ↗</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+ <div class="hero-glow"></div>
+ <p class="hero-eyebrow" data-r>Programa 2026 — 2027 · Admisiones abiertas</p>
+ <h1 class="hero-title" data-r data-d="1">MÁSTER <em>3D Integral</em></h1>
+ <p class="hero-sub" data-r data-d="2">9 meses de formación intensiva en 3D TechArt, orden interno y desarrollo de negocio.</p>
+ <div class="hero-dates" data-r data-d="2">
+  <span>28 Sept 2026</span><span class="sep">—</span><span>25 Junio 2027</span>
+ </div>
+ <div class="hero-actions" data-r data-d="3">
+  <a href="#cta" class="btn-blue">Reservar mi plaza</a>
+  <a href="#programa" class="btn-outline">Ver programa</a>
+ </div>
+ <div class="hero-stats" data-r data-d="4">
+  <div class="hstat"><span class="hstat-val">9</span><span class="hstat-lbl">Meses duración</span></div>
+  <div class="hstat"><span class="hstat-val">4</span><span class="hstat-lbl">Clases / semana</span></div>
+  <div class="hstat"><span class="hstat-val">+1</span><span class="hstat-lbl">Mentoría individual</span></div>
+  <div class="hstat"><span class="hstat-val">24<b>/7</b></span><span class="hstat-lbl">Soporte Discord</span></div>
+ </div>
+</div>
+```
