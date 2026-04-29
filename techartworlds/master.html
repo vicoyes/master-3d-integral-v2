@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
     <script>
         tailwind.config = {
@@ -23,6 +24,7 @@
                         sans: ["Inter", "system-ui", "sans-serif"],
                         mono: ["JetBrains Mono", "monospace"],
                         serifDisplay: ["Playfair Display", "Georgia", "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
                     },
                 },
             },
@@ -32,10 +34,25 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
             color: #1d1d1f;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+        h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; }
+
+        /* Títulos de sección unificados con la home */
+        .section-title {
+            font-size: 2.75rem !important;
+            line-height: 1.1;
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 70px !important;
+                line-height: 1;
+                letter-spacing: -0.02em;
+            }
         }
 
         /* Apple-style glass nav */
@@ -47,7 +64,29 @@
         }
 
         /* Stats strip Apple style */
-        .stat-divider { width: 1px; height: 2.5rem; background: rgba(0,0,0,0.1); }
+        .stats-card {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.11);
+            border-radius: 1.25rem;
+            overflow: hidden;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.04);
+        }
+        .stats-card-item {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+        }
+        .stats-card-item:nth-child(odd) { border-right: 1px solid rgba(0,0,0,0.1); }
+        .stats-card-item:nth-child(-n+2) { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        @media (min-width: 1024px) {
+            .stats-card { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .stats-card-item {
+                padding: 3.5rem 2.5rem;
+                border-bottom: 0 !important;
+            }
+            .stats-card-item:not(:last-child) { border-right: 1px solid rgba(0,0,0,0.1); }
+        }
 
         /* Cards */
         .card-apple {
@@ -193,6 +232,39 @@
             overflow: hidden;
             box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 20px 60px rgba(0,0,0,0.1);
         }
+        .hero-image-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 34rem;
+        }
+        .hero-image-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -2rem;
+            z-index: 0;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(0,113,227,0.18), transparent 38%),
+                radial-gradient(circle at 78% 68%, rgba(139,116,232,0.16), transparent 42%);
+            filter: blur(34px);
+            opacity: 0.9;
+        }
+        .hero-image-frame {
+            position: relative;
+            z-index: 1;
+            aspect-ratio: 4 / 3;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: #f5f5f7;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 24px 70px rgba(0,0,0,0.13);
+        }
+        .hero-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
     @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.08)}66%{transform:translate(-30px,50px) scale(.95)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-70px,40px) scale(1.06)}66%{transform:translate(40px,-30px) scale(.97)}}
 @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,-60px) scale(1.1)}}
@@ -231,10 +303,10 @@
                 <p class="label-apple mb-6 animate-in" style="color:#0071e3;">
                     Programa 2026–2027 · Online en directo
                 </p>
-                <h1 class="font-serifDisplay text-[2.9rem] md:text-[4rem] lg:text-[4.4rem] font-bold leading-[1.08] tracking-tight mb-8 animate-in animate-in-delay-1" style="color:#1d1d1f;">
+                <h1 class="font-serifDisplay italic text-[3rem] md:text-[4.1rem] font-semibold md:font-bold leading-[1.12] tracking-tight mb-8 animate-in animate-in-delay-1" style="color:#1d1d1f;">
                     9 meses que<br/>
                     transforman tu<br/>
-                    <em class="not-italic" style="color:#0071e3;">carrera</em>
+                    <em class="font-montserrat font-bold not-italic" style="color:#0071e3;">carrera</em>
                 </h1>
                 <p class="text-[#6e6e73] text-[1.05rem] mb-4 max-w-md leading-relaxed animate-in animate-in-delay-2">
                     Formación 3D TechArt, orden interno y desarrollo de negocio. Todo lo que necesitas para prosperar como profesional.
@@ -252,16 +324,12 @@
                 </div>
             </div>
 
-            <!-- Right — Video -->
+            <!-- Right — Hero image -->
             <div class="lg:w-5/12 relative flex items-center justify-center w-full animate-in animate-in-delay-2">
-                <div class="video-rounded w-full max-w-lg aspect-video bg-black">
-                    <iframe
-                        src="https://www.youtube.com/embed/0Db_ZMz8bWY?start=610&rel=0"
-                        title="Máster 3D Integral"
-                        class="absolute inset-0 w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                <div class="hero-image-wrap">
+                    <div class="hero-image-frame">
+                        <img src="../1.12.png" alt="Artista técnico trabajando con nodos y código en Houdini"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -269,25 +337,25 @@
 
     <!-- Stats Bar — Apple Strip -->
     <section style="background:#fafafa; border-top:1px solid rgba(0,0,0,0.06); border-bottom:1px solid rgba(0,0,0,0.06);">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[rgba(0,0,0,0.07)]">
+        <div class="max-w-7xl mx-auto px-6 py-10 lg:py-12">
+            <div class="stats-card">
                 <!-- 9 meses -->
-                <div class="py-10 lg:py-14 px-6 lg:px-10 text-center">
+                <div class="stats-card-item">
                     <div class="text-3xl lg:text-4xl font-bold tracking-tight mb-1" style="color:#1d1d1f;">9 <span style="color:#0071e3;">meses</span></div>
                     <div class="label-apple" style="color:#6e6e73;">Duración del programa</div>
                 </div>
                 <!-- 4 clases -->
-                <div class="py-10 lg:py-14 px-6 lg:px-10 text-center">
+                <div class="stats-card-item">
                     <div class="text-3xl lg:text-4xl font-bold tracking-tight mb-1" style="color:#1d1d1f;">4 <span style="color:#0071e3;">clases</span>/sem</div>
                     <div class="label-apple" style="color:#6e6e73;">Sesiones colectivas</div>
                 </div>
                 <!-- 1 a 1 -->
-                <div class="py-10 lg:py-14 px-6 lg:px-10 text-center">
+                <div class="stats-card-item">
                     <div class="text-3xl lg:text-4xl font-bold tracking-tight mb-1" style="color:#1d1d1f;">1 <span style="color:#0071e3;">a 1</span></div>
                     <div class="label-apple" style="color:#6e6e73;">Mentoría individual</div>
                 </div>
                 <!-- 24/7 -->
-                <div class="py-10 lg:py-14 px-6 lg:px-10 text-center">
+                <div class="stats-card-item">
                     <div class="text-3xl lg:text-4xl font-bold tracking-tight mb-1" style="color:#1d1d1f;"><span style="color:#0071e3;">24</span>/7</div>
                     <div class="label-apple" style="color:#6e6e73;">Soporte en Discord</div>
                 </div>
@@ -300,7 +368,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 lg:mb-20">
                 <p class="label-apple mb-5" style="color:#0071e3;">Programa</p>
-                <h2 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6" style="color:#1d1d1f;">
+                <h2 class="section-title font-extrabold tracking-tight mb-6" style="color:#1d1d1f;">
                     9 meses que<br/><span style="color:#0071e3;">cambian tu carrera</span>
                 </h2>
                 <p class="text-[#6e6e73] text-base max-w-lg mx-auto leading-relaxed">
@@ -439,7 +507,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
                 <p class="label-apple mb-5" style="color:#0071e3;">Sesiones colectivas</p>
-                <h2 class="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-5" style="color:#1d1d1f;">Horarios flexibles<br/><span style="color:#0071e3;">para tu rutina</span></h2>
+                <h2 class="section-title font-extrabold tracking-tight mb-5" style="color:#1d1d1f;">Horarios flexibles<br/><span style="color:#0071e3;">para tu rutina</span></h2>
                 <p class="text-[#6e6e73] text-base max-w-md mx-auto leading-relaxed">
                     Dos turnos disponibles. Elige el que mejor se adapte a tu horario o combínalos si lo necesitas.
                 </p>
@@ -478,7 +546,7 @@
                 <!-- Text -->
                 <div class="order-1 lg:order-2">
                     <p class="label-apple mb-5" style="color:#0071e3;">Sesiones individuales</p>
-                    <h2 class="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-6" style="color:#1d1d1f;">
+                    <h2 class="section-title font-extrabold tracking-tight mb-6" style="color:#1d1d1f;">
                         Mentoría<br/><span style="color:#0071e3;">personalizada</span>
                     </h2>
                     <p class="text-[#6e6e73] text-base leading-relaxed mb-8">
@@ -514,7 +582,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-14">
                 <p class="label-apple mb-5" style="color:#0071e3;">Plataforma</p>
-                <h2 class="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-5" style="color:#1d1d1f;">
+                <h2 class="section-title font-extrabold tracking-tight mb-5" style="color:#1d1d1f;">
                     Conecta, participa<br/><span style="color:#0071e3;">y crea</span>
                 </h2>
                 <p class="text-[#6e6e73] text-base max-w-md mx-auto leading-relaxed">
@@ -525,7 +593,7 @@
                 <!-- Zoom -->
                 <div class="card-apple bg-white">
                     <div class="aspect-video overflow-hidden">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/c3cmUrbBhdgs54adfIYP/media/666136581848ae65069c5b9f.jpeg" alt="Zoom" class="w-full h-full object-cover"/>
+                        <img src="../1.3.png" alt="Clase online de 3D en directo" class="w-full h-full object-cover"/>
                     </div>
                     <div class="p-8">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(0,113,227,0.08);">
@@ -540,7 +608,7 @@
                 <!-- Discord -->
                 <div class="card-apple bg-white">
                     <div class="aspect-video overflow-hidden">
-                        <img src="https://storage.googleapis.com/msgsndr/4IeQGzdbw8Skb5M1TmZE/media/67d1b678e86818addecad384.jpeg" alt="Discord" class="w-full h-full object-cover"/>
+                        <img src="../1.5.png" alt="Red de apoyo y feedback continuo" class="w-full h-full object-cover"/>
                     </div>
                     <div class="p-8">
                         <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(61,168,130,0.08);">
@@ -561,7 +629,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-14">
                 <p class="label-apple mb-5" style="color:#0071e3;">Idioma y nivel</p>
-                <h2 class="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-5" style="color:#1d1d1f;">
+                <h2 class="section-title font-extrabold tracking-tight mb-5" style="color:#1d1d1f;">
                     Accesible,<br/><span style="color:#0071e3;">para todos</span>
                 </h2>
             </div>
@@ -615,7 +683,7 @@
         <!-- Content -->
         <div style="position:relative;z-index:2;max-width:1100px;margin:0 auto;">
             <p class="label-apple mb-5" style="color:#0071e3;">Comunidad</p>
-            <h2 class="text-3xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-5" style="color:#1d1d1f;">
+            <h2 class="section-title font-extrabold tracking-tight mb-5" style="color:#1d1d1f;">
                 Ya no estarás<br/><span style="color:#0071e3;">sol@</span>
             </h2>
             <p class="text-base max-w-md mx-auto leading-relaxed mb-14" style="color:#6e6e73;">
@@ -661,7 +729,7 @@
             <div class="inline-flex items-center gap-2 label-apple px-5 py-2.5 rounded-full mb-8 animate-in" style="background:rgba(0,113,227,0.08); color:#8B74E8; border:1px solid rgba(0,113,227,0.12);">
                 Plazas limitadas · Admisión 2026
             </div>
-            <h2 class="text-4xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-6 animate-in animate-in-delay-1" style="color:#1d1d1f;">
+            <h2 class="section-title font-extrabold tracking-tight mb-6 animate-in animate-in-delay-1" style="color:#1d1d1f;">
                 Tu momento<br/><span style="color:#0071e3;">es ahora</span>
             </h2>
             <p class="text-lg leading-relaxed mb-10 animate-in animate-in-delay-2" style="color:#6e6e73;">

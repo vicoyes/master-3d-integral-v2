@@ -233,6 +233,39 @@
             writing-mode: vertical-lr;
             text-orientation: mixed;
         }
+        .hero-title {
+            font-size: clamp(3.2rem, 8vw, 6.8rem);
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+        }
+        .chapter-number {
+            font-size: clamp(6rem, 17vw, 13rem);
+            line-height: 0.8;
+            letter-spacing: -0.08em;
+            color: #e8e8ea;
+        }
+        .chapter-row {
+            border-top: 1px solid rgba(0,0,0,0.08);
+            padding-top: clamp(3rem, 7vw, 6.5rem);
+            padding-bottom: clamp(3rem, 7vw, 6.5rem);
+        }
+        .soft-card {
+            border: 1px solid rgba(0,0,0,0.07);
+            background: #fff;
+            border-radius: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .soft-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+        }
+        .image-frame {
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            overflow: hidden;
+            background: #f5f5f7;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-white text-black antialiased overflow-x-hidden">
@@ -254,179 +287,86 @@
                 <a class="nav-link" href="vamos-contigo.html">Acompañamiento</a>
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
             </div>
-            <a href="#oferta" class="font-montserrat font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+            <a href="master.html#oferta" class="font-montserrat font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
                 AGENDAR CONSULTORÍA
             </a>
         </div>
     </nav>
 
-    <!-- Hero — Depth metaphor -->
-    <section class="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 blob-container" style="filter: blur(120px);">
-                <div class="blob-a absolute top-[10%] left-[20%] w-[60%] h-[60%]" style="background: radial-gradient(ellipse at 60% 40%, #7c3aed88 0%, #7c3aed40 40%, transparent 70%);"></div>
-                <div class="blob-b absolute bottom-[5%] right-[10%] w-[50%] h-[55%]" style="background: radial-gradient(ellipse at 40% 60%, #4c1d9588 0%, #4c1d9540 40%, transparent 70%);"></div>
-            </div>
-            <!-- Depth lines -->
-            <div class="absolute inset-0 flex items-center justify-center overflow-hidden opacity-10">
-                <div class="w-px h-full bg-gradient-to-b from-transparent via-violet-400 to-transparent"></div>
-                <div class="absolute w-px h-full" style="left: 30%; background: linear-gradient(to bottom, transparent, #7c3aed, transparent); transform: rotate(15deg);"></div>
-                <div class="absolute w-px h-full" style="right: 30%; background: linear-gradient(to bottom, transparent, #7c3aed, transparent); transform: rotate(-15deg);"></div>
-            </div>
-        </div>
-        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-            <p class="font-mono text-violet-400 text-xs uppercase tracking-[0.3em] mb-8 fade-in">
-                Historia y propósito
-            </p>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white mb-8 fade-in fade-in-delay-1">
-                Nuestro Porqué
-            </h1>
-            <div class="flex items-center justify-center gap-4 fade-in fade-in-delay-2">
-                <div class="w-16 h-px bg-violet-600"></div>
-                <p class="font-mono text-violet-400 text-xs uppercase tracking-widest">Nov 2022 — Hoy</p>
-                <div class="w-16 h-px bg-violet-600"></div>
-            </div>
-            <div class="mt-12 fade-in fade-in-delay-3">
-                <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=900&q=80" alt="El equipo de TechArt Worlds" class="w-full max-w-3xl mx-auto rounded-2xl shadow-2xl shadow-violet-900/30 object-cover aspect-[16/9] card-hover" />
-            </div>
+    <!-- Hero -->
+    <section class="max-w-7xl mx-auto px-6 pt-20 lg:pt-28 pb-16 lg:pb-24 text-center">
+        <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-6 fade-in">Historia y propósito</p>
+        <h1 class="hero-title font-serifDisplay italic font-semibold md:font-bold mb-10 fade-in fade-in-delay-1">
+            Nuestro <span class="font-montserrat not-italic font-extrabold gradient-text">porqué</span>
+        </h1>
+        <div class="image-frame max-w-5xl mx-auto fade-in fade-in-delay-2">
+            <img src="../1.12.png" alt="Trabajo técnico 3D con nodos y código" class="w-full h-full object-cover aspect-[16/7]"/>
         </div>
     </section>
 
-    <!-- Chapter 1: La constitución -->
-    <section class="section-flow bg-white">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">1</div>
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El comienzo</p>
-                </div>
-                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
-                    <p>El 22 de Noviembre de 2022 constituimos una empresa por los motivos más comunes: hacer dinero para vivir mejor, independencia financiera, tener más cosas para nuestras familias.</p>
-                    <p class="text-gray-900 font-medium">Como ves, nada poético ni elevado.</p>
-                    <p>En menos de 4 años, este motivo resultó ser un cascarón vacío.</p>
+    <!-- Historia — estructura editorial -->
+    <section class="max-w-6xl mx-auto px-6 pb-10 lg:pb-16">
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div>
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 01</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">El comienzo</h2>
+                <p class="text-lg leading-relaxed text-gray-600">El 22 de noviembre de 2022 constituimos una empresa por los motivos más comunes: hacer dinero para vivir mejor, independencia financiera y tener más cosas para nuestras familias.</p>
+                <p class="text-lg leading-relaxed text-gray-900 font-semibold mt-5">Como ves, nada poético ni elevado.</p>
+            </div>
+            <div class="chapter-number font-montserrat font-extrabold select-none md:text-right">01</div>
+        </div>
+
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div class="chapter-number font-montserrat font-extrabold select-none order-2 md:order-1">02</div>
+            <div class="order-1 md:order-2">
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 02</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">La crisis</h2>
+                <p class="text-lg leading-relaxed text-gray-600">La evolución económica era favorable. Y aun así sentimos una profunda crisis de identidad, agotados y sin fuerzas.</p>
+                <div class="soft-card p-6 mt-7">
+                    <p class="text-gray-800 italic leading-relaxed">"¿Por qué cada día pesa más? ¿Por qué ya no tenemos energía? ¿Qué está pasando?"</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Chapter 2: La crisis -->
-    <section class="section-flow bg-gray-50 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[400px] h-[400px] blob-container opacity-30" style="filter: blur(80px);">
-            <div class="absolute inset-0" style="background: radial-gradient(ellipse, #7c3aed 0%, transparent 70%);"></div>
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div>
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 03</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Tocar fondo</h2>
+                <p class="text-lg leading-relaxed text-gray-600">Gracias a ayuda externa descubrimos, en el momento más crítico, que tocar fondo era una oportunidad. Paramos campañas, productos y ruido. Necesitábamos quietud.</p>
+            </div>
+            <div class="chapter-number font-montserrat font-extrabold select-none md:text-right">03</div>
         </div>
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">2</div>
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">La crisis</p>
-                </div>
-                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
-                    <p>La evolución económica de la empresa, aunque humilde, era favorable.</p>
-                    <p class="text-gray-900 font-semibold">Y a pesar de ello, sentimos una profunda crisis de identidad, agotados y sin fuerzas.</p>
-                    <div class="bg-white rounded-2xl border border-gray-100 p-6 my-8 shadow-sm">
-                        <p class="text-gray-700 italic">"¿Por qué cada día pesa más y apenas podemos salir de la cama?<br/>¿Por qué ya no tenemos energía?<br/>¿Qué está pasando?"</p>
-                    </div>
-                    <p>Agotamiento profundo, noches sin dormir, frustración e inquietud tremendas nos asaltaban.</p>
-                    <p>Es una sensación terrible sentir la urgencia de vender para evitar que el proyecto del que depende tu familia se hunda; achicando agua todos los días, al mismo tiempo que procuras proyectar fortaleza... y sin embargo sentir, muy dentro del corazón, que en realidad no sabes hacia dónde hay que ir.</p>
-                    <div class="bg-red-50/40 rounded-2xl border border-red-100 p-6 my-8">
-                        <p class="text-red-700 font-medium">A todas las dificultades de una joven empresa, se añadía nuestra estocada final:</p>
-                        <p class="text-red-900 font-bold text-xl mt-2">La pasión moría.</p>
-                    </div>
-                    <p>Estas emociones nos llevaron al miedo y mucho sufrimiento.</p>
-                </div>
+
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div class="chapter-number font-montserrat font-extrabold select-none order-2 md:order-1">04</div>
+            <div class="order-1 md:order-2">
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 04</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">La decisión</h2>
+                <p class="text-lg leading-relaxed text-gray-600">Llegamos al punto sin retorno: preferíamos que se hundiera el proyecto antes que sostener algo sin un porqué que nos hiciera vibrar.</p>
+                <p class="text-lg leading-relaxed text-gray-900 font-semibold mt-5">Ahí empezó el regreso al origen.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Chapter 3: El punto de inflexión -->
-    <section class="section-flow bg-white">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">3</div>
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El punto de inflexión</p>
-                </div>
-                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
-                    <p>Gracias a ayuda externa, tuvimos la suerte infinita de descubrir, en el momento más crítico, que <strong>tocar fondo es la oportunidad más grande</strong> que se nos podía presentar.</p>
-                    <p>Estar hundidos nos llevó a detenerlo todo: campañas promocionales, nuevos productos, incluso bloqueamos la web.</p>
-                    <p>Tuvimos el coraje de parar en seco un tren preñado de artificio, que silbaba al son de las reglas del marketing y de las tendencias, impulsado por el miedo, la urgencia y la escasez.</p>
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div>
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 05</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">El origen</h2>
+                <p class="text-lg leading-relaxed text-gray-600">Miramos hacia adentro sin prisa. Sin urgencia. Sin el teatro de parecer fuertes. Buscamos un propósito que no naciera del miedo.</p>
+                <div class="soft-card p-6 mt-7 flex items-center gap-5">
+                    <span class="font-mono text-4xl font-bold text-violet-600">0,0,0</span>
+                    <span class="text-sm text-gray-500 leading-relaxed">Coordenadas XYZ. El punto desde el que volver a construir.</span>
                 </div>
             </div>
+            <div class="chapter-number font-montserrat font-extrabold select-none md:text-right">05</div>
         </div>
-    </section>
 
-    <!-- Chapter 4: La decisión -->
-    <section class="section-flow bg-black text-white relative overflow-hidden">
-        <div class="absolute inset-0 blob-container" style="filter: blur(100px); opacity: 0.15;">
-            <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 50%, #7c3aed 0%, transparent 70%);"></div>
-        </div>
-        <div class="max-w-4xl mx-auto px-6 relative z-10">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">4</div>
-                    <p class="font-mono text-violet-400 text-xs uppercase tracking-widest">La decisión</p>
-                </div>
-                <div class="story-quote text-gray-300 leading-relaxed text-lg space-y-6">
-                    <p>Llegamos al punto sin retorno:</p>
-                    <div class="bg-gray-900 rounded-2xl border border-gray-700 p-8 my-8 text-center">
-                        <p class="text-white text-xl md:text-2xl font-bold leading-relaxed">
-                            "Preferimos que se hunda el proyecto, si no tenemos un <span class="text-violet-400">porque</span> que nos haga vibrar.<br/>
-                            A pesar del esfuerzo invertido, del dinero perdido y de los años empleados.<br/>
-                            <span class="text-gray-500">Ya nos da igual.</span>"
-                        </p>
-                    </div>
-                    <p>Hundidos en lo más frío y oscuro del océano, tan cansados que ya nos daba igual si el proyecto vivía o moría...</p>
-                    <p class="text-gray-400">...tuvimos la fortuna de iniciar un proceso de quietud.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chapter 5: El proceso -->
-    <section class="section-flow bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">5</div>
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El proceso de quietud</p>
-                </div>
-                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
-                    <p>De mirar hacia adentro sin prisas, sin urgencia.</p>
-                    <p>De mirarnos al espejo y esforzarnos por descubrir nuestro <strong class="text-violet-600">porque verdadero</strong>.</p>
-                    <div class="bg-white rounded-2xl border border-gray-100 p-8 my-8 shadow-sm">
-                        <div class="flex items-center gap-6">
-                            <div class="text-5xl font-mono font-bold text-violet-600">0,0,0</div>
-                            <div>
-                                <p class="text-gray-900 font-medium">Vuelta al origen</p>
-                                <p class="text-gray-500 text-sm">Coordenadas XYZ — punto de partida</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chapter 6: El ascenso -->
-    <section class="section-flow bg-white">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="reveal">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="bg-violet-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-mono text-sm font-bold flex-shrink-0">6</div>
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest">El ascenso</p>
-                </div>
-                <div class="story-quote text-gray-600 leading-relaxed text-lg space-y-6">
-                    <p>Y esto nos llevó, sin saberlo ni esperarlo, a iniciar un ascenso sin urgencia, liberados de las cargas que nos habían mantenido anclados a las frías profundidades del miedo.</p>
-                    <p>Nos llevó a la superficie, donde los rayos del sol ya iluminan y calientan las aguas.</p>
-                    <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 my-8">
-                        <p class="text-gray-900 text-xl font-medium leading-relaxed">
-                            Al lugar donde comienzas a sentir paz, porque estás haciendo lo que <strong>debes hacer</strong> y no te avergüenzas de alzar la voz para que se te oiga.
-                        </p>
-                    </div>
-                    <div class="mt-8">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" alt="El equipo trabajando en equipo" class="w-full rounded-2xl shadow-xl shadow-gray-200/50 object-cover aspect-[16/7] card-hover" />
-                    </div>
-                </div>
+        <div class="chapter-row grid md:grid-cols-2 gap-10 lg:gap-16 items-center reveal">
+            <div class="chapter-number font-montserrat font-extrabold select-none order-2 md:order-1">06</div>
+            <div class="order-1 md:order-2">
+                <p class="font-mono text-xs uppercase tracking-[0.22em] text-violet-600 mb-4">Capítulo 06</p>
+                <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">El ascenso</h2>
+                <p class="text-lg leading-relaxed text-gray-600">Desde ahí apareció otra forma de trabajar: menos urgencia, más verdad. Menos autoexigencia vacía, más excelencia con sentido.</p>
+                <p class="text-lg leading-relaxed text-gray-900 font-semibold mt-5">Queremos ayudarte a prosperar sin romperte por dentro.</p>
             </div>
         </div>
     </section>
@@ -495,47 +435,47 @@
 
     <!-- QUIÉN HAY DETRÁS -->
     <section class="section-flow bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
                 <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-5">El equipo</p>
                 <h2 class="section-title font-extrabold tracking-tight mb-8 text-black">
-                    <span class="text-accent">¿Quién hay</span><br/>detrás?
+                    Mentes<br/><span class="text-accent">maestras</span>
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 text-center card-hover">
-                    <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-violet-600">A</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 reveal">
+                <article class="soft-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=600&fit=crop&crop=face" alt="Adolfo Reverón" class="w-full aspect-square object-cover"/>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Adolfo Reverón</h3>
+                        <p class="text-violet-600 text-[11px] uppercase tracking-[0.18em] font-mono mb-4">Dirección · Ejes Y/Z</p>
+                        <p class="text-gray-500 text-sm leading-relaxed">Mentor, director del proyecto y guía en orden interno y negocio.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Adolfo</h3>
-                    <p class="text-violet-600 text-sm font-mono mb-2">EJE X — 3D</p>
-                    <p class="text-gray-500 text-sm">Especialista en Generación Procedural y Technical Art.</p>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 text-center card-hover">
-                    <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-violet-600">M</span>
+                </article>
+                <article class="soft-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=600&fit=crop&crop=face" alt="Marta" class="w-full aspect-square object-cover"/>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Marta</h3>
+                        <p class="text-violet-600 text-[11px] uppercase tracking-[0.18em] font-mono mb-4">Experiencia · Eje Y</p>
+                        <p class="text-gray-500 text-sm leading-relaxed">Cuida la experiencia humana, la calidad del acompañamiento y el proceso del alumno.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Marta</h3>
-                    <p class="text-violet-600 text-sm font-mono mb-2">EJE Y — Crecimiento</p>
-                    <p class="text-gray-500 text-sm">Especialista en desarrollo personal y mentalidad.</p>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 text-center card-hover">
-                    <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-violet-600">J</span>
+                </article>
+                <article class="soft-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=600&fit=crop&crop=face" alt="Jas" class="w-full aspect-square object-cover"/>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Jas</h3>
+                        <p class="text-violet-600 text-[11px] uppercase tracking-[0.18em] font-mono mb-4">Marketing · Eje Z</p>
+                        <p class="text-gray-500 text-sm leading-relaxed">Estrategia, comunicación, plataforma y funcionamiento práctico del proyecto.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Jas</h3>
-                    <p class="text-violet-600 text-sm font-mono mb-2">EJE Z — Negocio</p>
-                    <p class="text-gray-500 text-sm">Especialista en marketing y estrategia empresarial.</p>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-100 p-6 text-center card-hover">
-                    <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <span class="text-2xl font-bold text-violet-600">+</span>
+                </article>
+                <article class="soft-card overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=600&fit=crop&crop=face" alt="Andrés" class="w-full aspect-square object-cover"/>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-1">Andrés</h3>
+                        <p class="text-violet-600 text-[11px] uppercase tracking-[0.18em] font-mono mb-4">3D · Eje X</p>
+                        <p class="text-gray-500 text-sm leading-relaxed">Coordina profesores, recursos, masterclasses y el crecimiento técnico del alumno.</p>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Andrés</h3>
-                    <p class="text-violet-600 text-sm font-mono mb-2">Soporte</p>
-                    <p class="text-gray-500 text-sm">Equipo de soporte y operaciones.</p>
-                </div>
+                </article>
             </div>
 
             <div class="mt-12 text-center reveal">
@@ -566,7 +506,7 @@
         </div>
     </section>
 
-    <!-- Chapter 7: La misión — CTA -->
+    <!-- CTA final -->
     <section class="section-flow bg-violet-600 relative overflow-hidden">
         <div class="absolute inset-0 blob-container" style="filter: blur(80px); opacity: 0.35;">
             <div class="absolute inset-0" style="background: radial-gradient(ellipse at 50% 50%, #9333ea 0%, transparent 70%);"></div>
