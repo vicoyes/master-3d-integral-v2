@@ -3,34 +3,19 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Vamos Contigo | TechArt Worlds</title>
+    <title>Acompañamiento | TechArt Worlds</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         accent: "#0071e3",
-                        "accent-red": "#c73838",
-                        "accent-green": "#0a7c42",
-                        gray_50_light: "#fcfdfd",
-                        violet: {
-                            50: "#eff6ff",
-                            100: "#dbeafe",
-                            200: "#bfdbfe",
-                            300: "#93c5fd",
-                            400: "#60a5fa",
-                            500: "#3b82f6",
-                            600: "#0071e3",
-                            700: "#0066cc",
-                            800: "#0052a3",
-                            900: "#003d7a",
-                        },
+                        violet: { 600: "#0071e3", 700: "#0066cc" },
                     },
                     fontFamily: {
                         sans: ["Inter", "system-ui", "sans-serif"],
@@ -44,198 +29,104 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; font-weight: 400; }
-        h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; font-weight: 400; color: #1d1d1f; -webkit-font-smoothing: antialiased; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(1deg); }
-        }
-        .float-anim { animation: float 8s ease-in-out infinite; }
-
-        @keyframes blobA {
-            0%   { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
-            25%  { transform: translate(12px, -8px) scale(1.08); border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; }
-            50%  { transform: translate(-6px, 10px) scale(0.95); border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%; }
-            75%  { transform: translate(8px, 5px) scale(1.04); border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; }
-            100% { transform: translate(0, 0) scale(1); border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%; }
-        }
-        @keyframes blobB {
-            0%   { transform: translate(0, 0) scale(1); border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%; }
-            30%  { transform: translate(-10px, 6px) scale(1.06); border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%; }
-            60%  { transform: translate(8px, -12px) scale(0.94); border-radius: 60% 40% 45% 55% / 40% 60% 50% 50%; }
-            100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 50% 50% / 45% 55% 45% 55%; }
-        }
-        @keyframes blobC {
-            0%   { transform: translate(0, 0) scale(1); border-radius: 45% 55% 60% 40% / 55% 45% 40% 60%; }
-            35%  { transform: translate(6px, 10px) scale(0.96); border-radius: 55% 45% 40% 60% / 45% 55% 60% 40%; }
-            65%  { transform: translate(-12px, -5px) scale(1.07); border-radius: 40% 60% 50% 50% / 60% 40% 45% 55%; }
-            100% { transform: translate(0, 0) scale(1); border-radius: 45% 55% 60% 40% / 55% 45% 40% 60%; }
-        }
-        @keyframes blobGlow {
-            0%, 100% { opacity: 0.85; filter: blur(60px); }
-            50%      { opacity: 1; filter: blur(70px); }
-        }
-        .blob-a { animation: blobA 12s ease-in-out infinite; }
-        .blob-b { animation: blobB 14s ease-in-out infinite; }
-        .blob-c { animation: blobC 16s ease-in-out infinite; }
-        .blob-container { animation: blobGlow 10s ease-in-out infinite; }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in { animation: fadeInUp 0.8s ease-out forwards; }
-        .fade-in-delay-1 { animation-delay: 0.15s; opacity: 0; }
-        .fade-in-delay-2 { animation-delay: 0.3s; opacity: 0; }
-        .fade-in-delay-3 { animation-delay: 0.45s; opacity: 0; }
-        .fade-in-delay-4 { animation-delay: 0.6s; opacity: 0; }
-
+        /* ── Nav ── */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255,255,255,0.72);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
         }
-        .nav-scroll {
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-        }
-        .nav-scroll::-webkit-scrollbar { display: none; }
         .nav-link {
             position: relative;
-            padding: 10px 0;
-            margin: 0 14px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: #4b5563;
+            font-size: 0.85rem; font-weight: 500; color: #6e6e73;
+            text-decoration: none; padding-bottom: 2px;
             transition: color 0.2s ease;
-            white-space: nowrap;
         }
         .nav-link::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #111827;
+            content: ""; position: absolute; left: 0; bottom: -2px;
+            width: 0; height: 1.5px; background: #1d1d1f;
             transition: width 0.25s ease;
         }
-        .nav-link:hover { color: #111827; }
+        .nav-link:hover { color: #1d1d1f; }
         .nav-link:hover::after { width: 100%; }
+        .nav-scroll { overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+        .nav-scroll::-webkit-scrollbar { display: none; }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 113, 227, 0.12);
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #0071e3, #5ba3f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .label-gradient {
-            background: linear-gradient(90deg, #2196F3 0%, #673AB7 35%, #E91E63 65%, #FF9800 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .h3-blue {
-            background: linear-gradient(90deg, #2F6FD6 0%, #3A7CE8 50%, #60A5FA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .h3-multi {
-            background: linear-gradient(90deg, #2196F3 0%, #673AB7 35%, #E91E63 65%, #FF9800 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* ── Typography ── */
+        .display-headline { font-family: 'Montserrat', sans-serif; font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; }
+        .display-lg { font-size: clamp(2.75rem, 7vw, 5.5rem); }
+        .display-md { font-size: clamp(2.25rem, 5.5vw, 4rem); }
+        .display-sm { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+
+        .label-apple {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.22em;
+            text-transform: uppercase; font-weight: 600;
+            display: block;
         }
 
-        .section-title {
-            font-size: 2.75rem !important;
-            line-height: 1.1;
+        /* ── Cards ── */
+        .card-apple {
+            border-radius: 1.25rem;
+            border: 1px solid rgba(0,0,0,0.07);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 70px !important;
-                line-height: 1;
-                letter-spacing: -0.02em;
-            }
-        }
+        .card-apple:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-3px); }
 
-        .section-flow {
-            padding-top: 9rem;
-            padding-bottom: 9rem;
-        }
-        @media (max-width: 1023px) {
-            .section-flow {
-                padding-top: 6rem;
-                padding-bottom: 6rem;
-            }
-        }
+        /* ── Feature image ── */
+        .feature-img { aspect-ratio: 4/3; object-fit: cover; border-radius: 20px; }
 
-        .glass-arrow {
-            background: rgba(255, 255, 255, 0.45);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            backdrop-filter: saturate(180%) blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            color: #1f2937;
-            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-        }
-        .glass-arrow:hover {
-            background: rgba(255, 255, 255, 0.65);
-            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-        }
-        .glass-arrow:active { transform: scale(0.96); }
+        /* ── Scroll reveal ── */
+        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        /* ── Fade-in hero ── */
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .fade-in   { animation: fadeInUp 0.9s ease-out forwards; }
+        .delay-1   { animation-delay: 0.12s; opacity: 0; }
+        .delay-2   { animation-delay: 0.24s; opacity: 0; }
+        .delay-3   { animation-delay: 0.4s;  opacity: 0; }
 
-        .eje-label {
-            font-size: 10px;
-            font-family: var(--font-mono, 'JetBrains Mono', monospace);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-weight: 600;
-        }
-        .eje-x { color: rgb(204, 0, 0); }
-        .eje-y { color: rgb(0, 128, 0); }
-        .eje-z { color: rgb(0, 0, 204); }
+        /* ── Drift orbs ── */
+        @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(60px,-40px) scale(1.08)} 66%{transform:translate(-30px,50px) scale(.95)} }
+        @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-70px,40px) scale(1.06)} 66%{transform:translate(40px,-30px) scale(.97)} }
+        @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-50px,-60px) scale(1.1)} }
 
-        .schedule-icon {
-            font-size: 1.125rem;
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        /* ── Blob hero ── */
+        @keyframes blobA { 0%,100%{transform:translate(0,0) scale(1);border-radius:40% 60% 55% 45%/50% 40% 60% 50%} 50%{transform:translate(-6px,10px) scale(0.95);border-radius:55% 45% 60% 40%/45% 55% 40% 60%} }
+        @keyframes blobB { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(8px,-12px) scale(0.94)} }
+        @keyframes blobGlow { 0%,100%{opacity:0.7;filter:blur(70px)} 50%{opacity:1;filter:blur(80px)} }
+        .blob-a { animation: blobA 12s ease-in-out infinite; }
+        .blob-b { animation: blobB 14s ease-in-out infinite; }
+        .blob-container { animation: blobGlow 10s ease-in-out infinite; }
+
+        /* ── Step numbers ── */
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem; font-weight: 700; line-height: 1;
+            color: rgba(0,113,227,0.12);
+            letter-spacing: -0.04em;
         }
     </style>
 </head>
-<body class="bg-white text-black antialiased overflow-x-hidden">
+<body class="bg-white text-[#1d1d1f] antialiased overflow-x-hidden">
 
     <!-- Top Bar -->
-    <div class="bg-black text-white text-center py-2.5 text-xs font-mono uppercase tracking-[0.2em] font-medium">
-        [Webinar] El Futuro del 3D + IA 2026 &nbsp;|&nbsp; <a class="underline hover:no-underline text-violet-300" href="#">Ver la grabación →</a>
+    <div class="bg-[#1d1d1f] text-white text-center py-2.5 text-xs font-mono uppercase tracking-[0.2em]">
+        [Webinar] El Futuro del 3D + IA 2026 &nbsp;|&nbsp;
+        <a class="text-violet-300 underline hover:no-underline" href="#">Ver la grabación →</a>
     </div>
 
     <!-- Nav -->
     <nav class="sticky top-0 z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
-            <a href="../index.html" class="text-xl font-extrabold tracking-tight flex-shrink-0">
-                MÁSTER <span class="text-violet-600">3D</span>
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+            <a href="../index.html" class="text-lg font-extrabold tracking-tight flex-shrink-0 text-[#1d1d1f]">
+                MÁSTER <span style="color:#0071e3;">3D</span>
             </a>
             <div class="hidden md:flex nav-scroll items-center gap-2 flex-1">
                 <a class="nav-link" href="comunidad.html">Comunidad</a>
@@ -243,124 +134,165 @@
                 <a class="nav-link" href="vamos-contigo.html">Acompañamiento</a>
                 <a class="nav-link" href="nosotros.html">Nosotros</a>
             </div>
-            <a href="#oferta" class="font-montserrat font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+            <a href="#llamada" class="font-montserrat font-bold text-white px-5 py-2 rounded-full text-sm transition-colors flex-shrink-0" style="background:#0071e3;">
                 AGENDAR CONSULTORÍA
             </a>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-6 fade-in">
-                    Acompañamiento Personalizado
-                </p>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-8 fade-in fade-in-delay-1">
-                    El acompañamiento que necesitas cuando la vida te pide avances
-                </h1>
-                <a href="#llamada" class="inline-flex items-center gap-2 font-montserrat font-bold bg-violet-600 text-white px-8 py-4 rounded-full text-base hover:bg-violet-700 transition-all fade-in fade-in-delay-2 hover:scale-105">
-                    Solicitar Llamada de 30'
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    <!-- ════════════════════════════════
+         HERO
+    ════════════════════════════════ -->
+    <section class="relative bg-[#f5f5f7] overflow-hidden pt-20 pb-0">
+        <!-- Blobs ambientales -->
+        <div class="absolute inset-0 z-0 pointer-events-none blob-container overflow-hidden">
+            <div class="blob-a absolute top-[-5%] right-[5%] w-[45%] h-[70%]"
+                 style="background:radial-gradient(ellipse at 60% 40%,rgba(0,113,227,0.10) 0%,transparent 70%);"></div>
+            <div class="blob-b absolute top-[10%] left-[0%] w-[40%] h-[60%]"
+                 style="background:radial-gradient(ellipse at 35% 50%,rgba(139,116,232,0.08) 0%,transparent 70%);"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <p class="label-apple mb-8 fade-in" style="color:#0071e3;">Acompañamiento Personalizado</p>
+            <h1 class="display-headline display-lg text-[#1d1d1f] mb-8 fade-in delay-1">
+                El acompañamiento<br/>que necesitas<br/>
+                <span style="color:#0071e3;">cuando más importa</span>
+            </h1>
+            <p class="text-[#6e6e73] text-lg max-w-xl mx-auto leading-relaxed mb-10 fade-in delay-2">
+                Un equipo de seniors con experiencia real que te ayuda a convertir lo abstracto en algo concreto, para poder avanzar.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-20 fade-in delay-3">
+                <a href="#llamada"
+                   class="bg-[#0071e3] text-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-[#0066cc] transition-all hover:scale-105">
+                    Solicitar Llamada de 30' gratis
                 </a>
-                <div class="mt-10 fade-in fade-in-delay-3">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80" alt="Sesión de acompañamiento y mentoría" class="w-full max-w-2xl mx-auto rounded-2xl shadow-xl shadow-violet-200/40 object-cover aspect-[16/9] card-hover" />
-                </div>
+                <a href="#como-funciona"
+                   class="border border-gray-300 text-[#1d1d1f] bg-white px-8 py-3.5 rounded-full font-bold text-sm hover:bg-gray-50 transition-all">
+                    Cómo funciona ↓
+                </a>
             </div>
         </div>
-        <!-- Blob decorations -->
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute top-0 left-0 w-full h-full blob-container">
-                <div class="blob-a absolute top-[5%] right-[5%] w-[60%] h-[60%]" style="background: radial-gradient(ellipse at 60% 40%, #bebcea 0%, #bebcea88 40%, transparent 70%);"></div>
-                <div class="blob-b absolute bottom-[10%] left-[5%] w-[55%] h-[55%]" style="background: radial-gradient(ellipse at 40% 60%, #ffcac4 0%, #ffcac488 40%, transparent 70%);"></div>
-                <div class="blob-c absolute top-[10%] left-[0%] w-[50%] h-[65%]" style="background: radial-gradient(ellipse at 35% 50%, #bebcea 0%, #bebcea88 40%, transparent 70%);"></div>
+
+        <!-- Hero image full-bleed -->
+        <div class="relative fade-in delay-3">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&q=85"
+                 alt="Sesión de acompañamiento"
+                 class="w-full object-cover object-center"
+                 style="height: clamp(300px, 48vh, 580px);" />
+            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#f5f5f7] to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         STATS
+    ════════════════════════════════ -->
+    <section class="bg-white py-16 border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-100 rounded-2xl overflow-hidden shadow-sm reveal">
+                <div class="bg-white p-10 text-center">
+                    <div class="text-3xl font-extrabold tracking-tight mb-1" style="color:#0071e3;">30'</div>
+                    <p class="label-apple" style="color:#6e6e73;">Llamada gratuita</p>
+                </div>
+                <div class="bg-white p-10 text-center">
+                    <div class="text-3xl font-extrabold tracking-tight mb-1" style="color:#0071e3;">Sin</div>
+                    <p class="label-apple" style="color:#6e6e73;">Compromiso</p>
+                </div>
+                <div class="bg-white p-10 text-center">
+                    <div class="text-3xl font-extrabold tracking-tight mb-1" style="color:#0071e3;">Real</div>
+                    <p class="label-apple" style="color:#6e6e73;">Experiencia práctica</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 3 Bloques de ayuda -->
-    <section class="section-flow bg-gray-50">
+    <!-- ════════════════════════════════
+         ¿EN QUÉ PODEMOS AYUDARTE?
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-[#f5f5f7]">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-4">¿En qué podemos ayudarte?</p>
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">Ayuda con tu...</h2>
+            <div class="text-center mb-16 reveal">
+                <p class="label-apple mb-5" style="color:#0071e3;">¿En qué podemos ayudarte?</p>
+                <h2 class="display-headline display-md text-[#1d1d1f] mb-5">
+                    Ayuda con tu...
+                </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
+
                 <!-- Carrera profesional -->
-                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
-                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.834c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
+                <div class="card-apple bg-white p-9">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,113,227,0.08);">
+                        <svg class="w-6 h-6" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.834c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Carrera profesional</h3>
+                    <h3 class="text-lg font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Carrera profesional</h3>
                     <ul class="space-y-3">
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             Estrategias de búsqueda de empleo
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Formación
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Formación y desarrollo de habilidades
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             Productividad
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Bloqueos internos: autosabotaje, procrastinación, falta de motivación
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Autosabotaje, procrastinación, motivación
                         </li>
                     </ul>
                 </div>
 
                 <!-- Emprendimiento -->
-                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
-                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                <div class="card-apple bg-white p-9">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,113,227,0.08);">
+                        <svg class="w-6 h-6" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Emprendimiento</h3>
+                    <h3 class="text-lg font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Emprendimiento</h3>
                     <ul class="space-y-3">
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Modelo de negocio, producto
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Modelo de negocio y producto
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Proceso de Creación de Empresa
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Proceso de creación de empresa
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Marketing: Estrategias, Diseño Web, Copywriting, Campañas, Comunicación, Ventas
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Marketing, diseño web, copywriting
+                        </li>
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Campañas, comunicación y ventas
                         </li>
                     </ul>
                 </div>
 
                 <!-- Ordenarte -->
-                <div class="bg-white rounded-2xl border border-gray-100 p-8 card-hover reveal">
-                    <div class="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+                <div class="card-apple bg-white p-9">
+                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,113,227,0.08);">
+                        <svg class="w-6 h-6" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Ordenarte</h3>
+                    <h3 class="text-lg font-bold mb-4 tracking-tight" style="color:#1d1d1f;">Ordenarte</h3>
                     <ul class="space-y-3">
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Trabajo de Mentalidad adecuada
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Mentalidad y bloqueos internos
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Definición de objetivos
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Definición de objetivos claros
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Mapeo de escenarios
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Mapeo de escenarios y criterios de decisión
                         </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Criterios de decisión
-                        </li>
-                        <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <svg class="w-4 h-4 text-violet-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            Panificación y ejecución
+                        <li class="flex items-start gap-3 text-sm" style="color:#6e6e73;">
+                            <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            Planificación y ejecución
                         </li>
                     </ul>
                 </div>
@@ -368,266 +300,294 @@
         </div>
     </section>
 
-    <!-- ¿Por qué te interesa? -->
-    <section class="section-flow bg-white">
+    <!-- ════════════════════════════════
+         ¿POR QUÉ TE INTERESA? — feature row
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div class="reveal">
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.2em] mb-4">Contexto</p>
-                    <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-8">¿Por qué te interesa?</h2>
-                    <div class="space-y-6 text-gray-600 leading-relaxed">
-                        <p>En ocasiones la vida te pide moverte.<br/>Te llegan oportunidades externas o quizá motivaciones internas te piden salir y expresarte: un proyecto que te llega, un deseo de emprender, un cambio laboral, un momento difícil.</p>
-                        <p>Sientes que tienes que acciónar, que es el momento.<br/>Pero sientes que estás solo.</p>
-                        <p>Te falta un equipo que te acompañe para atravesar la incertidumbre: consultar y debatir, descubrir cómo superar tus carencias, establecer y ejecutar planes.</p>
-                        <p class="text-gray-900 font-medium">Tendemos una mano para dar soporte y ayudarte a convertir lo abstracto en algo concreto, para poder moverte.</p>
-                        <p>Tenemos para ofrecerte nuestra experiencia personal, profesional y empresarial para ayudarte a encontrar el <strong>QUÉ</strong>, el <strong>CÓMO</strong> y el <strong>CUÁNDO</strong>.</p>
-                        <p>Te acompañamos para dejar atrás lo difuso y el estancamiento.</p>
-                        <p class="font-medium text-gray-900">Nos dirigimos a tí si estás en un momento en que necesitas ayuda para crear realidad y avanzar: ayuda con tu carrera profesional, tu proceso de emprendimiento o un enfoque externo para ayudarte a tomar buenas decisiones y crecer interiormente.</p>
+                    <p class="label-apple mb-6" style="color:#0071e3;">Contexto</p>
+                    <h2 class="display-headline display-md text-[#1d1d1f] mb-8">
+                        ¿Por qué<br/>te interesa?
+                    </h2>
+                    <div class="space-y-5 text-base leading-relaxed" style="color:#6e6e73;">
+                        <p>En ocasiones la vida te pide moverte. Te llegan oportunidades o motivaciones internas: un proyecto, el deseo de emprender, un cambio laboral, un momento difícil.</p>
+                        <p>Sientes que tienes que accionar. Pero sientes que estás solo.</p>
+                        <p>Te falta un equipo que te acompañe: consultar, debatir, superar carencias, establecer y ejecutar planes.</p>
+                        <p class="font-semibold" style="color:#1d1d1f;">Tendemos una mano para convertir lo abstracto en algo concreto, para que puedas moverte.</p>
+                        <p>Ponemos a tu servicio nuestra experiencia personal, profesional y empresarial para ayudarte a encontrar el <strong style="color:#0071e3;">QUÉ</strong>, el <strong style="color:#0071e3;">CÓMO</strong> y el <strong style="color:#0071e3;">CUÁNDO</strong>.</p>
                     </div>
                 </div>
                 <div class="reveal">
-                    <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 lg:p-10">
-                        <div class="text-center mb-6">
-                            <div class="inline-flex items-center gap-2 bg-violet-600 text-white px-6 py-3 rounded-full font-bold">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                                611 62 04 99
-                            </div>
-                        </div>
-                        <div class="space-y-4 text-center">
-                            <div class="bg-white rounded-xl p-5 border border-gray-100">
-                                <p class="text-sm font-bold text-violet-600 mb-1">Marta</p>
-                                <p class="text-gray-600 text-xs">Responsable de Marketing</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-5 border border-gray-100">
-                                <p class="text-sm font-bold text-violet-600 mb-1">Adolfo</p>
-                                <p class="text-gray-600 text-xs">Mentoría y estrategia</p>
-                            </div>
-                            <div class="bg-white rounded-xl p-5 border border-gray-100">
-                                <p class="text-sm font-bold text-violet-600 mb-1">Jas</p>
-                                <p class="text-gray-600 text-xs">Operaciones y ejecución</p>
-                            </div>
-                        </div>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=85"
+                         alt="Acompañamiento y mentoría"
+                         class="feature-img w-full shadow-2xl shadow-gray-200/80" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ¿Quién hay detrás? -->
-    <section class="section-flow bg-gray-50">
+    <!-- ════════════════════════════════
+         CÓMO FUNCIONA
+    ════════════════════════════════ -->
+    <section id="como-funciona" class="py-24 lg:py-32 bg-[#f5f5f7]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-4">El equipo</p>
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1] mb-16">¿Quién hay detrás?</h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Marta -->
-                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
-                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">👩‍💼</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Marta</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">Soy la responsable de Marketing. Me esfuerzo por dar a conocer los productos y servicios que sirven a nuestro propósito.</p>
-                    </div>
-
-                    <!-- Adolfo -->
-                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
-                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">👨‍💻</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Adolfo</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">Velo porque todo funcione adecuadamente y pongo al servicio todo mi conocimiento sobre Marketing.</p>
-                    </div>
-
-                    <!-- Jas -->
-                    <div class="bg-white rounded-2xl border border-gray-100 p-8 text-center card-hover">
-                        <div class="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <span class="text-3xl">🧑‍🎨</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Jas</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">El responsável del Marketing y la comunicación. Hace que las cosas se vean y se sientan bien.</p>
-                    </div>
-                </div>
+                <p class="label-apple mb-5" style="color:#0071e3;">Proceso</p>
+                <h2 class="display-headline display-md text-[#1d1d1f] mb-5">
+                    3 pasos,<br/><span style="color:#0071e3;">así de sencillo</span>
+                </h2>
             </div>
 
-            <!-- Nuestros amigos -->
-            <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:p-12 reveal">
-                <h3 class="text-2xl font-bold mb-6 text-center">Nuestros amigos</h3>
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" alt="Equipo de Growth Consulting" class="w-full rounded-2xl shadow-xl shadow-gray-200/50 object-cover aspect-[16/7] card-hover mb-8" />
-                <div class="text-gray-600 leading-relaxed space-y-4 max-w-3xl mx-auto text-center">
-                    <p>Somos un equipo de Seniors, personas con canas que se ha equivocado y aprendido mucho a lo largo de la vida.</p>
-                    <p>Venimos del mundo de la Producción 3D para Cine y Videojuegos, de la Ingeniería, del Marketing.</p>
-                    <p>Hemos salido adelante por separado y ahora trabajamos juntos para ganarnos la vida bajo un modelo de negocio y propósito que atiende a nuestros valores.</p>
-                    <p><strong>Hemos aprendido lo suficiente como para ser de utilidad a otros en este momento.</strong></p>
-                    <p class="font-medium text-gray-900">Es nuestro momento de crecer alineados con un propósito y ayudar a muchas personas.<br/>¿Eres una de ellas?</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
+                <div class="card-apple bg-white p-9">
+                    <div class="step-number mb-4">01</div>
+                    <h3 class="text-lg font-bold mb-3 tracking-tight" style="color:#1d1d1f;">Llamada gratuita de 30'</h3>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Te ofrecemos una llamada de 30' gratuita por Zoom, sin compromiso, para que nos cuentes en qué necesitas ayuda.</p>
+                </div>
+                <div class="card-apple bg-white p-9">
+                    <div class="step-number mb-4">02</div>
+                    <h3 class="text-lg font-bold mb-3 tracking-tight" style="color:#1d1d1f;">Descubrimos si podemos ayudarte</h3>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Durante la llamada valoramos si podemos ayudarte. Si es así, establecemos lo que debería ser la línea de trabajo básica.</p>
+                </div>
+                <div class="card-apple bg-white p-9">
+                    <div class="step-number mb-4">03</div>
+                    <h3 class="text-lg font-bold mb-3 tracking-tight" style="color:#1d1d1f;">Tú decides</h3>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Después de la llamada nos despediremos y tú decidirás tranquilamente si quieres que te acompañemos.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ¿Cómo funciona? -->
-    <section class="section-flow bg-white">
-        <div class="max-w-7xl mx-auto px-6">
+    <!-- ════════════════════════════════
+         SERVICIOS — pricing cards
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-4">Proceso</p>
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">¿Cómo funciona?</h2>
-                <p class="text-gray-500 mt-4">Sencillo, 3 simples pasos:</p>
+                <p class="label-apple mb-5" style="color:#0071e3;">Servicios</p>
+                <h2 class="display-headline display-md text-[#1d1d1f]">
+                    Elige tu<br/><span style="color:#0071e3;">modalidad</span>
+                </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 reveal">
-                <!-- Paso 1 -->
-                <div class="relative">
-                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">1</div>
-                    <h3 class="text-lg font-bold mb-3 text-center">Llamada de 30' gratuita</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed text-center">Te ofrecemos una llamada de 30' gratuita por Zoom, sin compromiso, para que nos cuentes en qué necesitas ayuda.</p>
-                </div>
-
-                <!-- Paso 2 -->
-                <div class="relative">
-                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">2</div>
-                    <h3 class="text-lg font-bold mb-3 text-center">Descubrimos si podemos ayudarte</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed text-center">Durante la llamada descubriremos si te podemos ayudar. Si es así, estableceremos lo que, a nuestro juicio, debería ser la línea de trabajo básica.</p>
-                </div>
-
-                <!-- Paso 3 -->
-                <div class="relative">
-                    <div class="bg-violet-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-6">3</div>
-                    <h3 class="text-lg font-bold mb-3 text-center">Tú decides</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed text-center">Después de la llamada, nos despediremos y tú decidirás si te podemos ayudar.</p>
-                </div>
-            </div>
-
-            <!-- Servicios -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto reveal">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal">
                 <!-- Mentoría -->
-                <div class="bg-violet-50/40 rounded-2xl border border-violet-100 p-8 lg:p-10">
-                    <p class="font-mono text-violet-600 text-xs uppercase tracking-widest mb-4">Servicio</p>
-                    <h3 class="text-2xl font-bold mb-4">MENTORÍA</h3>
-                    <div class="space-y-3 text-gray-600 text-sm leading-relaxed mb-6">
+                <div class="card-apple p-10" style="background:#f5f5f7;">
+                    <p class="label-apple mb-5" style="color:#0071e3;">Servicio 01</p>
+                    <h3 class="text-2xl font-extrabold tracking-tight mb-5" style="color:#1d1d1f;">Mentoría</h3>
+                    <div class="space-y-3 text-sm leading-relaxed mb-8" style="color:#6e6e73;">
                         <p>Ponemos a tu servicio nuestra experiencia.</p>
-                        <p><strong>Te decimos el QUÉ, el CÓMO Y el CUÁNDO</strong></p>
+                        <p class="font-semibold" style="color:#1d1d1f;">Te decimos el QUÉ, el CÓMO y el CUÁNDO.</p>
                         <p>Te damos la guía y tú ejecutas.</p>
-                        <p class="text-gray-900 font-medium">2 videollamadas a la semana en horario de mañanas</p>
-                    </div>
-                    <div class="border-t border-violet-100 pt-6">
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-extrabold text-violet-600">395€</span>
-                            <span class="text-gray-500 text-sm">/mes</span>
+                        <div class="flex items-center gap-2 pt-2">
+                            <svg class="w-4 h-4 flex-shrink-0" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>2 videollamadas semanales en horario de mañanas</span>
                         </div>
-                        <p class="text-gray-400 text-xs mt-1">(imp.no incluidos)</p>
+                    </div>
+                    <div class="border-t border-gray-200 pt-6">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-4xl font-extrabold" style="color:#0071e3;">395€</span>
+                            <span class="text-sm" style="color:#6e6e73;">/mes · imp. no incluidos</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Acompañamiento -->
-                <div class="bg-black text-white rounded-2xl p-8 lg:p-10">
-                    <p class="font-mono text-violet-400 text-xs uppercase tracking-widest mb-4">Servicio</p>
-                    <h3 class="text-2xl font-bold mb-4">ACOMPAÑAMIENTO</h3>
-                    <div class="space-y-3 text-gray-300 text-sm leading-relaxed mb-6">
+                <div class="card-apple p-10" style="background:#1d1d1f; border-color:#1d1d1f;">
+                    <p class="label-apple mb-5" style="color:#60a5fa;">Servicio 02</p>
+                    <h3 class="text-2xl font-extrabold tracking-tight mb-5 text-white">Acompañamiento</h3>
+                    <div class="space-y-3 text-sm leading-relaxed mb-8" style="color:rgba(255,255,255,0.65);">
                         <p>Nosotros te lo hacemos.</p>
-                        <p><strong>Además de indicarte qué hay que hacer, co-creamos contigo.</strong></p>
+                        <p class="font-semibold text-white">Además de indicar qué hay que hacer, co-creamos contigo.</p>
                         <p>Ejecutamos tareas contigo como un equipo.</p>
-                    </div>
-                    <div class="border-t border-gray-700 pt-6">
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-extrabold text-white">A convenir</span>
+                        <div class="flex items-center gap-2 pt-2">
+                            <svg class="w-4 h-4 flex-shrink-0" style="color:#60a5fa;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span>Dedicación máxima adaptada a tu proyecto</span>
                         </div>
+                    </div>
+                    <div class="border-t pt-6" style="border-color:rgba(255,255,255,0.1);">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-extrabold text-white">A convenir</span>
+                        </div>
+                        <p class="text-sm mt-1" style="color:rgba(255,255,255,0.5);">según alcance y dedicación</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ¿Por qué hacemos esto? -->
-    <section class="section-flow bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-12 reveal">
-                <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-4">Nuestro propósito</p>
-                <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]">¿Por qué hacemos esto?</h2>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 p-8 lg:p-12 text-gray-600 leading-relaxed space-y-5 reveal">
-                <p>Hemos descubierto que la falta de capacitación (entendida como el conocimiento útil que te hace empleable) no es lo que impide a las personas progresar en la mayoría de casos.</p>
-                <p>Existe una masa tremenda de conocimiento que no enseñan en ningún sitio y que resulta crucial para conseguir cosas, para avanzar.</p>
-                <p>Desde la ideación con libertad y propósito de una meta, hasta su planificación y ejecución, existe toda una serie de desafíos en el camino.</p>
-                <p>Algunos son retos externos, dificultades para afrontar lo que viene del entorno, que desconoces y no puedes controlar.</p>
-                <p>Muchos otros son bloqueos internos, que impiden alinear pensamiento, verbo y acción.</p>
-                <p>Nosotros hemos enfrentado estos retos y somos conscientes de lo inestimable que es recibir la guía adecuada en el momento adecuado.</p>
-                <p>Hemos tenido la gran suerte de contar con guías en el pasado reciente y lejano.</p>
-                <p class="text-gray-900 font-medium">No hay nada más maravilloso que ayudar a otra persona en un momento de bloqueo y poder comprobar el efecto positivo de tu interacción.</p>
-                <p class="font-bold text-gray-900">Por eso hemos creado este servicio.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonios -->
-    <section class="section-flow bg-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-10">
-                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-4">Testimonios</p>
-                <h2 class="section-title font-extrabold tracking-tight text-black">
-                    <span class="text-accent">Lo que Dicen</span><br/>Nuestros Alumnos
+    <!-- ════════════════════════════════
+         QUIÉN HAY DETRÁS
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-[#f5f5f7]">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="label-apple mb-5" style="color:#0071e3;">El equipo</p>
+                <h2 class="display-headline display-md text-[#1d1d1f]">
+                    ¿Quién hay<br/><span style="color:#0071e3;">detrás?</span>
                 </h2>
             </div>
 
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-gray-50 rounded-2xl border border-gray-100 p-8 md:p-12 text-center">
-                    <div class="flex justify-center mb-6">
-                        <div class="flex gap-1">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14 reveal">
+                <div class="card-apple bg-white p-8 text-center group">
+                    <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-5 ring-2 ring-gray-100 group-hover:ring-[#0071e3] transition-all">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Marta" class="w-full h-full object-cover"/>
                     </div>
-                    <blockquote class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 font-normal">
-                        "Gracias a ORIGEN pude encontrar el equilibrio que necesitaba. No solo aprendí 3D, sino que descubrí cómo presupuestar mi trabajo y comunicarme mejor con clientes."
-                    </blockquote>
-                    <div class="flex flex-col items-center gap-2">
-                        <div class="w-14 h-14 rounded-full bg-violet-100 flex items-center justify-center">
-                            <span class="text-xl font-bold text-violet-600">A</span>
-                        </div>
-                        <p class="font-semibold text-black">Alumno de ORIGEN</p>
-                        <p class="text-gray-500 text-sm">Comunidad TechArt Worlds</p>
+                    <h3 class="font-bold text-base mb-1" style="color:#1d1d1f;">Marta</h3>
+                    <p class="label-apple mb-3" style="color:#0071e3;">Marketing</p>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Responsable de Marketing. Se esfuerza por dar a conocer los productos y servicios que sirven a nuestro propósito.</p>
+                </div>
+                <div class="card-apple bg-white p-8 text-center group">
+                    <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-5 ring-2 ring-gray-100 group-hover:ring-[#0071e3] transition-all">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Adolfo" class="w-full h-full object-cover"/>
+                    </div>
+                    <h3 class="font-bold text-base mb-1" style="color:#1d1d1f;">Adolfo</h3>
+                    <p class="label-apple mb-3" style="color:#0071e3;">Mentoría y Estrategia</p>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Vela porque todo funcione adecuadamente y pone al servicio todo su conocimiento sobre 3D y estrategia.</p>
+                </div>
+                <div class="card-apple bg-white p-8 text-center group">
+                    <div class="w-20 h-20 rounded-full overflow-hidden mx-auto mb-5 ring-2 ring-gray-100 group-hover:ring-[#0071e3] transition-all">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt="Jas" class="w-full h-full object-cover"/>
+                    </div>
+                    <h3 class="font-bold text-base mb-1" style="color:#1d1d1f;">Jas</h3>
+                    <p class="label-apple mb-3" style="color:#0071e3;">Operaciones y Negocio</p>
+                    <p class="text-sm leading-relaxed" style="color:#6e6e73;">Responsable de operaciones y ejecución. Hace que las ideas se conviertan en resultados concretos.</p>
+                </div>
+            </div>
+
+            <!-- Nuestros amigos -->
+            <div class="card-apple bg-white overflow-hidden reveal">
+                <div style="aspect-ratio:16/6; overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1400&q=85"
+                         alt="Equipo de seniors con experiencia"
+                         class="w-full h-full object-cover object-center" />
+                </div>
+                <div class="p-10 lg:p-14 text-center max-w-3xl mx-auto">
+                    <p class="label-apple mb-6" style="color:#0071e3;">Nuestros amigos</p>
+                    <div class="space-y-4 text-base leading-relaxed" style="color:#6e6e73;">
+                        <p>Somos un equipo de seniors, personas con canas que se han equivocado y aprendido mucho a lo largo de la vida.</p>
+                        <p>Venimos del mundo de la Producción 3D para Cine y Videojuegos, de la Ingeniería, del Marketing.</p>
+                        <p>Hemos salido adelante por separado y ahora trabajamos juntos bajo un modelo de negocio y propósito alineado con nuestros valores.</p>
+                        <p class="font-bold" style="color:#1d1d1f;">Hemos aprendido lo suficiente como para ser de utilidad a otros en este momento.</p>
+                        <p class="font-semibold" style="color:#1d1d1f;">Es nuestro momento de crecer alineados con un propósito y ayudar a muchas personas.<br/>¿Eres una de ellas?</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Final -->
-    <section id="llamada" class="section-flow bg-violet-600 relative overflow-hidden">
-        <div class="absolute inset-0 z-0 pointer-events-none">
-            <div class="absolute inset-0 blob-container" style="filter: blur(80px); opacity: 0.3;">
-                <div style="background: radial-gradient(ellipse at 50% 50%, #9333ea 0%, transparent 70%); width: 100%; height: 100%;"></div>
-            </div>
-        </div>
-        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-                Solicita tu Llamada de 30' minutos gratis
-            </h2>
-            <p class="text-violet-100 text-lg mb-8 leading-relaxed">
-                Sin compromiso. Te escuchamos y decides si te podemos ayudar.
-            </p>
-            <div class="inline-flex items-center gap-3 bg-white text-violet-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-violet-50 transition-all hover:scale-105">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                611 62 04 99
+    <!-- ════════════════════════════════
+         POR QUÉ HACEMOS ESTO — feature row
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="order-2 lg:order-1 reveal">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=85"
+                         alt="Por qué hacemos esto"
+                         class="feature-img w-full shadow-2xl shadow-gray-200/80" />
+                </div>
+                <div class="order-1 lg:order-2 reveal">
+                    <p class="label-apple mb-6" style="color:#0071e3;">Nuestro propósito</p>
+                    <h2 class="display-headline display-md text-[#1d1d1f] mb-8">
+                        ¿Por qué<br/>hacemos esto?
+                    </h2>
+                    <div class="space-y-4 text-base leading-relaxed" style="color:#6e6e73;">
+                        <p>La falta de capacitación no es lo que impide a las personas progresar en la mayoría de casos.</p>
+                        <p>Existe una masa tremenda de conocimiento que no enseñan en ningún sitio y que resulta crucial para conseguir cosas.</p>
+                        <p>Algunos son retos externos. Muchos otros son bloqueos internos que impiden alinear pensamiento, verbo y acción.</p>
+                        <p>Nosotros hemos enfrentado estos retos y somos conscientes de lo inestimable que es recibir la guía adecuada en el momento adecuado.</p>
+                        <p class="font-bold" style="color:#1d1d1f;">Por eso hemos creado este servicio.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-gray-100 py-12">
+    <!-- ════════════════════════════════
+         TESTIMONIO
+    ════════════════════════════════ -->
+    <section class="py-24 lg:py-32 bg-[#f5f5f7]">
+        <div class="max-w-3xl mx-auto px-6 reveal">
+            <div class="card-apple bg-white p-10 md:p-14 text-center">
+                <div class="flex justify-center gap-1 mb-8">
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                </div>
+                <blockquote class="text-lg md:text-xl leading-relaxed mb-8" style="color:#1d1d1f; font-style:italic;">
+                    "Gracias a ORIGEN pude encontrar el equilibrio que necesitaba. No solo aprendí 3D, sino que descubrí cómo presupuestar mi trabajo y comunicarme mejor con clientes."
+                </blockquote>
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-12 h-12 rounded-full overflow-hidden ring-2 ring-gray-100">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Alumno" class="w-full h-full object-cover"/>
+                    </div>
+                    <p class="font-semibold text-sm" style="color:#1d1d1f;">Alumno de ORIGEN</p>
+                    <p class="text-xs" style="color:#6e6e73;">Comunidad TechArt Worlds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         CTA FINAL — gradiente multicolor
+    ════════════════════════════════ -->
+    <section id="llamada" style="
+        position: relative;
+        overflow: hidden;
+        padding: 120px 44px;
+        text-align: center;
+        background:
+            radial-gradient(ellipse 140% 100% at 20% 0%, rgba(255,214,0,.22) 0%, transparent 55%),
+            radial-gradient(ellipse 120% 80% at 80% 0%, rgba(255,55,95,.18) 0%, transparent 55%),
+            radial-gradient(ellipse 100% 70% at 50% 100%, rgba(94,92,230,.20) 0%, transparent 60%),
+            radial-gradient(ellipse 130% 70% at 10% 80%, rgba(50,215,75,.16) 0%, transparent 55%),
+            radial-gradient(ellipse 110% 80% at 90% 70%, rgba(41,151,255,.18) 0%, transparent 55%),
+            #fff;
+    ">
+        <div style="position:absolute;inset:0;background:rgba(255,255,255,.52);pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;width:600px;height:600px;top:-200px;left:-100px;background:radial-gradient(circle,rgba(255,214,0,.6) 0%,rgba(255,149,0,.4) 60%,transparent 100%);animation:drift1 18s ease-in-out infinite;pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;width:500px;height:500px;top:-100px;right:-80px;background:radial-gradient(circle,rgba(255,55,95,.55) 0%,rgba(175,82,222,.4) 60%,transparent 100%);animation:drift2 22s ease-in-out infinite;pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;width:550px;height:550px;bottom:-150px;left:30%;background:radial-gradient(circle,rgba(41,151,255,.5) 0%,rgba(94,92,230,.4) 60%,transparent 100%);animation:drift3 20s ease-in-out infinite;pointer-events:none;"></div>
+
+        <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;">
+            <p class="label-apple mb-6" style="color:#0071e3;">Empieza hoy</p>
+            <h2 class="display-headline display-md mb-6" style="color:#1d1d1f;font-family:'Montserrat',sans-serif;">
+                Solicita tu llamada<br/><span style="color:#0071e3;">de 30' gratis</span>
+            </h2>
+            <p class="text-lg mb-10 leading-relaxed" style="color:#6e6e73;">
+                Sin compromiso. Te escuchamos y decides<br/>
+                <strong style="color:#1d1d1f;">si te podemos ayudar.</strong>
+            </p>
+            <a href="tel:611620499"
+               class="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-base transition-all hover:scale-105"
+               style="background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.1);color:#0071e3;font-family:'Montserrat',sans-serif;box-shadow:0 4px 32px rgba(0,113,227,.15);">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                611 62 04 99
+            </a>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         FOOTER
+    ════════════════════════════════ -->
+    <footer class="bg-white border-t border-gray-100 py-14">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2">
-                <a href="../index.html" class="text-lg font-extrabold tracking-tight text-gray-900">MÁSTER <span class="text-violet-600">3D</span></a>
-                <span class="text-sm text-gray-500">· © 2026 TechArt Worlds</span>
+                <a href="../index.html" class="text-base font-extrabold tracking-tight text-[#1d1d1f]">
+                    MÁSTER <span style="color:#0071e3;">3D</span>
+                </a>
+                <span class="text-sm text-gray-400">· © 2026 TechArt Worlds</span>
             </div>
             <div class="flex items-center gap-6 text-sm text-gray-500">
-                <a href="comunidad.html" class="hover:text-violet-600 transition-colors">Comunidad</a>
-                <a href="master.html" class="hover:text-violet-600 transition-colors">Máster</a>
-                <a href="vamos-contigo.html" class="hover:text-violet-600 transition-colors">Acompañamiento</a>
-                <a href="nosotros.html" class="hover:text-violet-600 transition-colors">Nosotros</a>
+                <a href="comunidad.html"     class="hover:text-[#0071e3] transition-colors">Comunidad</a>
+                <a href="master.html"        class="hover:text-[#0071e3] transition-colors">Máster</a>
+                <a href="vamos-contigo.html" class="hover:text-[#0071e3] transition-colors">Acompañamiento</a>
+                <a href="nosotros.html"      class="hover:text-[#0071e3] transition-colors">Nosotros</a>
             </div>
         </div>
     </footer>
@@ -635,12 +595,8 @@
     <script>
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.08 });
         reveals.forEach(el => observer.observe(el));
     </script>
 </body>
