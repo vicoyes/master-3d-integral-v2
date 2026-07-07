@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Casos de Éxito | TechArt Worlds</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: "#0071e3",
+                        "accent-red": "#c73838",
+                        "accent-green": "#0a7c42",
+                        gray_50_light: "#fcfdfd",
+                        violet: {
+                            50: "#eff6ff",
+                            100: "#dbeafe",
+                            200: "#bfdbfe",
+                            300: "#93c5fd",
+                            400: "#60a5fa",
+                            500: "#3b82f6",
+                            600: "#0071e3",
+                            700: "#0066cc",
+                            800: "#0052a3",
+                            900: "#003d7a",
+                        },
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                        serifDisplay: ["Playfair Display", "Georgia", "serif"],
+                        montserrat: ["Montserrat", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; font-weight: 400; }
+        h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; }
+
+        @keyframes drift1 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33%     { transform: translate(40px,-30px) scale(1.08); }
+            66%     { transform: translate(-20px,20px) scale(0.94); }
+        }
+        @keyframes drift2 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33%     { transform: translate(-35px,25px) scale(1.06); }
+            66%     { transform: translate(25px,-15px) scale(0.96); }
+        }
+        @keyframes drift3 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50%     { transform: translate(20px,-40px) scale(1.1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.8s ease-out forwards; }
+        .fade-in-delay-1 { animation-delay: 0.15s; opacity: 0; }
+        .fade-in-delay-2 { animation-delay: 0.3s; opacity: 0; }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.65);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+        }
+        .nav-scroll { overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+        .nav-scroll::-webkit-scrollbar { display: none; }
+        .nav-link {
+            position: relative;
+            padding: 10px 0;
+            margin: 0 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4b5563;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #111827;
+            transition: width 0.25s ease;
+        }
+        .nav-link:hover { color: #111827; }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.is-active { color: #111827; }
+        .nav-link.is-active::after { width: 100%; }
+
+        .label-gradient {
+            background: linear-gradient(90deg, #2196F3 0%, #673AB7 35%, #E91E63 65%, #FF9800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0071e3, #5ba3f5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: 2.75rem !important;
+            line-height: 1.1;
+        }
+        @media (min-width: 768px) {
+            .section-title { font-size: 70px !important; line-height: 1; letter-spacing: -0.02em; }
+        }
+        .section-flow { padding-top: 9rem; padding-bottom: 9rem; }
+        @media (max-width: 1023px) {
+            .section-flow { padding-top: 6rem; padding-bottom: 6rem; }
+        }
+
+        .hero-title {
+            font-size: clamp(3.2rem, 8vw, 6.8rem);
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .eje-label {
+            font-size: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+        }
+        .eje-x { color: rgb(204, 0, 0); }
+        .eje-y { color: rgb(0, 128, 0); }
+        .eje-z { color: rgb(0, 0, 204); }
+
+        .soft-card {
+            border: 1px solid rgba(0,0,0,0.07);
+            background: #fff;
+            border-radius: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .soft-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .image-frame {
+            border-radius: 1.5rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            overflow: hidden;
+            background: #f5f5f7;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-black antialiased overflow-x-hidden">
+
+    <!-- Top Bar -->
+    <div class="bg-black text-white text-center py-2.5 text-xs font-mono uppercase tracking-[0.2em] font-medium">
+        [Webinar] El Futuro del 3D + IA 2026 &nbsp;|&nbsp; <a class="underline hover:no-underline text-violet-300" href="#">Ver la grabación →</a>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a href="../index.html" class="text-xl font-extrabold tracking-tight flex-shrink-0">
+                MÁSTER <span class="text-violet-600">3D</span>
+            </a>
+            <div class="hidden md:flex nav-scroll items-center gap-2 flex-1">
+                <a class="nav-link" href="comunidad.html">Comunidad</a>
+                <a class="nav-link" href="master.html">Máster</a>
+                <a class="nav-link" href="vamos-contigo.html">Acompañamiento</a>
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+                <a class="nav-link is-active" href="casos-de-exito.html">Casos de Éxito</a>
+            </div>
+            <a href="master.html#oferta" class="font-montserrat font-bold bg-violet-600 text-white px-6 py-2.5 rounded-full text-sm hover:bg-violet-700 transition-colors flex-shrink-0">
+                AGENDAR CONSULTORÍA
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-6 pt-20 lg:pt-28 pb-16 lg:pb-20 text-center">
+        <p class="font-mono label-gradient text-xs uppercase tracking-[0.25em] mb-6 fade-in">Prueba Social</p>
+        <h1 class="hero-title font-serifDisplay italic font-semibold md:font-bold mb-8 fade-in fade-in-delay-1">
+            Casos de <span class="font-montserrat not-italic font-extrabold gradient-text">Éxito</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto fade-in fade-in-delay-2">
+            Historias reales de alumnos que pasaron por los 3 ejes — Formación 3D, Orden Interno y Negocio — y hoy trabajan donde antes solo soñaban.
+        </p>
+
+        <!-- Stats -->
+        <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-100 rounded-2xl overflow-hidden max-w-3xl mx-auto reveal">
+            <div class="bg-white px-4 py-8">
+                <p class="text-3xl md:text-4xl font-extrabold tracking-tight text-black">87%</p>
+                <p class="text-xs text-gray-500 font-mono uppercase tracking-wider mt-2">Empleabilidad</p>
+            </div>
+            <div class="bg-white px-4 py-8">
+                <p class="text-3xl md:text-4xl font-extrabold tracking-tight text-black">+60</p>
+                <p class="text-xs text-gray-500 font-mono uppercase tracking-wider mt-2">Alumnos formados</p>
+            </div>
+            <div class="bg-white px-4 py-8">
+                <p class="text-3xl md:text-4xl font-extrabold tracking-tight text-black">25</p>
+                <p class="text-xs text-gray-500 font-mono uppercase tracking-wider mt-2">Empresas contratando</p>
+            </div>
+            <div class="bg-white px-4 py-8">
+                <p class="text-3xl md:text-4xl font-extrabold tracking-tight text-black">4.9/5</p>
+                <p class="text-xs text-gray-500 font-mono uppercase tracking-wider mt-2">Valoración media</p>
+            </div>
+        </div>
+
+        <!-- Imagen full width -->
+        <div class="image-frame max-w-5xl mx-auto mt-16 reveal">
+            <img src="../1.6.png" alt="Alumna del Máster 3D Integral reflexionando sobre su transformación" class="w-full h-full object-cover aspect-[21/9] object-[center_20%]"/>
+        </div>
+    </section>
+
+    <!-- Casos en Video -->
+    <section id="videos" class="section-flow bg-[#fcfdfd]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-5">En sus propias palabras</p>
+                <h2 class="section-title font-extrabold tracking-tight text-black">
+                    Casos de Éxito <span class="text-accent">en Vídeo</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                <!-- Caso vídeo 1 -->
+                <article class="video-card soft-card overflow-hidden">
+                    <div class="relative w-full aspect-video bg-black">
+                        <!-- Sustituir VIDEO_ID_1 por el ID real de YouTube -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0" title="Caso de éxito — [Nombre del Alumno]" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="eje-label eje-x">Eje X · Formación 3D</span>
+                        <h3 class="font-bold text-lg mt-3 mb-1 text-black">[Nombre del Alumno]</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">De Junior sin rumbo a Technical Artist en [Empresa]. "El máster me dio el enfoque técnico que necesitaba."</p>
+                    </div>
+                </article>
+
+                <!-- Caso vídeo 2 -->
+                <article class="video-card soft-card overflow-hidden">
+                    <div class="relative w-full aspect-video bg-black">
+                        <!-- Sustituir VIDEO_ID_2 por el ID real de YouTube -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0" title="Caso de éxito — [Nombre del Alumno]" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="eje-label eje-y">Eje Y · Orden Interno</span>
+                        <h3 class="font-bold text-lg mt-3 mb-1 text-black">[Nombre del Alumno]</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">Del burnout a la calma productiva. "Aprendí a sostener mi carrera sin romperme por dentro."</p>
+                    </div>
+                </article>
+
+                <!-- Caso vídeo 3 -->
+                <article class="video-card soft-card overflow-hidden">
+                    <div class="relative w-full aspect-video bg-black">
+                        <!-- Sustituir VIDEO_ID_3 por el ID real de YouTube -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3?rel=0" title="Caso de éxito — [Nombre del Alumno]" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="eje-label eje-z">Eje Z · Negocio</span>
+                        <h3 class="font-bold text-lg mt-3 mb-1 text-black">[Nombre del Alumno]</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">De emplear su tiempo a facturar como freelance. "Monté mi propio estudio en menos de un año."</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Escritos -->
+    <section id="testimonios" class="section-flow bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="font-mono text-violet-600 text-xs uppercase tracking-[0.25em] mb-5">Lo que dicen</p>
+                <h2 class="section-title font-extrabold tracking-tight text-black">
+                    Testimonios <span class="text-accent-green">Escritos</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "Estaba estancado enviando portfolios sin respuesta. En 6 meses mi carrera se transformó por completo."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Alumno]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Alumno]</p>
+                            <p class="text-gray-500 text-xs font-mono">Technical Artist en [Empresa]</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "No solo aprendí Houdini. Aprendí a presupuestar mi trabajo y a luchar por mi lugar en la industria."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Alumno]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Alumno]</p>
+                            <p class="text-gray-500 text-xs font-mono">Freelance 3D Artist</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "Llegué agotado y sin rumbo. La comunidad y el orden interno me devolvieron la calma para seguir creciendo."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Alumno]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Alumno]</p>
+                            <p class="text-gray-500 text-xs font-mono">Environment Artist en [Estudio]</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "Monté mi propio estudio en menos de un año gracias al Eje Z. Nunca me habían enseñado a vender mi trabajo así."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Alumno]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Alumno]</p>
+                            <p class="text-gray-500 text-xs font-mono">Fundador de [Estudio]</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "Contratamos a un graduado de TechArtWorlds y su impacto fue inmediato. Dominaba el pipeline mejor que perfiles con años de experiencia."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Manager]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Manager]</p>
+                            <p class="text-gray-500 text-xs font-mono">Head of 3D en [Empresa de Videojuegos]</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="soft-card p-8 flex flex-col">
+                    <svg class="w-8 h-8 text-violet-200 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/></svg>
+                    <blockquote class="text-gray-700 text-base leading-relaxed mb-6 flex-1">
+                        "Pasé de hacer props sueltos a liderar el pipeline técnico de todo un equipo. El eje X me dio el criterio que me faltaba."
+                    </blockquote>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&h=120&fit=crop&crop=face" alt="[Nombre del Alumno]" class="w-11 h-11 rounded-full object-cover flex-shrink-0"/>
+                        <div>
+                            <p class="font-semibold text-black text-sm">[Nombre del Alumno]</p>
+                            <p class="text-gray-500 text-xs font-mono">Pipeline TD en [Empresa]</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA final — gradiente Apple multicolor -->
+    <section style="
+        position: relative;
+        overflow: hidden;
+        padding: 120px 44px;
+        text-align: center;
+        background:
+            radial-gradient(ellipse 140% 100% at 20% 0%, rgba(255,214,0,.22) 0%, transparent 55%),
+            radial-gradient(ellipse 120% 80% at 80% 0%, rgba(255,55,95,.18) 0%, transparent 55%),
+            radial-gradient(ellipse 100% 70% at 50% 100%, rgba(94,92,230,.20) 0%, transparent 60%),
+            radial-gradient(ellipse 130% 70% at 10% 80%, rgba(50,215,75,.16) 0%, transparent 55%),
+            radial-gradient(ellipse 110% 80% at 90% 70%, rgba(41,151,255,.18) 0%, transparent 55%),
+            #fff;
+    ">
+        <!-- Frost -->
+        <div style="position:absolute;inset:0;background:rgba(255,255,255,.52);pointer-events:none;"></div>
+
+        <!-- Orbes animados -->
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;width:600px;height:600px;top:-200px;left:-100px;background:radial-gradient(circle,rgba(255,214,0,.6) 0%,rgba(255,149,0,.4) 60%,transparent 100%);animation:drift1 18s ease-in-out infinite;pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;width:500px;height:500px;top:-100px;right:-80px;background:radial-gradient(circle,rgba(255,55,95,.55) 0%,rgba(175,82,222,.4) 60%,transparent 100%);animation:drift2 22s ease-in-out infinite;pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;width:550px;height:550px;bottom:-150px;left:30%;background:radial-gradient(circle,rgba(41,151,255,.5) 0%,rgba(94,92,230,.4) 60%,transparent 100%);animation:drift3 20s ease-in-out infinite;pointer-events:none;"></div>
+        <div style="position:absolute;border-radius:50%;filter:blur(80px);opacity:.45;width:400px;height:400px;bottom:-80px;right:10%;background:radial-gradient(circle,rgba(50,215,75,.45) 0%,rgba(41,151,255,.3) 60%,transparent 100%);animation:drift1 16s ease-in-out infinite reverse;pointer-events:none;"></div>
+
+        <!-- Contenido -->
+        <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;" class="reveal">
+            <p class="label-tag mb-5" style="color:#0071e3;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;">Tu turno</p>
+            <h2 class="mb-6" style="color:#1d1d1f; font-family:'Montserrat',sans-serif; font-size:clamp(2rem,4.5vw,3.25rem); font-weight:800; letter-spacing:-0.02em; line-height:1.1;">
+                Tú también puedes ser el<br/><span style="color:#0071e3;">próximo caso de éxito</span>
+            </h2>
+            <p class="text-lg mb-10 leading-relaxed max-w-lg mx-auto" style="color:#6e6e73;">
+                20 plazas por edición. Proceso de admisión para asegurar el compromiso del grupo.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="master.html#oferta" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:scale-105" style="background:#0071e3;color:#fff;">
+                    Agendar Consultoría
+                </a>
+                <a href="comunidad.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base transition-all hover:scale-105" style="background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border:1px solid rgba(0,0,0,.1);color:#1d1d1f;">
+                    Únete a la Comunidad
+                </a>
+            </div>
+            <div class="mt-10 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" style="color:#0071e3;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                <span class="font-mono text-sm" style="color:#6e6e73;">611 62 04 99</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <a href="../index.html" class="text-lg font-extrabold tracking-tight text-gray-900">MÁSTER <span class="text-violet-600">3D</span></a>
+                <span class="text-sm text-gray-500">· © 2026 TechArt Worlds</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-gray-500">
+                <a href="comunidad.html" class="hover:text-violet-600 transition-colors">Comunidad</a>
+                <a href="master.html" class="hover:text-violet-600 transition-colors">Máster</a>
+                <a href="vamos-contigo.html" class="hover:text-violet-600 transition-colors">Acompañamiento</a>
+                <a href="nosotros.html" class="hover:text-violet-600 transition-colors">Nosotros</a>
+                <a href="casos-de-exito.html" class="hover:text-violet-600 transition-colors">Casos de Éxito</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
